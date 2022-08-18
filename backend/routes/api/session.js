@@ -19,11 +19,19 @@ console.log(user, 'hello')
       return next(err);
     }
 
-     setTokenCookie(res, user);
+     await setTokenCookie(res, user);
 
     return res.json({
       user
     });
+  }
+);
+
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
   }
 );
 
