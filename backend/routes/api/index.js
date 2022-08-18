@@ -1,5 +1,7 @@
 // backend/routes/api/index.js
 const router = require('express').Router();
+const { restoreUser, requireAuth,setTokenCookie } = require('../../utils/auth.js');
+
 
 // backend/routes/api/index.js
 // ...
@@ -19,4 +21,30 @@ router.post('/test', function(req, res) {
 //   },
 //   body: JSON.stringify({ hello: 'world' })
 // }).then(res => res.json()).then(data => console.log(data));
+
+
+const { User } = require('../../db/models');
+router.get('/set-token-cookie', async (_req, res) => {
+  const user = await User.findOne({
+      where: {
+        username: 'CaptainDeadPool'
+      }
+    });
+  setTokenCookie(res, user);
+  return res.json({ user });
+});
+
+
+
+router.use(restoreUser);
+
+
+
+// ...
+
+// GET /api/require-auth
+
+
+// ...
+// ...
 module.exports = router;

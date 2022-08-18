@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
      Spot.belongsTo(models.User, {foreignKey:'ownerId'})
-     Spot.hasMany(models.review,{foreignKey:'userId'})
-     Spot.hasMany(models.booking,{foreignKey:'userId'})
-     Spot.hasMany(models.image,
+     Spot.hasMany(models.Review,{foreignKey:'userId'})
+     Spot.hasMany(models.Booking,{foreignKey:'userId'})
+     Spot.hasMany(models.Image,
      {
       foreighKey:'imageableId',
       constraints:false,
@@ -62,6 +62,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    defaultScope: {
+      attributes: {
+        exclude: ["createdAt", "updatedAt"]
+      }
+    }
   });
   return Spot;
 };
