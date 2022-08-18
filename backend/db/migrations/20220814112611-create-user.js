@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require("bcryptjs")
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {

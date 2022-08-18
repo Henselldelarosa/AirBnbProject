@@ -2,6 +2,7 @@
 const {
   Model, Validator
 } = require('sequelize');
+const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
@@ -10,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     validatePassword(password) {
-      return bcrypt.compareSync(password, this.hashedPassword.toString());
+      // return password;
+      console.log("password (before)", password);
+
+
+      return bcrypt.compareSync(password, this.password.toString());
     }
 
     static getCurrentUserById(id) {
@@ -24,12 +29,15 @@ module.exports = (sequelize, DataTypes) => {
         lastName,
         username,
         email,
+        // password
         hashedPassword
       });
-      return await User.scope('currentUser').findByPk(user.id);
+      return await User.scope('loginUser').findByPk(user.id);
     }
 
     static async login({ credential, password }) {
+      // console.log(password, 'hello')
+      // console.log("here");
       const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({
         where: {
@@ -40,7 +48,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
       if (user && user.validatePassword(password)) {
-        return await User.scope('currentUser').findByPk(user.id);
+        // console.log("password", password);
+        // console.log("user.validatePassword(password)", user.validatePassword(password));
+        return await User.scope('loginUser').findByPk(user.id);
       }
     }
     static associate(models) {
@@ -117,12 +127,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     scopes: {
-      currentUser: {
-        attributes: { exclude: ["password"] }
+      currentUser() {
+        return {
+          attributes: { exclude: ["password"] }
+        }
       },
-      loginUser: {
-        attributes: {}
+      loginUser() {
+        return {
+          attributes: {}
+        }
       }
+
     }
   });
   return User;
