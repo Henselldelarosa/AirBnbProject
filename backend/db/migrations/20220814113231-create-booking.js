@@ -19,27 +19,20 @@ module.exports = {
       startDate: {
         type: Sequelize.DATE,
         allowNull:false,
-        validate:{
-          isBefore:'2080-10-10',
-          isAfter:Sequelize.literal("CURRENT_TIMESTAMP")
-        }
       },
       endDate: {
         type: Sequelize.INTEGER,
         allowNull:false,
-
-        validate:{
-
-        }
-
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue:Sequelize.literal("CURRENT_TIMESTAMP")
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue:Sequelize.literal("CURRENT_TIMESTAMP")
       }
     });
   },

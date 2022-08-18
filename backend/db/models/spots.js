@@ -3,31 +3,65 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Spots extends Model {
+  class Spot extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+     Spot.belongsTo(models.User, {foreignKey:'ownerId'})
+     Spot.hasMany(models.review,{foreignKey:'userId'})
+     Spot.hasMany(models.booking,{foreignKey:'userId'})
+     Spot.hasMany(models.image,
+     {
+      foreighKey:'imageableId',
+      constraints:false,
+      scope:{
+      imageableType:'spot'
+      }
+    })
     }
   }
-  Spots.init({
-    onwerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
+  Spot.init({
+    ownerId: {
+      type:DataTypes.INTEGER,
+    },
+    address: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    city: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    state: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    country: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
     lat: DataTypes.DECIMAL,
     lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.NUMERIC,
-    previewImage: DataTypes.STRING
+    name: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    description: {
+      type:DataTypes.STRING,
+    },
+    price: {
+      type:DataTypes.NUMERIC(5,2),
+      allowNull:false
+    },
+    previewImage: {
+      type:DataTypes.STRING
+    },
   }, {
     sequelize,
-    modelName: 'Spots',
+    modelName: 'Spot',
   });
-  return Spots;
+  return Spot;
 };
