@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router();
 
 const { setTokenCookie, requireAuth,restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
 
 // backend/routes/api/users.js
 // ...
@@ -10,8 +9,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 // ...
 //signup user
-
-
 const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
