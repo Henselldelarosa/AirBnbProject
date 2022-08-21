@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
      Spot.belongsTo(models.User, {foreignKey:'ownerId'})
-     Spot.hasMany(models.Review,{foreignKey:'userId'})
+     Spot.hasMany(models.Review,{foreignKey:'spotId'})
      Spot.hasMany(models.Booking,{foreignKey:'userId'})
      Spot.hasMany(models.Image,
      {
       foreighKey:'imageableId',
       constraints:false,
       scope:{
-      imageableType:'spot'
+      imageableType:'Spot'
       }
     })
     }

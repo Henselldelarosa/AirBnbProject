@@ -15,19 +15,29 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Image.init({
-    userId: DataTypes.INTEGER,
+    // userId: {
+    //   type:DataTypes.INTEGER,
+    // allowNull:false
+    // },
     url: {
-      type:DataTypes.STRING,
+      type:DataTypes.STRING(255),
       allowNull:false
     },
-    imageableType: DataTypes.STRING,
-    imageableId: DataTypes.INTEGER
+    imageableType: {
+      type:DataTypes.STRING(50),
+      allowNull:false
+    },
+    imageableId: {
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      onDelete:"CASCADE"
+    }
   }, {
     sequelize,
     modelName: 'Image',
     defaultScope: {
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ["createdAt", "updatedAt","imageableType","SpotId"]
       }
     }
   });
