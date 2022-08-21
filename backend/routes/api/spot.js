@@ -11,6 +11,7 @@ router.get('/', async(req,res)=>{
   res.json(getAllSpots)
 })
 
+//!GET
 //* Get details of a Spot from an id
 router.get('/:spotId', async(req,res,next)=>{
   const {spotId} = req.params
@@ -148,14 +149,67 @@ router.post('/', restoreUser,requireAuth,validateSpot, async(req,res)=>{
 })
 
 //!PUT
-// router.put('/:id', restoreUser,requireAuth,validateSpot, async(req,res)=>{
+router.put('/:spotId',restoreUser,requireAuth,validateSpot, async(req,res,next)=>{
+  const { spotId}  = req.params
 
-// })
+  //given body to modify the spot
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  } = req.body;
 
-//get current user info
-// const user = await User.findOne({
-//   where:{
-//     id:req.user.id
-//   }
-// })
+  const allowed = await Spot.findByPk(spotId)
+
+  //handles not the owner error
+  if(allowed && allowed.ownerId !== req.user.id){
+    const error = Error('This Action Is Forbidden')
+    error.status = 403
+    return next(error)
+  }
+
+  //gets current user
+  const currentUser = await User.findOne({
+    where:{
+      id: req.user.id
+    }
+  })
+
+  const spot = await Spot.findOne({
+  where:{
+    id: spotId,
+    ownerId: currentUser.id
+  }
+})
+
+if (!spot) {
+  const error = Error("Spot couldn't be found");
+  error.status = 404;
+  return next(error);
+}
+
+
+const editedSpot = await spot.update(
+  {
+  address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+})
+const newUpdate = await Spot.findByPk(editedSpot.id)
+return res.json(newUpdate)
+})
+
+
 module.exports = router;

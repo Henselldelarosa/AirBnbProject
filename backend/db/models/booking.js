@@ -15,8 +15,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
-    spotId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
+    spotId: {
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      onDelete: 'CASCADE',
+    },
+    userId: {
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      onDelete: 'CASCADE',
+    },
     startDate:{
       type:DataTypes.DATE,
       allowNull:false,
@@ -30,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Booking',
     defaultScope: {
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ["id","userId","createdAt", "updatedAt"]
       }
     }
   });

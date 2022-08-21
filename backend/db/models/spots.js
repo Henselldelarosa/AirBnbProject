@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   Spot.init({
     ownerId: {
       type:DataTypes.INTEGER,
+      allowNull:false,
+      onDelete: 'CASCADE'
     },
     address: {
       type:DataTypes.STRING,
@@ -64,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Spot',
     defaultScope: {
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ["previewImage","description","createdAt", "updatedAt"]
       }
     }
   });
