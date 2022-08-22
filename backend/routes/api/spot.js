@@ -109,7 +109,7 @@ const validateSpot = [
 
 //* CREATE new Spot
 //!Post
-router.post('/', restoreUser,requireAuth,validateSpot, async(req,res)=>{
+router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
 
   // destructor the spot body
   const {
@@ -129,8 +129,11 @@ router.post('/', restoreUser,requireAuth,validateSpot, async(req,res)=>{
       id: req.user.id
     }
   })
+  // const allSpots = await Spot.findAll()
+  // console.log(allSpots.length, "allSpots")
   //?create a Spot
   const newSpot = await Spot.create({
+    // id:allSpots.length,
     ownerId: user.id,
     address,
     city,
@@ -142,6 +145,7 @@ router.post('/', restoreUser,requireAuth,validateSpot, async(req,res)=>{
     description,
     price
   })
+  console.log("newSpot", newSpot);
 
   //?return spot
   const returnNewSpot = await Spot.findByPk(newSpot.id)
@@ -149,7 +153,7 @@ router.post('/', restoreUser,requireAuth,validateSpot, async(req,res)=>{
 })
 
 //!PUT
-router.put('/:spotId',restoreUser,requireAuth,validateSpot, async(req,res,next)=>{
+router.put('/:spotId',[restoreUser,requireAuth,validateSpot], async(req,res,next)=>{
   const { spotId}  = req.params
 
   //given body to modify the spot
@@ -211,5 +215,54 @@ const newUpdate = await Spot.findByPk(editedSpot.id)
 return res.json(newUpdate)
 })
 
+//!DELETE
+//* delete a spot
+router.delete('/:spotId',[restoreUser,requireAuth], async(req,res,next)=>{
+const {spotId} = req.params
 
+
+//gets current user
+const currentUser = await User.findOne({
+  where:{
+    id: req.user.id
+  }
+})
+
+const allowed = await Spot.findByPk(spotId)
+//handles not the owner error
+if(allowed && allowed.ownerId !== req.user.id){
+  const error = Error('This Action Is Forbidden')
+  error.status = 403
+  return next(error)
+}
+
+
+  const spot = await Spot.findOne({
+  where:{
+    id: spotId,
+    ownerId: currentUser.id
+  }
+})
+
+if (!spot) {
+  const error = Error("Spot couldn't be found");
+  error.status = 404;
+  return next(error);
+}
+spot.destroy()
+res.json({
+  message: "Successfully deleted"
+});
+
+})
+
+//*Get all Reviews by a Spot's id
+//!GET
+// router.get('/:id/reviews',[restoreUser,requireAuth,validateSpot], async(req,res,next) =>{
+//   const reviews = await review.findAll
+// })
+
+
+//*Create a Review for a Spot based on the Spot's id
+//!POST
 module.exports = router;
