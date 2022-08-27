@@ -25,7 +25,7 @@ module.exports = {
         review:'Is 420 all over year around',
         stars:3
       }
-      
+
      ])
   },
 
