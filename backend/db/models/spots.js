@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
      Spot.belongsTo(models.User, {foreignKey:'ownerId'})
      Spot.hasMany(models.Review,{foreignKey:'spotId'})
-     Spot.hasMany(models.Booking,{foreignKey:'userId'})
+     Spot.hasMany(models.Booking,{foreignKey:'spotId'})
      Spot.hasMany(models.Image,
      {
       foreighKey:'imageableId',
@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       onDelete: 'CASCADE'
     },
+    // bookingId:{
+    //   type:DataTypes.INTEGER,
+    //   allowNull:false
+    // },
     address: {
       type:DataTypes.STRING,
       allowNull:false
