@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsTo(models.User, {foreignKey:'ownerId'})
       Spot.hasMany(models.Image,
       {
-       foreighKey:'imageableId',
+       foreignKey:'imageableId',
        constraints:false,
        scope:{
        imageableType:'Spot'
