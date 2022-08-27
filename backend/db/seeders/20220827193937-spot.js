@@ -2,7 +2,7 @@
 const bcrypt = require("bcryptjs");
 module.exports = {
   async up (queryInterface, Sequelize) {
-   return queryInterface.bulkInsert('Users', [
+   return queryInterface.bulkInsert('Spots', [
     {
       address: "123 Disney Lane",
       city: "San Francisco",
@@ -32,7 +32,7 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
+    return queryInterface.bulkDelete('Spots', {
       name: { [Op.in]: ['The Ghetto', 'App Academy'] }
     }, {});
   }
