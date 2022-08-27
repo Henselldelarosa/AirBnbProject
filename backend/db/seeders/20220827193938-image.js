@@ -5,12 +5,12 @@ const { Image} = require('../models');
 const images = [
   {
     url: "image url",
-    imageableType: "Spot",
+    imageableType: "spot",
     imageableId: 1
   },
   {
     url: "image url 2",
-    imageableType: "Spot",
+    imageableType: "spot",
     imageableId: 2
   },
 ];
