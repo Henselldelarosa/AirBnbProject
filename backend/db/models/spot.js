@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
+    lat: DataTypes.INTEGER,
+    lng: DataTypes.INTEGER,
     name: {
       type:DataTypes.STRING,
       allowNull:false
@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
     },
     price: {
-      type:DataTypes.NUMERIC(5,2),
+      type:DataTypes.INTEGER(5,2),
       allowNull:false
     },
     previewImage: {
