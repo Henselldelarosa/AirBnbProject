@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
     },
     price: {
-      type:DataTypes.INTEGER(5,2),
+      type:DataTypes.INTEGER,
       allowNull:false
     },
     previewImage: {
