@@ -68,7 +68,7 @@ router.post("/:reviewId/images",requireAuth,async(req,res,next)=>{
 //!PUT
 router.put('/:reviewId', [requireAuth,validateReview], async(req, res,next)=>{
   const {reviewId} = req.params
-  const review = await Review.findByPk(reviewId)
+  const reviews = await Review.findByPk(reviewId)
 
   const user = await User.findOne({
     where:{
@@ -76,7 +76,7 @@ router.put('/:reviewId', [requireAuth,validateReview], async(req, res,next)=>{
     }
   })
 
-  if(!review){
+  if(!reviews){
     const error = Error("Review could not be found")
     error.status = 404
     return next(error)
@@ -94,7 +94,10 @@ router.put('/:reviewId', [requireAuth,validateReview], async(req, res,next)=>{
     error.satus = 403
     return next(error)
   }
-
+const{
+  review,
+  stars
+} = req.body
   const editReview = await findAReview.update({
     review,
     stars
@@ -105,7 +108,7 @@ router.put('/:reviewId', [requireAuth,validateReview], async(req, res,next)=>{
 
 //*Delete a Review
 //!DELETE
-router.delete('/reviewId', requireAuth, async(req,res,next)=>{
+router.delete('/:reviewId', requireAuth, async(req,res,next)=>{
   const {reviewId} = req.params
   const user = await User.findOne({
     where:{
@@ -131,6 +134,7 @@ router.delete('/reviewId', requireAuth, async(req,res,next)=>{
     error.status = 404;
     return next(error);
   }
+  review.destroy()
 res.json({
   messsage:"Successfully deleted",
   statusCode:res.statusCode

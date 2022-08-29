@@ -6,6 +6,7 @@ const { User, Booking, Image, Spot, Review } = require('../../db/models');
 const router = express.Router();
 
 //* GET all Spots owned by the Current User
+//todo add avg Rating
 router.get('/spots', [restoreUser, requireAuth], async(req,res)=>{
 const getUser = await User.findOne({
   where:{
@@ -48,7 +49,20 @@ res.json({reviews})
 
 //*Get all of the Current User's Bookings
 //!GET
-router.get('/user/bookings', [restoreUser,requireAuth], async(req,res,next)=>{
-  
-})
+router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
+  // get bookings from user id
+  const bookings = await Booking.findAll({
+    where: {
+      userId: req.user.id
+    },
+    include: {
+      model: Spot
+    },
+  });
+
+  // return successful response
+  res.json(
+    { Bookings: bookings }
+  );
+});
 module.exports = router

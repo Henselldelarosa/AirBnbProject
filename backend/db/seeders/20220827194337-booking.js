@@ -14,6 +14,8 @@ module.exports = {
     */
      return queryInterface.bulkInsert('Bookings',[
        {
+        userId:3,
+        spotId:1,
         startDate: today,
         endDate: today
       }

@@ -2,13 +2,25 @@ const express = require('express');
 const { check } = require('express-validator');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors, validateSignup } = require('../../utils/validation');
-const { User, Spot, Album, Comment, Playlist, Image, Sequelize, Review } = require('../../db/models');
+const { User, Spot,Booking, Image, Sequelize, Review, sequelize } = require('../../db/models');
+const { raw } = require('express');
 const router = express.Router();
 
+//TODO REVIEW
 // *GET all Spots
 router.get('/', async(req,res)=>{
-  const getAllSpots = await Spot.findAll()
-  return res.json({Spots:getAllSpots})
+   const getAllSpots = await Spot.findAll({
+    //raw:true,
+     include:{
+      model:Review,
+      attributes:[
+         [Sequelize.fn('COUNT', Sequelize.col('stars')),'numReviews'],
+        [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 1), 'avgStarRating'],
+      ],
+
+    }
+   })
+   res.json({Spots:getAllSpots})
 })
 
 //!GET
@@ -412,5 +424,26 @@ const newReview = await Review.create({
 })
 res.json(newReview)
 })
+
+//*Get all Bookings for a Spot based on the Spot's id
+//!GET
+router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
+  // get bookings from user id
+  const bookings = await Booking.findAll({
+    where: {
+      userId: req.user.id
+    },
+    include: {
+      model: Spot.scope
+    },
+  });
+
+
+  res.json(
+    { Bookings: bookings }
+  );
+});
+
+
 
 module.exports = router;
