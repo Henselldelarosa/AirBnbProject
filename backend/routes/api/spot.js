@@ -8,7 +8,7 @@ const router = express.Router();
 
 //TODO REVIEW
 // *GET all Spots
-// router.get('/', async(req,res)=>{
+ router.get('/', async(req,res)=>{
 //    const getAllSpots = await Spot.findAll({
      //raw:true,
 //      include:{
@@ -21,7 +21,9 @@ const router = express.Router();
 //     }
 //    })
 //    res.json({Spots:getAllSpots})
-// })
+const spot = await Spot.findAll()
+res.json(spot)
+ })
 
 //!GET
 //* Get details of a Spot from an id
@@ -61,6 +63,7 @@ const image = await Image.findAll({
     imageableId: spotId
   }
 })
+
 
 
 const owner = await User.findByPk(spot.ownerId)
