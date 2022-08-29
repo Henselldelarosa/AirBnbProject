@@ -8,20 +8,20 @@ const router = express.Router();
 
 //TODO REVIEW
 // *GET all Spots
-router.get('/', async(req,res)=>{
-   const getAllSpots = await Spot.findAll({
-    //raw:true,
-     include:{
-      model:Review,
-      attributes:[
-         [Sequelize.fn('COUNT', Sequelize.col('stars')),'numReviews'],
-        [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 1), 'avgStarRating'],
-      ],
+// router.get('/', async(req,res)=>{
+//    const getAllSpots = await Spot.findAll({
+     //raw:true,
+//      include:{
+//       model:Review,
+//       attributes:[
+//          [Sequelize.fn('COUNT', Sequelize.col('stars')),'numReviews'],
+//         [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 1), 'avgStarRating'],
+//       ],
 
-    }
-   })
-   res.json({Spots:getAllSpots})
-})
+//     }
+//    })
+//    res.json({Spots:getAllSpots})
+// })
 
 //!GET
 //* Get details of a Spot from an id
@@ -66,7 +66,7 @@ const image = await Image.findAll({
 const owner = await User.findByPk(spot.ownerId)
 const details = {
   ...spot,
-  ...parseInt(reviews),
+  ...reviews,
 Image: image,
 Owner: owner
 }

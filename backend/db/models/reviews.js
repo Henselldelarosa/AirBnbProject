@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     stars: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.REAL,
       allowNull:false
     }
   }, {
