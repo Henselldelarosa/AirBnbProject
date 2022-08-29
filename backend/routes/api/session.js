@@ -7,8 +7,20 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+
+
+const flatten = (obj = {}, res = {}, extraKey = '') => {
+  for(key in obj){
+     if(typeof obj[key] !== 'object'){
+        res[extraKey + key] = obj[key];
+     }else{
+        flatten(obj[key], res, `${extraKey}${key}.`);
+     };
+  };
+  return res;
+};
 router.post(
-  '/',
+  ['/', '/new'],
   async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
@@ -20,11 +32,9 @@ router.post(
       return next(err);
     }
 
-     setTokenCookie(res, user);
+     const token = setTokenCookie(res, user);
 
-    return res.json({
-      user
-    });
+    return (res.json(user));
   }
 );
 

@@ -24,12 +24,11 @@ module.exports = (sequelize, DataTypes) => {
   Review.init({
     userId: {
       type:DataTypes.INTEGER,
-      allowNull:false,
       onDelete: 'CASCADE'
     },
     spotId: {
       type:DataTypes.INTEGER,
-      allowNull:false,
+
       onDelete: 'CASCADE'
     },
     review: {
@@ -45,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Review',
     defaultScope: {
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
+        //exclude: ["createdAt", "updatedAt"]
       }
     }
   });

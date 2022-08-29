@@ -1,5 +1,6 @@
 'use strict';
-
+const moment = require('moment-timezone');
+const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -11,6 +12,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+     return queryInterface.bulkInsert('Bookings',[
+       {
+        startDate: today,
+        endDate: today
+      }
+     ])
   },
 
   async down (queryInterface, Sequelize) {

@@ -10,7 +10,7 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
+        //allowNull:false,
       },
       userId: {
         type: Sequelize.INTEGER
