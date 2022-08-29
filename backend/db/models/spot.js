@@ -49,8 +49,18 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
-    lat: DataTypes.INTEGER,
-    lng: DataTypes.INTEGER,
+    lat: {
+      type:DataTypes.INTEGER,
+      validate:{
+        isFloat:true
+      }
+    },
+    lng: {
+      type:DataTypes.INTEGER,
+      validate:{
+        isFloat:true
+      }
+    },
     name: {
       type:DataTypes.STRING,
       allowNull:false
