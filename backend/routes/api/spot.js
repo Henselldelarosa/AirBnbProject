@@ -66,7 +66,7 @@ const image = await Image.findAll({
 const owner = await User.findByPk(spot.ownerId)
 const details = {
   ...spot,
-  ...reviews,
+  ...parseInt(reviews),
 Image: image,
 Owner: owner
 }
