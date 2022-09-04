@@ -5,5 +5,9 @@ const { handleValidationErrors, validateSignup } = require('../../utils/validati
 const { User, Booking } = require('../../db/models');
 const router = express.Router();
 
+router.get('/', async(req,res)=>{
+  const booking = await Booking.findAll()
+  res.json(booking)
+})
 
 module.exports = router;

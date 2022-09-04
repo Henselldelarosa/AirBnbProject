@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       return User.scope("currentUser").findByPk(id);
     }
 
+    static async getCurrentUserByEmail(email) {
+      return await User.scope('loginUser').findOne({
+        where: {
+          email: email
+        }
+      });
+    };
+
     static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
@@ -33,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         // password
         password:hashedPassword
       });
-      console.log(user, "klklklk")
+
       return await User.scope('loginUser').findByPk(user.id);
     }
 
@@ -125,21 +133,23 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ["username","password", "email", "createdAt", "updatedAt"]
+        exclude: ['password', 'updatedAt', 'email', 'createdAt']
       }
     },
     scopes: {
       currentUser() {
         return {
-          attributes: { exclude: ["password"] }
+          attributes: {
+            exclude: ['password', 'createdAt', 'updatedAt']
+          }
         }
       },
+
       loginUser() {
         return {
           attributes: {}
         }
       }
-
     }
   });
   return User;

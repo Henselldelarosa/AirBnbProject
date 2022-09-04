@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Booking',
     defaultScope: {
       attributes: {
-        // exclude: ["id","userId","createdAt", "updatedAt"]
+         //exclude: ["userId"]
       }
     }
   });

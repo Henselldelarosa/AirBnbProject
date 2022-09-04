@@ -20,7 +20,7 @@ const flatten = (obj = {}, res = {}, extraKey = '') => {
   return res;
 };
 router.post(
-  ['/', '/new'],
+  '/',
   async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });

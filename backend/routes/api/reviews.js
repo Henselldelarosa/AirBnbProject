@@ -1,21 +1,15 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { handleValidationErrors, validateSignup } = require('../../utils/validation');
+const { handleValidationErrors, validateSignup,validateReview } = require('../../utils/validation');
 const { User, Review,Image } = require('../../db/models');
 const router = express.Router();
 
-const validateReview = [
-  check('review')
-    .exists({ checkFalsy: true })
-    .withMessage('Review text is required'),
-  check('stars')
-    .isInt({ min: 1, max: 5 })
-    .withMessage('Stars must be an integer from 1 to 5'),
-  handleValidationErrors
-];
 
-
+router.get('/', async(req,res,next)=>{
+  const review = await Review.findAll()
+  res.json(review)
+})
 
 
 
@@ -31,12 +25,21 @@ router.post("/:reviewId/images",requireAuth,async(req,res,next)=>{
       id:req.user.id
     }
   })
+
   const review = await Review.findOne({
     where:{
       id:reviewId,
       userId:user.id
     }
   })
+  const allowed = await Review.findByPk(reviewId)
+
+  if (allowed && allowed.userId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   if(!review){
     const error = new Error("")
     error.satus = 404

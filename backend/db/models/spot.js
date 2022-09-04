@@ -50,13 +50,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     lat: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.NUMBER,
       validate:{
         isFloat:true
       }
     },
     lng: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.NUMBER,
       validate:{
         isFloat:true
       }
@@ -82,7 +82,17 @@ module.exports = (sequelize, DataTypes) => {
       attributes: {
         //exclude: ["description","createdAt", "updatedAt"]
       }
+    },
+    scopes:{
+      booking(){
+        return{
+          attributes:{
+            exclude:["description", "createdAt", "updatedAt"]
+          }
+        }
+      }
     }
+
   });
   return Spot;
 };

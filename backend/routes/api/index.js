@@ -3,6 +3,7 @@
 const router = require('express').Router();;
 
 const sessionRouter = require('./session.js');
+const bookigRouter = require('./booking')
 const usersRouter = require('./users.js');
 const imageRouter = require('./image')
 const spotRouter = require('./spot.js')
@@ -33,6 +34,7 @@ router.use('/spots', spotRouter)
 router.use('/user', userRouter)
 router.use('/new', newRouter)
 router.use('/reviews', reviewRouter)
+router.use('/bookings', bookigRouter)
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
