@@ -65,9 +65,14 @@ router.post(
     const token = setTokenCookie(res, user);
 
     const newUserInfo = await User.scope('currentUser').findByPk(user.id);
-    newUserInfo.dataValues['token'] = token;
+    //newUserInfo.dataValues['token'] = token;
     return res.json({
-      newUserInfo
+      id:newUserInfo.id,
+      firstName:newUserInfo.firstName,
+      lastName:newUserInfo.lastName,
+      email:newUserInfo.email,
+      username:newUserInfo.username,
+      token:token
     });
   }
 );
