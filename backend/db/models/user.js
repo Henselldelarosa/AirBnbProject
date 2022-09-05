@@ -25,6 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
     };
+    static async getCurrentUserByUsername(username){
+      return await User.scope('loginUser').findOne({
+        where:{
+          username:username
+        }
+      })
+    }
 
     static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);

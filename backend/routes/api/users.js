@@ -47,10 +47,10 @@ router.post(['/','/new'],validateSignup, async (req, res,next) => {
       username,
       firstName,
       lastName } = req.body;
-    const elreadyUser = await User.getCurrentUserByEmail(email);
+    const alreadyEmail = await User.getCurrentUserByEmail(email);
 
 
-    if(elreadyUser){
+    if(alreadyEmail){
       const error = new Error("User already exists");
       error.status = 403;
       error.errors = {
@@ -58,6 +58,16 @@ router.post(['/','/new'],validateSignup, async (req, res,next) => {
       };
       return next(error);
     }
+    const alreadyUsername = await User.getCurrentUserByUsername(username)
+    if(alreadyUsername){
+      const error = new Error("User already exists");
+      error.status = 403;
+      error.errors = {
+        username: "User with that username already exists"
+      };
+      return next(error);
+    }
+
     const user = await User.signup({ email, password, username, firstName, lastName });
     const token = setTokenCookie(res, user);
 
