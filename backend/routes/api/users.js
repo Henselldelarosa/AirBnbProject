@@ -43,8 +43,13 @@ router.post(
 router.post(
   ['/','/new'],
   validateSignup,
-  async (req, res) => {
-    const { email, password, username, firstName, lastName } = req.body;
+  async (req, res,next) => {
+    const {
+      email,
+      password,
+      username,
+      firstName,
+      lastName } = req.body;
     const elreadyUser = await User.getCurrentUserByEmail(email);
 
 
