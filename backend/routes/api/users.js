@@ -39,22 +39,30 @@ router.post(
 );
 
 
+//*Sign Up a User
 router.post(
   ['/','/new'],
   validateSignup,
   async (req, res) => {
     const { email, password, username, firstName, lastName } = req.body;
-    const user = await User.signup({ email, username, firstName, lastName, password });
+    const elreadyUser = await User.getCurrentUserByEmail(email);
 
-    await setTokenCookie(res, user);
 
+    if(elreadyUser){
+      const error = new Error("User already exists");
+      error.status = 403;
+      error.errors = {
+        email: "User with that email already exists"
+      };
+      return next(error);
+    }
+    const user = await User.signup({ email, password, username, firstName, lastName });
+    const token = setTokenCookie(res, user);
+
+    const newUserInfo = await User.scope('currentUser').findByPk(user.id);
+    newUserInfo.dataValues['token'] = token;
     return res.json({
-      id:user.id,
-      firstName:user.firstName,
-      lastName:user.lastName,
-      email:user.email,
-      username:user.username,
-      token:token
+      newUserInfo
     });
   }
 );
