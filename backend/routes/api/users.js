@@ -13,7 +13,7 @@ const { handleValidationErrors, validateLogin, validateSignup } = require('../..
 //*log in user
 //!GET
 router.post(
-  '/', validateLogin, requireAuth,
+  '/', validateLogin,
   async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
