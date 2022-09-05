@@ -7,7 +7,7 @@ const { raw } = require('express');
 const e = require('express');
 const router = express.Router();
 
-// *GET all Spots
+// *Get all Spots
 //!GET
  router.get('/', async(req,res)=>{
 
