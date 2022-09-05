@@ -40,10 +40,7 @@ router.post(
 
 
 //*Sign Up a User
-router.post(
-  ['/','/new'],
-  validateSignup,
-  async (req, res,next) => {
+router.post(['/','/new'],validateSignup, async (req, res,next) => {
     const {
       email,
       password,
@@ -64,17 +61,11 @@ router.post(
     const user = await User.signup({ email, password, username, firstName, lastName });
     const token = setTokenCookie(res, user);
 
-    const newUserInfo = await User.scope('currentUser').findByPk(user.id);
-    //newUserInfo.dataValues['token'] = token;
-    return res.json({
-      id:newUserInfo.id,
-      firstName:newUserInfo.firstName,
-      lastName:newUserInfo.lastName,
-      email:newUserInfo.email,
-      username:newUserInfo.username,
-      token:token
-    });
-  }
-);
+    const newUserInfo = await User.findByPk(user.id);
+    newUserInfo.dataValues['token'] = token;
+    return res.json(
+      newUserInfo
+    );
+  });
 
 module.exports = router;
