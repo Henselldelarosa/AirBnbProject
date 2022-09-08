@@ -433,7 +433,7 @@ res.json(newReview)
 
 //*Get all Bookings for a Spot based on the Spot's id
 //!GET
-router.get('/:spotId/bookings', [restoreUser, requireAuth], async (req, res, next) => {
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 const {spotId} = req.params
 
 //? get the current user
