@@ -475,11 +475,10 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
       where: {
         spotId
       },
-      include: [
+      include:
         {
           model: User
       }
-    ],
     });
   }
 
