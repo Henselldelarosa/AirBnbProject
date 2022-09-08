@@ -446,7 +446,7 @@ const user = await User.findOne({
 //?get spots onwed by the current user
 const spotOwned = await Spot.findOne({
   where:{
-    OwnerId: user.id
+    ownerId: user.id
   }
 })
 
