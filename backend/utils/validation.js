@@ -1,6 +1,8 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
 const { check } = require('express-validator');
+const { query } = require('express-validator/check');
+
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
 const handleValidationErrors = (req, _res, next) => {
@@ -113,7 +115,46 @@ const validateReview = [
   handleValidationErrors
 ];
 
+const validateQuery = [
+  query('page')
+    .isInt({ min: 0 })
+    .default(0)
+    .optional()
+    .withMessage('Page must be greater than or equal to 0'),
+  check('size')
+    .isInt({ min: 0 })
+    .default(20)
+    .optional()
+    .withMessage('Size must be greater than or equal to 0'),
+  check('minLat')
+    .isDecimal()
+    .optional()
+    .withMessage('Minimum latitude is invalid'),
+  check('maxLat')
+    .isDecimal()
+    .optional()
+    .withMessage('Maximum latitude is invalid'),
+  check('minLng')
+    .isDecimal()
+    .optional()
+    .withMessage('Minimum longitude is invalid'),
+  check('maxLng')
+    .isDecimal()
+    .optional()
+    .withMessage('Maximum longitude is invalid'),
+  check('minPrice')
+    .isFloat({ min: 0 })
+    .optional()
+    .withMessage('Minimum price must be greater than 0'),
+  check('maxPrice')
+    .isFloat({ min: 0 })
+    .optional()
+    .withMessage('Maximum price must be greater than 0'),
+  handleValidationErrors
+];
+
 module.exports = {
+  validateQuery,
   handleValidationErrors,
   validateLogin,
   validateSignup,

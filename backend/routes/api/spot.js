@@ -1,7 +1,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { handleValidationErrors, validateSignup,validateSpot, validateReview } = require('../../utils/validation');
+const { handleValidationErrors, validateSignup,validateSpot, validateReview,validateQuery } = require('../../utils/validation');
 const { User, Spot,Booking, Image, Sequelize, Review, sequelize } = require('../../db/models');
 const { raw } = require('express');
 const e = require('express');
@@ -9,9 +9,42 @@ const router = express.Router();
 
 // *Get all Spots
 //!GET
- router.get('/', async(req,res)=>{
+ router.get('/', validateQuery, async(req,res)=>{
+  const { Op } = require('sequelize')
 
-const spots = await Spot.findAll()
+  let page = Number(req.query.page);
+  let size = Number(req.query.size);
+
+  if (isNaN(page) || page <= 0) page = 0;
+  if (isNaN(size) || size < 0) size = 20;
+
+  if (page > 10) page = 0;
+  if (size > 20) size = 20;
+
+
+  const limit = size;
+  const offset = size * (page - 1) >= 0 ? size * (page - 1) : 0;
+
+  const where = {};
+
+  const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+  if (minLat) where.lat = { [Op.gte]: Number(minLat) };
+  if (maxLat) where.lat = { [Op.lte]: Number(maxLat) };
+  if (minLng) where.lng = { [Op.gte]: Number(minLng) };
+  if (maxLng) where.lng = { [Op.lte]: Number(maxLng) };
+  if (minPrice) where.price = { [Op.gte]: Number(minPrice) };
+  if (maxPrice) where.price = { [Op.lte]: Number(maxPrice) };
+
+
+const spots = await Spot.findAll({
+  include:{
+    model:Image,
+    attributes:[]
+  },
+  where,
+  limit,
+  offset
+})
 
 for(let spot of spots){
   const {id} = spot
@@ -42,7 +75,9 @@ let order = JSON.parse(JSON.stringify( spots,
   "price","createdAt","updatedAt","avgRating","previewImage"]));
 
 res.json({
-  Spots:order
+  Spots:order,
+  page,
+  size
 })
  })
 
@@ -450,6 +485,89 @@ res.json({Bookings:bookings})
 
 });
 
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
 
+  // deconstruct request body
+  const {
+    startDate,
+    endDate
+  } = req.body;
+
+
+  const user = await User.findOne({
+    where:{
+      id: req.user.id
+    }
+  })
+  // get spot
+  const spot = await Spot.findByPk(spotId);
+
+
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  if (spot.ownerId === user.id) {
+    const err = Error("Spot must NOT belong to the current user");
+    return next(err);
+  }
+
+
+  if (endDate <= startDate) {
+    const err = Error("Validation error");
+    err.status = 400;
+    err.errors = {
+      endDate: "endDate cannot be on or before startDate"
+    };
+    return next(err);
+  }
+
+  const findBooking = await Booking.findOne({
+    where: {
+      spotId,
+      userId: user.id,
+    }
+  });
+
+  if (findBooking) {
+    // set comparison start/end date variable for comparing with request body date
+    const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
+    const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
+
+    // if booking start date or end date exist with given dates
+    if (startDateCompare === startDate || endDateCompare === endDate) {
+      const err = Error("Sorry, this spot is already booked for the specified dates");
+      err.status = 403;
+      err.errors = {};
+
+      // start date conflicts
+      if (startDateCompare === startDate) {
+        err.errors.startDate = "Start date conflicts with an existing booking";
+      }
+
+      // end date conflicts
+      if (endDateCompare === endDate) {
+        err.errors.endDate = "End date conflicts with an existing booking";
+      }
+
+      return next(err);
+    }
+  }
+
+  // create booking with given request time
+  const booking = await Booking.create({
+    spotId,
+    userId: user.id,
+    startDate,
+    endDate
+  });
+
+
+  res.json(booking);
+});
 
 module.exports = router;
