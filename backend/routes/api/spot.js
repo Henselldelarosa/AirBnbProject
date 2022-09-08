@@ -69,13 +69,13 @@ for(let spot of spots){
    spot.dataValues.avgRating = avgRating
 
 }
-// let order = JSON.parse(JSON.stringify( spots,
-//   ["id","ownerId","address","city","state",
-//   "country","lat","lng","name","description",
-//   "price","createdAt","updatedAt","avgRating","previewImage"]));
+let order = JSON.parse(JSON.stringify( spots,
+  ["id","ownerId","address","city","state",
+  "country","lat","lng","name","description",
+  "price","createdAt","updatedAt","avgRating","previewImage"]));
 
 res.json({
-  Spots:spots,
+  Spots:order,
   page,
   size
 })
