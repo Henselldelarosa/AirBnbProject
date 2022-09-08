@@ -434,55 +434,57 @@ res.json(newReview)
 //*Get all Bookings for a Spot based on the Spot's id
 //!GET
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
-const {spotId} = req.params
+  // deconstruct spotId
+  const { spotId } = req.params;
 
-//? get the current user
-const user = await User.findOne({
-  where:{
-    id: req.user.id
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // get spot from current user id
+  const spotOwner = await Spot.findOne({
+    where: {
+      ownerId: user.id
+    }
+  });
+
+  // TODO: Couldn't find a Spot with the specified id
+  const findSpot = await Spot.findByPk(spotId);
+
+  if (!findSpot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
   }
-})
 
-//?get spots onwed by the current user
-const spotOwned = await Spot.findOne({
-  where:{
-    ownerId: user.id
+  let booking;
+
+  // TODO: Successful Response: If you ARE NOT the owner of the spot.
+  // if booking does not include current user id
+  if (!spotOwner) {
+    booking = await Booking.findAll({
+      where: {
+        spotId
+      }
+    });
+  } else {
+    // TODO: If you ARE the owner of the spot.
+    booking = await Booking.findAll({
+      where: {
+        spotId
+      },
+      include: {
+        model: User
+      }
+    });
   }
-})
 
-const spot = await Spot.findByPk(spotId)
-//? if the spot couldn't be found
-if(!spot){
-  const error = Error("Spot couldn't be found")
-  error.status = 404
-  return next(error)
-}
-
-//? if the current spot is not owned by the current user
-let bookings;
-if(!spotOwned){
-bookings = await Booking.findAll({
-  attributes:["spotId","startDate","endDate"],
-  where:{
-    spotId
-  }
-})
-
-}
-else{
-  bookings = await Booking.findAll({
-    where:{
-      spotId
-    },
-    include:{
-      model:User,
-      //attributes:["id","firstName","lastName"]
-    },
-
-  })
-}
-res.json({Bookings:bookings})
-
+  res.json({
+    Bookings: booking
+  });
 });
 
 router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {

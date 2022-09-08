@@ -50,13 +50,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     lat: {
-      type:DataTypes.NUMBER,
+      type:DataTypes.DECIMAL,
       validate:{
         isFloat:true
       }
     },
     lng: {
-      type:DataTypes.NUMBER,
+      type:DataTypes.DECIMAL,
       validate:{
         isFloat:true
       }
