@@ -39,7 +39,7 @@ router.post(
 );
 
 
-//*Sign Up a User
+//*Sign up a User
 router.post(['/','/new'],validateSignup, async (req, res,next) => {
     const {
       email,

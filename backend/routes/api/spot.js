@@ -36,23 +36,13 @@ for(let spot of spots){
    spot.dataValues.avgRating = avgRating
 
 }
+let order = JSON.parse(JSON.stringify( spots,
+  ["id","ownerId","address","city","state",
+  "country","lat","lng","name","description",
+  "price","createdAt","updatedAt","avgRating","previewImage"]));
 
-res.json({Spot:spots,
-  id:spots.id,
-  ownerId: spots.ownerId,
-  address: spots.address,
-  city: spots.city,
-  state:spots.state,
-  country: spots.country,
-  lat: spots.lat,
-  lng: spots.lng,
-  name: spots.name,
-  description: spots.description,
-  price: spots.price,
-  createdAt: spots.createAt,
-  updatedAt: spots.updatedAt,
-  avgRating: spots.avgRating,
-  previewImage: spots.previewImage
+res.json({
+  Spots:order
 })
  })
 
@@ -62,9 +52,9 @@ router.get('/:spotId', async(req,res,next)=>{
   const {spotId} = req.params
   const spots = await Spot.findByPk(spotId)
 const spot = await Spot.findOne({
-attributes:[
-  '*'
-],
+attributes:{exclude:["previewImage"]}
+  // '*'
+,
 where:{
   id: spotId
 },
@@ -94,14 +84,19 @@ const image = await Image.findAll({
     imageableId: spotId
   }
 })
+//!assign an order to your json object
+let order = JSON.parse(JSON.stringify( image,
+  ["id","imageableId","url"]));
 
 
 
-const owner = await User.findByPk(spot.ownerId)
+const owner = await User.findByPk(spot.ownerId,{
+  attributes:{exclude:["username"]}
+})
 const details = {
   ...spot,
   ...reviews,
-Image: image,
+Images: order,
 Owner: owner
 }
 res.json(details)
