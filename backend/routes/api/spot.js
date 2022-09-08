@@ -445,45 +445,46 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   });
 
   // get spot from current user id
-  const spotOwner = await Spot.findOne({
+  const spotOwned = await Spot.findOne({
     where: {
       ownerId: user.id
     }
   });
 
-  // TODO: Couldn't find a Spot with the specified id
-  const findSpot = await Spot.findByPk(spotId);
 
-  if (!findSpot) {
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
     const err = Error("Spot couldn't be found");
     err.status = 404;
     return next(err);
   }
 
-  let booking;
+  let bookings;
 
-  // TODO: Successful Response: If you ARE NOT the owner of the spot.
-  // if booking does not include current user id
-  if (!spotOwner) {
-    booking = await Booking.findAll({
+
+  if (!spotOwned) {
+    bookings = await Booking.findAll({
       where: {
         spotId
       }
     });
   } else {
-    // TODO: If you ARE the owner of the spot.
-    booking = await Booking.findAll({
+
+    bookings = await Booking.findAll({
       where: {
         spotId
       },
-      include: {
+      include: [
+        {
         model: User
       }
+    ]
     });
   }
 
   res.json({
-    Bookings: booking
+    Bookings: bookings
   });
 });
 
