@@ -185,7 +185,7 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
 })
 
 //!PUT
-//? eddit a spot
+//? Edit a spot
 router.put('/:spotId',[restoreUser,requireAuth,validateSpot], async(req,res,next)=>{
   const { spotId}  = req.params
 
