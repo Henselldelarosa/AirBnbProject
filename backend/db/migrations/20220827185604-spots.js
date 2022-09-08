@@ -30,11 +30,11 @@ module.exports = {
         allowNull:false
       },
       lat: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.DECIAMAL,
         allowNull:false
       },
       lng: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.DECIAMAL,
         allowNull:false
       },
       name: {
