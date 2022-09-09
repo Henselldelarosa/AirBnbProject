@@ -177,14 +177,15 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
     description,
     price
   })
-  let order = JSON.parse(JSON.stringify( spots,
-    ["address","city","state",
-    "country","lat","lng","name","description",
-    "price"]));
+
 
   //?return spot
   const returnNewSpot = await Spot.findByPk(newSpot.id)
-  res.json(returnNewSpot)
+  let order = JSON.parse(JSON.stringify( returnNewSpot,
+    ["address","city","state",
+    "country","lat","lng","name","description",
+    "price"]));
+  res.json(order)
 })
 
 //!PUT
