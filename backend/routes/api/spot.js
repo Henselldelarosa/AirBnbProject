@@ -406,13 +406,12 @@ router.post('/:spotId/reviews', [requireAuth, validateReview],async(req,res,next
     }
   })
 
-  const spot = await Spot.findByPk(spotId)
-  //?check if the spot exists
-  if(!spot){
-    error.status = 404;
-    const error = Error("Spot couldn't be found");
-    return next(error);
+  const spot = await Spot.findByPk(spotId);
 
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
   }
 
 
