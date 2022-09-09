@@ -250,7 +250,7 @@ const editedSpot = await spot.update(
 })
 const newUpdate = await Spot.findByPk(editedSpot.id)
 let order = JSON.parse(JSON.stringify( newUpdate,
-  ["address","city","state",
+  ["id","ownerId","address","city","state",
   "country","lat","lng","name","description",
   "price","createdAt","updatedAt"]));
 return res.json(order)
