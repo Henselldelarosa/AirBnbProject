@@ -73,6 +73,9 @@ router.post(['/','/new'],validateSignup, async (req, res,next) => {
 
     const newUserInfo = await User.findByPk(user.id);
     newUserInfo.dataValues['token'] = token;
+    let order = JSON.parse(JSON.stringify( newUserInfo,
+      ["id","firstName","lastName","email","username",
+      "token"]));
     return res.json(
       newUserInfo
     );
