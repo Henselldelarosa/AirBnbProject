@@ -76,8 +76,11 @@ const reviews = await Review.findAll({
       attributes:["id","ownerId","address","city","state","country","lat","lng","name","price"]
     },
     {
-      model:JSON.parse(JSON.stringify(Image,
-        ["id","imageableId","url"]))
+      model:Image,
+      attributes: JSON.parse(JSON.stringify(
+        ["id","ownerId","address","city","state",
+        "country","lat","lng","name","description",
+        "price","createdAt","updatedAt","avgRating","previewImage"]))
     }
   ],
 })
