@@ -249,7 +249,11 @@ const editedSpot = await spot.update(
     price
 })
 const newUpdate = await Spot.findByPk(editedSpot.id)
-return res.json(newUpdate)
+let order = JSON.parse(JSON.stringify( returnNewSpot,
+  ["address","city","state",
+  "country","lat","lng","name","description",
+  "price","createdAt","updatedAt"]));
+return res.json(order)
 })
 
 //!DELETE
