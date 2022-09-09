@@ -139,7 +139,7 @@ res.json(details)
 
 
 
-//* CREATE a Spot
+//* Create a Spot
 //!Post
 router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
 
@@ -177,7 +177,10 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
     description,
     price
   })
-  console.log("newSpot", newSpot);
+  let order = JSON.parse(JSON.stringify( spots,
+    ["address","city","state",
+    "country","lat","lng","name","description",
+    "price"]));
 
   //?return spot
   const returnNewSpot = await Spot.findByPk(newSpot.id)
