@@ -76,12 +76,12 @@ const reviews = await Review.findAll({
       attributes:["id","ownerId","address","city","state","country","lat","lng","name","price"]
     },
     {
-      model:Image = JSON.parse(JSON.stringify( Image,
+      model:Image.JSON.parse(JSON.stringify(
         ["id","imageableId","url"]))
     }
   ],
 })
-res.json({reviews})
+res.json({Reviews:reviews})
 })
 
 //*Get all of the Current User's Bookings
