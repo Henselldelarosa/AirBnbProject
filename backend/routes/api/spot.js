@@ -126,7 +126,7 @@ let order = JSON.parse(JSON.stringify( image,
 
 
 const owner = await User.findByPk(spot.ownerId,{
-  attributes:{exclude:["username"]}
+  attributes:{exclude:["username","email","password"]}
 })
 const details = {
   ...spot,
