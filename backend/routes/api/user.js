@@ -45,7 +45,7 @@ let order = JSON.parse(JSON.stringify( spots,
   ["id","ownerId","address","city","state",
   "country","lat","lng","name","description",
   "price","createdAt","updatedAt","avgRating","previewImage"]));
-res.json({Spots:spots})
+res.json({Spots:order})
 })
 
 router.get('/',[restoreUser, requireAuth], async(req,res)=>{
