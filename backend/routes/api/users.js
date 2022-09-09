@@ -77,7 +77,7 @@ router.post(['/','/new'],validateSignup, async (req, res,next) => {
       ["id","firstName","lastName","email","username",
       "token"]));
     return res.json(
-      newUserInfo
+      order
     );
   });
 
