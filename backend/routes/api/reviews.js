@@ -41,7 +41,7 @@ router.post("/:reviewId/images",requireAuth,async(req,res,next)=>{
   }
 
   if(!review){
-    const error = new Error("")
+    const error = new Error("Review couldn't be found")
     error.satus = 404
     return next(error)
   }
