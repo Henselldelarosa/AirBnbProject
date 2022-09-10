@@ -364,9 +364,9 @@ router.get('/:spotId/reviews', async(req,res,next)=>{
     include:[
       {
       model:User,
+      attributes:{excludes:["username","email","password"]}
     }
   ],
-  attributes:{excludes:["username","email","password"]}
   })
 
 for (let review of reviews){
