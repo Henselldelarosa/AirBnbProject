@@ -510,7 +510,7 @@ const authorization = async (req, res, next) => {
   next();
 }
 
-// TODO: Create a Booking from a Spot based on the Spot's id
+//* Create a Booking from a Spot based on the Spot's id
 // Create and return a new booking from a spot specified by id.
 router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, next) => {
   // deconstruct spotId
@@ -525,7 +525,7 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
   // get spot
   const spot = await Spot.findByPk(spotId);
 
-  // TODO: Error response: Couldn't find a Spot with the specified id
+
   if (!spot) {
     const err = Error("Spot couldn't be found");
     err.status = 404;
@@ -537,7 +537,7 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
     return next(err);
   }
 
-  // TODO: Error response: Body validation errors
+
   if (endDate <= startDate) {
     const err = Error("Validation error");
     err.status = 400;
@@ -547,7 +547,7 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
     return next(err);
   }
 
-  // TODO: Error response: Booking conflict
+
   const findBooking = await Booking.findOne({
     where: {
       spotId,
@@ -559,6 +559,8 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
     // set comparison start/end date variable for comparing with request body date
     const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
     const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
+    console.log(startDateCompare,"hellooooooo")
+    console.log(endDateCompare,"heloooo")
 
     // if booking start date or end date exist with given dates
     if (startDateCompare === startDate || endDateCompare === endDate) {
@@ -588,7 +590,7 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
     endDate
   });
 
-  // TODO: Successful Response
+
   res.json(booking);
 });
 module.exports = router;
