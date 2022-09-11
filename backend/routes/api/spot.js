@@ -509,10 +509,10 @@ const authorization = async (req, res, next) => {
 
   next();
 }
-// *Create a Booking from a Spot based on the Spot's id
-//!POST
 
-router.post('/:spotId/bookings',authorization,requireAuth, async (req, res, next) => {
+// TODO: Create a Booking from a Spot based on the Spot's id
+// Create and return a new booking from a spot specified by id.
+router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
@@ -522,12 +522,10 @@ router.post('/:spotId/bookings',authorization,requireAuth, async (req, res, next
     endDate
   } = req.body;
 
-
-
   // get spot
   const spot = await Spot.findByPk(spotId);
 
-
+  // TODO: Error response: Couldn't find a Spot with the specified id
   if (!spot) {
     const err = Error("Spot couldn't be found");
     err.status = 404;
@@ -535,11 +533,11 @@ router.post('/:spotId/bookings',authorization,requireAuth, async (req, res, next
   }
 
   if (spot.ownerId === user.id) {
-    const error = Error("Spot must NOT belong to the current user");
-    return next(error);
+    const err = Error("Spot must NOT belong to the current user");
+    return next(err);
   }
 
-
+  // TODO: Error response: Body validation errors
   if (endDate <= startDate) {
     const err = Error("Validation error");
     err.status = 400;
@@ -549,6 +547,7 @@ router.post('/:spotId/bookings',authorization,requireAuth, async (req, res, next
     return next(err);
   }
 
+  // TODO: Error response: Booking conflict
   const findBooking = await Booking.findOne({
     where: {
       spotId,
@@ -589,8 +588,7 @@ router.post('/:spotId/bookings',authorization,requireAuth, async (req, res, next
     endDate
   });
 
-
+  // TODO: Successful Response
   res.json(booking);
 });
-
 module.exports = router;
