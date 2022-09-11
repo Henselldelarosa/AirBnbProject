@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-// const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -11,35 +10,52 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Booking.belongsTo(models.User,{foreignKey:'userId'})
-    Booking.belongsTo(models.Spot,{foreignKey: 'spotId'})
+      // define association here
+      // Booking belongs to Spot
+      Booking.belongsTo(models.Spot, {
+        foreignKey: 'spotId'
+      });
+
+      // Booking belongs to User
+      Booking.belongsTo(models.User, {
+        foreignKey: 'userId'
+      });
     }
   }
   Booking.init({
     spotId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      allowNull: false
     },
-    startDate:{
-      type:DataTypes.DATE,
-      allowNull:false,
-    },
-    endDate:{
+    startDate: {
       type: DataTypes.DATE,
-      allowNull:false
+      allowNull: false
     },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Booking',
-    defaultScope: {
-      attributes: {
-         //exclude: ["userId"]
+    scopes: {
+      notOwner() {
+        return {
+          attributes: {
+            exclude: [
+              'id',
+              'createdAt',
+              'updatedAt',
+              'userId'
+            ]
+          }
+        };
       }
     }
   });
