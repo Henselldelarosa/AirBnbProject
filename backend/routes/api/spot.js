@@ -498,21 +498,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 });
 
 
-let user;
 
-const authorization = async (req, res, next) => {
-  user = await User.findOne({
-    where: {
-      id: req.user.id
-    }
-  });
-
-  next();
-}
 // *Create a Booking from a Spot based on the Spot's id
 //!POST
 
-router.post('/:spotId/bookings', requireAuth,authorization, async (req, res, next) => {
+router.post('/:spotId/bookings',authorization, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
