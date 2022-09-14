@@ -554,10 +554,15 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
       userId: user.id,
     }
   });
-
+res.json({
+  booking:findBooking,
+  startDate:findBooking.startDate,
+  startType:typeof(findBooking.startDate)
+})
+  // console.log(findBooking.startDate,"bdjhadhjabjdhb")
   if (findBooking) {
     // set comparison start/end date variable for comparing with request body date
-    const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
+    const startDateCompare = `${findBooking.startDate}`;
     const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
     console.log(startDateCompare,"hellooooooo")
     console.log(endDateCompare,"heloooo")
