@@ -1,20 +1,68 @@
+// 'use strict';
+
+// const { Booking, User, Spot } = require('../models');
+
+// // Today's date
+// const moment = require('moment-timezone');
+// const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+
+// const bookings = [
+//   {
+//     startDate: today,
+//     endDate: today
+//   }
+// ];
+
+// module.exports = {
+//   async up(queryInterface, Sequelize) {
+//     /**
+//      * Add seed commands here.
+//      *
+//      * Example:
+//      * await queryInterface.bulkInsert('People', [{
+//      *   name: 'John Doe',
+//      *   isBetaMember: false
+//      * }], {});
+//     */
+//     for (let bookingInfo of bookings) {
+//       const {
+//         startDate,
+//         endDate
+//       } = bookingInfo;
+
+//       // userId
+//       const user = await User.findByPk(1);
+
+//       // spotId
+//       const spot = await Spot.findByPk(1);
+
+//       // create booking
+//       await Booking.create({
+//         spotId: spot.id,
+//         userId: user.id,
+//         startDate,
+//         endDate
+//       });
+//     }
+//   },
+
+//   async down(queryInterface, Sequelize) {
+//     /**
+//      * Add commands to revert seed here.
+//      *
+//      * Example:
+//      * await queryInterface.bulkDelete('People', null, {});
+//      */
+//     await queryInterface.bulkDelete('Bookings');
+//   }
+
+
+// };
+
 'use strict';
 
-const { Booking, User, Spot } = require('../models');
-
-// Today's date
-const moment = require('moment-timezone');
-const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
-
-const bookings = [
-  {
-    startDate: today,
-    endDate: today
-  }
-];
-
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -24,35 +72,26 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    for (let bookingInfo of bookings) {
-      const {
-        startDate,
-        endDate
-      } = bookingInfo;
 
-      // userId
-      const user = await User.findByPk(1);
+     return queryInterface.bulkInsert('Bookings',[
+      {
+        spotId:1,
+        userId:1,
+        startDate:"2022-12-24",
+        endDate:"2022-12-25"
+      },
 
-      // spotId
-      const spot = await Spot.findByPk(1);
 
-      // create booking
-      await Booking.create({
-        spotId: spot.id,
-        userId: user.id,
-        startDate,
-        endDate
-      });
-    }
+     ])
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Bookings');
+     await queryInterface.bulkDelete('Bookings');
   }
 };
