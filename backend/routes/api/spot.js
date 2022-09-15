@@ -566,8 +566,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 for (let i = 0; i < findBooking.length;i++){
   let booking = findBooking[i]
-  let bookingStart = booking.getTime()
-  let bookingEnd = new Date(booking.endDate)
+  let bookingStart = new Date(booking.startDate).getTime()
+  let bookingEnd = new Date(booking.endDate).getTime()
   //reasearch get time and pass startDate into the Date()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime
 
