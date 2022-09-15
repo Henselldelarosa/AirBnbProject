@@ -570,19 +570,19 @@ for (let i = 0; i < findBooking.length;i++){
   //reasearch get time and pass startDate into the Date()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime
 
-  if(firstDate.getTime() >= booking.startDate.getTime() && firstDate.getTime()<= booking.endDate.getTime()){
+  if(firstDate.getTime() >= booking.firstDate.getTime() && firstDate.getTime()<= booking.secondDate.getTime()){
  const error = Error("Sorry, this spot is already booked for the specified dates")
  error.status = 403
  return next(error)
   }
 
-  if (secondDate.getTime() >= booking.startDate.getTime() && secondDate.getTime() <= booking.endDate.getTime()){
+  if (secondDate.getTime() >= booking.firstDate.getTime() && secondDate.getTime() <= booking.secondDate.getTime()){
     const error = Error("End date conflicts with an existing booking")
     error.status = 403
     return next(error)
   }
 
-  if (booking.startDate.getTime() >= firstDate.getTime() && booking.startDate.getTime() <= secondDate.getTime()) {
+  if (booking.firstDate.getTime() >= firstDate.getTime() && booking.firstDate.getTime() <= secondDate.getTime()) {
     const error = Error("Start date conflicts with an existing booking")
     error.status = 403
     return next(error)
