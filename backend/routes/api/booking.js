@@ -70,7 +70,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     // set comparison start/end date variable for comparing with request body date
 
     // if booking start date or end date exist with given dates
-    if (bookingStart === firstDate || endDateCompare === secondDate) {
+    if (bookingStart === firstDate || bookingEnd === secondDate) {
       const err = Error("Sorry, this spot is already booked for the specified dates");
       err.status = 403;
       err.errors = {};
