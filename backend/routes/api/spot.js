@@ -590,33 +590,6 @@ for (let i = 0; i < findBooking.length;i++){
   }
 }
 
-
-  // if (findBooking) {
-  //   // set comparison start/end date variable for comparing with request body date
-  //   const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
-  //   const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
-
-
-  //   // // if booking start date or end date exist with given dates
-  //   // if (startDateCompare === startDate || endDateCompare === endDate) {
-  //   //   const err = Error("Sorry, this spot is already booked for the specified dates");
-  //   //   err.status = 403;
-  //   //   err.errors = {};
-
-  //     // start date conflicts
-  //     if (startDateCompare === startDate) {
-  //       err.errors.startDate = "Start date conflicts with an existing booking";
-  //     }
-
-  //     // end date conflicts
-  //     if (endDateCompare === endDate) {
-  //       err.errors.endDate = "End date conflicts with an existing booking";
-  //     }
-
-  //     return next(err);
-  //   }
-    // create booking with given request time
-
     const booking = await Booking.create({
       spotId,
       userId: user.id,
