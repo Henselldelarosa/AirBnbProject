@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require("sequelize");
 const { check } = require('express-validator');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors, validateSignup,validateSpot, validateReview,validateQuery } = require('../../utils/validation');
@@ -498,21 +499,21 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 });
 
 
-let user;
+// let user;
 
-const authorization = async (req, res, next) => {
-  user = await User.findOne({
-    where: {
-      id: req.user.id
-    }
-  });
+// const authorization = async (req, res, next) => {
+//   user = await User.findOne({
+//     where: {
+//       id: req.user.id
+//     }
+//   });
 
-  next();
-}
+//   next();
+// }
 
 //* Create a Booking from a Spot based on the Spot's id
 // Create and return a new booking from a spot specified by id.
-router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, next) => {
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
@@ -521,6 +522,15 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
     startDate,
     endDate
   } = req.body;
+
+  let firstDate = new Date(startDate)
+  let secondDate = new Date(endDate)
+
+ const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
 
   // get spot
   const spot = await Spot.findByPk(spotId);
@@ -548,49 +558,75 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
   }
 
 
-  const findBooking = await Booking.findOne({
+  const findBooking = await Booking.findAll({
     where: {
-      spotId,
-      userId: user.id,
+     spotId
     }
   });
+  console.log(startDate.getTime(),"helooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+  console.log("heyyyyyy")
+for (let i = 0; i < findBooking.length;i++){
+  let booking = findBooking[i]
+  console.log(booking)
+  //reasearch get time and pass startDate into the Date()
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime
 
-  if (findBooking) {
-    // set comparison start/end date variable for comparing with request body date
-    const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
-    const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
-    console.log(startDateCompare,"hellooooooo")
-    console.log(endDateCompare,"heloooo")
-
-    // if booking start date or end date exist with given dates
-    if (startDateCompare === startDate || endDateCompare === endDate) {
-      const err = Error("Sorry, this spot is already booked for the specified dates");
-      err.status = 403;
-      err.errors = {};
-
-      // start date conflicts
-      if (startDateCompare === startDate) {
-        err.errors.startDate = "Start date conflicts with an existing booking";
-      }
-
-      // end date conflicts
-      if (endDateCompare === endDate) {
-        err.errors.endDate = "End date conflicts with an existing booking";
-      }
-
-      return next(err);
-    }
+  if(firstDate.getTime() >= booking.startDate.getTime() && firstDate.getTime()<= booking.endDate.getTime()){
+ const error = Error("Sorry, this spot is already booked for the specified dates")
+ error.status = 403
+ return next(error)
   }
 
-  // create booking with given request time
-  const booking = await Booking.create({
-    spotId,
-    userId: user.id,
-    startDate,
-    endDate
+  if (secondDate.getTime() >= booking.startDate.getTime() && firstDate.getTime() <= booking.endDate.getTime()){
+    const error = Error("End date conflicts with an existing booking")
+    error.status = 403
+    return next(error)
+  }
+
+  if (booking.startDate.getTime() >= firstDate.getTime() && booking.startDate.getTime() <= firstDate.getTime()) {
+    const error = Error("Start date conflicts with an existing booking")
+    error.status = 403
+    return next(error)
+  }
+}
+
+
+  // if (findBooking) {
+  //   // set comparison start/end date variable for comparing with request body date
+  //   const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
+  //   const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
+
+
+  //   // // if booking start date or end date exist with given dates
+  //   // if (startDateCompare === startDate || endDateCompare === endDate) {
+  //   //   const err = Error("Sorry, this spot is already booked for the specified dates");
+  //   //   err.status = 403;
+  //   //   err.errors = {};
+
+  //     // start date conflicts
+  //     if (startDateCompare === startDate) {
+  //       err.errors.startDate = "Start date conflicts with an existing booking";
+  //     }
+
+  //     // end date conflicts
+  //     if (endDateCompare === endDate) {
+  //       err.errors.endDate = "End date conflicts with an existing booking";
+  //     }
+
+  //     return next(err);
+  //   }
+    // create booking with given request time
+
+    const booking = await Booking.create({
+      spotId,
+      userId: user.id,
+      startDate,
+      endDate
+    });
+
+
+    res.json(booking);
   });
 
 
-  res.json(booking);
-});
 module.exports = router;
