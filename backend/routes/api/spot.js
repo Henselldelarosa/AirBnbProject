@@ -563,8 +563,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
      spotId
     }
   });
-  console.log(startDate.getTime(),"helooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-  console.log("heyyyyyy")
+
 for (let i = 0; i < findBooking.length;i++){
   let booking = findBooking[i]
   console.log(booking)
