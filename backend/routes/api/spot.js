@@ -566,23 +566,24 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 for (let i = 0; i < findBooking.length;i++){
   let booking = findBooking[i]
-  console.log(booking)
+  let bookingStart = booking.getTime()
+  let bookingEnd = new Date(booking.endDate)
   //reasearch get time and pass startDate into the Date()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime
 
-  if(firstDate.getTime() >= booking.firstDate.getTime() && firstDate.getTime()<= booking.secondDate.getTime()){
+  if(firstDate.getTime() >= bookingStart && firstDate.getTime()<= bookingEnd){
  const error = Error("Sorry, this spot is already booked for the specified dates")
  error.status = 403
  return next(error)
   }
 
-  if (secondDate.getTime() >= booking.firstDate.getTime() && secondDate.getTime() <= booking.secondDate.getTime()){
+  if (secondDate.getTime() >= bookingStart && secondDate.getTime() <= bookingEnd){
     const error = Error("End date conflicts with an existing booking")
     error.status = 403
     return next(error)
   }
 
-  if (booking.firstDate.getTime() >= firstDate.getTime() && booking.firstDate.getTime() <= secondDate.getTime()) {
+  if (bookingStart >= firstDate.getTime() &&bookingStart <= secondDate.getTime()) {
     const error = Error("Start date conflicts with an existing booking")
     error.status = 403
     return next(error)
