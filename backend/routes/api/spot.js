@@ -577,13 +577,13 @@ for (let i = 0; i < findBooking.length;i++){
  return next(error)
   }
 
-  if (secondDate.getTime() >= booking.startDate.getTime() && firstDate.getTime() <= booking.endDate.getTime()){
+  if (secondDate.getTime() >= booking.startDate.getTime() && secondDate.getTime() <= booking.endDate.getTime()){
     const error = Error("End date conflicts with an existing booking")
     error.status = 403
     return next(error)
   }
 
-  if (booking.startDate.getTime() >= firstDate.getTime() && booking.startDate.getTime() <= firstDate.getTime()) {
+  if (booking.startDate.getTime() >= firstDate.getTime() && booking.startDate.getTime() <= secondDate.getTime()) {
     const error = Error("Start date conflicts with an existing booking")
     error.status = 403
     return next(error)
