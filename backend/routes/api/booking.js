@@ -21,7 +21,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     endDate
   } = req.body;
 
-
+  let firstDate = new Date(startDate)
+  let secondDate = new Date(endDate)
   // get the current user info
   const currentUser = await User.findOne({
     where: {
@@ -54,11 +55,11 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
 
   // set end date variable for comparing with request body date
-  const endDateCompare = booking.endDate.toISOString().split('T')[0];
-  const dateNowCompare = new Date().toISOString().split('T')[0];
-  const startDateCompare = booking.startDate.toISOString().split('T')[0];
+  const dateNowCompare = new Date().getTime()
+  let bookingStart = new Date(booking.startDate).getTime()
+  let bookingEnd = new Date(booking.endDate).getTime()
 
-  if (endDateCompare < dateNowCompare) {
+  if (bookingEnd < dateNowCompare) {
     const err = Error("Past bookings can't be modified");
     err.status = 403;
     return next(err);
@@ -69,19 +70,19 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     // set comparison start/end date variable for comparing with request body date
 
     // if booking start date or end date exist with given dates
-    if (startDateCompare === startDate || endDateCompare === endDate) {
+    if (bookingStart === firstDate || endDateCompare === secondDate) {
       const err = Error("Sorry, this spot is already booked for the specified dates");
       err.status = 403;
       err.errors = {};
 
       // start date conflicts
-      if (startDateCompare === startDate) {
-        err.errors.startDate = "Start date conflicts with an existing booking";
+      if (bookingStart === firstDate) {
+        err.errors.bookingStart = "Start date conflicts with an existing booking";
       }
 
       // end date conflicts
-      if (endDateCompare === endDate) {
-        err.errors.endDate = "End date conflicts with an existing booking";
+      if (bookingEnd === secondDate) {
+        err.errors.bookingEnd = "End date conflicts with an existing booking";
       }
 
       return next(err);
