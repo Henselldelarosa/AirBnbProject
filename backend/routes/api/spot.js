@@ -604,7 +604,7 @@ for (let i = 0; i < findBooking.length;i++){
 //* GET all Spots owned by the Current User
 //todo add avg Rating
 router.get(['/','/current'], [restoreUser, requireAuth], async(req,res)=>{
-const getUser = await User.findOne({
+const user = await User.findOne({
   where:{
     id:req.user.id
   }
