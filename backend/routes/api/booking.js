@@ -110,7 +110,7 @@ router.delete("/:bookingId", requireAuth, async(req,res,next)=>{
     }
   })
 
-  const allowed = await Booking.findByPk(imageId)
+  const allowed = await Booking.findByPk(bookingId)
   if(allowed && allowed.userId !== req.user.id){
     const error = Error('This Action Is Forbidden')
     error.status = 403
