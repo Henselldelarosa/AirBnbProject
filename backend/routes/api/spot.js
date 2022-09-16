@@ -82,6 +82,48 @@ res.json({
 })
  })
 
+ //* GET all Spots owned by the Current User
+//todo add avg Rating
+router.get('/current', [restoreUser, requireAuth], async(req,res)=>{
+  const user = await User.findOne({
+    where:{
+      id:req.user.id
+    }
+  })
+  const spots = await Spot.findAll({
+    where:{
+      ownerId:req.user.id
+    }
+  })
+  for(let spot of spots){
+    const {id} = spot
+
+    const reviews = await Review.findAll({
+      where:{
+        spotId:id
+      }
+    })
+
+    const eachReview = reviews.length
+
+    let ratings = 0
+     reviews.forEach((ele)=>{
+      if(ele.stars){
+        ratings += ele.stars
+      }
+     })
+
+     const avgRating = ratings/eachReview
+
+     spot.dataValues.avgRating = avgRating
+
+  }
+  let order = JSON.parse(JSON.stringify( spots,
+    ["id","ownerId","address","city","state",
+    "country","lat","lng","name","description",
+    "price","createdAt","updatedAt","avgRating","previewImage"]));
+  res.json({Spots:order})
+  })
 //!GET
 //* Get details of a Spot from an id
 router.get('/:spotId', async(req,res,next)=>{
@@ -601,46 +643,5 @@ for (let i = 0; i < findBooking.length;i++){
     res.json(booking);
   });
 
-//* GET all Spots owned by the Current User
-//todo add avg Rating
-router.get(['/','/current'], [restoreUser, requireAuth], async(req,res)=>{
-const user = await User.findOne({
-  where:{
-    id:req.user.id
-  }
-})
-const spots = await Spot.findAll({
-  where:{
-    ownerId:req.user.id
-  }
-})
-for(let spot of spots){
-  const {id} = spot
 
-  const reviews = await Review.findAll({
-    where:{
-      spotId:id
-    }
-  })
-
-  const eachReview = reviews.length
-
-  let ratings = 0
-   reviews.forEach((ele)=>{
-    if(ele.stars){
-      ratings += ele.stars
-    }
-   })
-
-   const avgRating = ratings/eachReview
-
-   spot.dataValues.avgRating = avgRating
-
-}
-let order = JSON.parse(JSON.stringify( spots,
-  ["id","ownerId","address","city","state",
-  "country","lat","lng","name","description",
-  "price","createdAt","updatedAt","avgRating","previewImage"]));
-res.json({Spots:order})
-})
 module.exports = router;
