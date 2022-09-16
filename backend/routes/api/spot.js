@@ -601,5 +601,57 @@ for (let i = 0; i < findBooking.length;i++){
     res.json(booking);
   });
 
+  //*Get all spots owned by cureent user
 
+  router.get(['/','current'], [requireAuth], async(req,res)=>{
+    const getUser = await User.findOne({
+      where:{
+        id:req.user.id
+      }
+    })
+    const spots = await Spot.findAll({
+      where:{
+        ownerId:req.user.id
+      }
+    })
+    for(let spot of spots){
+      const {id} = spot
+
+      const reviews = await Review.findAll({
+        where:{
+          spotId:id
+        }
+      })
+
+      const eachReview = reviews.length
+
+      let ratings = 0
+       reviews.forEach((ele)=>{
+        if(ele.stars){
+          ratings += ele.stars
+        }
+       })
+
+       const avgRating = ratings/eachReview
+
+       spot.dataValues.avgRating = avgRating
+
+    }
+    let order = JSON.parse(JSON.stringify( spots,
+      ["id","ownerId","address","city","state",
+      "country","lat","lng","name","description",
+      "price","createdAt","updatedAt","avgRating","previewImage"]));
+    res.json({Spots:order})
+    })
+
+    router.get('/',[restoreUser, requireAuth], async(req,res)=>{
+    const currentUser = await User.getCurrentUserById(req.user.id)
+    return res.json({
+      id:currentUser.id,
+      firstName:currentUser.firstName,
+      lastName:currentUser.lastName,
+      email:currentUser.email,
+      username:currentUser.username
+    })
+    })
 module.exports = router;
