@@ -40,7 +40,7 @@ router.post(
 
 
 //*Sign up a User
-router.post(['/','/new'],validateSignup, async (req, res,next) => {
+router.post('/',validateSignup, async (req, res,next) => {
     const {
       email,
       password,
