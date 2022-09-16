@@ -98,4 +98,39 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
   res.json(updateBooking);
 });
 
+
+//*Delete a booking
+//!DELETE
+router.delete("/:bookingId", requireAuth, async(req,res,next)=>{
+  const {bookingId} = req.params
+
+  const user = await User.findOne({
+    where:{
+      id:req.user.id
+    }
+  })
+
+  const allowed = await Booking.findByPk(imageId)
+  if(allowed && allowed.userId !== req.user.id){
+    const error = Error('This Action Is Forbidden')
+    error.status = 403
+    return next(error)
+  }
+
+const booking = await Booking.findOne({
+  where:{
+    id:bookingId
+  }
+})
+  if(!booking){
+    const error = Error("Booking couldn't be found");
+    error.status = 404;
+    return next(error);
+  }
+  booking.destroy()
+  res.json({
+    message: "Successfully deleted",
+    statusCode:200
+  });
+})
 module.exports = router;
