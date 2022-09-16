@@ -129,7 +129,7 @@ router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
 // const user = await
 const booking = await Booking.findAll({
   attributes:[
-    "id","spotId"],
+    "id","spotId","userId","startDate".split(" ")[0],"endDate","createdAt","updatedAt"],
   where:{
     userId:req.user.id,
   },
@@ -145,8 +145,7 @@ const booking = await Booking.findAll({
 //   attributes:["id",'spotId'],
 //   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"].join(""),
 //  // raw:true
-attributes:
-  ["userId","startDate","endDate","createdAt","updatedAt"]
+
 })
 
 const bookings = await Booking.findAll({
