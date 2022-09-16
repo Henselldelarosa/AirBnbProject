@@ -85,18 +85,18 @@ const { handleValidationErrors,validateLogin } = require('../../utils/validation
 //   }
 // );
 // //restore session user
-// router.get(
-//   '/',
-//   restoreUser,
-//   (req, res) => {
-//     const { user } = req;
-//     if (user) {
-//       return res.json({
-//         user: user.toSafeObject()
-//       });
-//     } else return res.json({});
-//   }
-// );
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject()
+      });
+    } else return res.json({});
+  }
+);
 
 //*log in user
 //!GET
