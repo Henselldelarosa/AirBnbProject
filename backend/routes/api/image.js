@@ -36,7 +36,7 @@ const user = await User.findOne({
   error.status = 404;
   return next(error);
   }
-image.detroy()
+image.destroy()
   res.json({
     message: "Successfully deleted",
     statusCode:200
