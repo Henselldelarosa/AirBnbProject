@@ -603,7 +603,7 @@ for (let i = 0; i < findBooking.length;i++){
 
   //*Get all spots owned by cureent user
 
-  router.get(['/','current'], [requireAuth], async(req,res)=>{
+  router.get(['/','/current'], [requireAuth], async(req,res)=>{
     const getUser = await User.findOne({
       where:{
         id:req.user.id
