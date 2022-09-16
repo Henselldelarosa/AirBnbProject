@@ -128,19 +128,25 @@ router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
 // })
 // const user = await
 const booking = await Booking.findAll({
+  attributes:[
+    "id","spotId"],
   where:{
     userId:req.user.id,
   },
-  attributes:["id", "spotId"],
+  //attributes:["id", "spotId"],
   include:{
     model:Spot,
-    attributes:{exclude:["description","createdAt","updatedAt"]},
-
+    attributes:JSON.parse(JSON.stringify(
+      ["address","city","state",
+      "country","lat","lng","name",
+      "price","previewImage"]))
   },
 //   require:true,
 //   attributes:["id",'spotId'],
 //   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"].join(""),
 //  // raw:true
+attributes:
+  ["userId","startDate","endDate","createdAt","updatedAt"]
 })
 
 const bookings = await Booking.findAll({
@@ -149,7 +155,13 @@ const bookings = await Booking.findAll({
   },
   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"]
 })
+
+let order = JSON.parse(JSON.stringify( booking,
+  ["id","spotId","address","city","state",
+  "country","lat","lng","name",
+  "price","previewImage","userId","startDate",
+  "endDate","createdAt","updatedAt"]));
 // bookings.push(booking)
-res.json({Booking:booking.concat(bookings)})
+res.json(booking)
 });
 module.exports = router
