@@ -87,78 +87,78 @@ const router = express.Router();
 
 //*Get all of the Current User's Bookings
 //!GET
-router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
-  // get bookings from user id
+// router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
+//   // get bookings from user id
 
-//   const bookings = await Booking.findAll({
-//     where: {
-//       userId: req.user.id,
-//     },
-//     include:[
-//       {
-//         model:Spot.scope("booking")
-//       },
-//     ],
-//     attributes:["id","spotId"],
-//   });
+// //   const bookings = await Booking.findAll({
+// //     where: {
+// //       userId: req.user.id,
+// //     },
+// //     include:[
+// //       {
+// //         model:Spot.scope("booking")
+// //       },
+// //     ],
+// //     attributes:["id","spotId"],
+// //   });
 
-//   const booking = await Booking.findAll({
-//     where: {
-//       userId: req.user.id,
-//     },
-//     attributes:{exclude:['id', 'spotId']
-//   },
-//   })
+// //   const booking = await Booking.findAll({
+// //     where: {
+// //       userId: req.user.id,
+// //     },
+// //     attributes:{exclude:['id', 'spotId']
+// //   },
+// //   })
 
-//   const allBook = bookings.concat(booking)
+// //   const allBook = bookings.concat(booking)
 
-// let ray = []
-// ray.push(allBook)
-//// const spots = await Spot.findAll({
-////   include:{
-////     model:Booking,
-////     attributes:["id","spotId"]
-////   }
-//// })
+// // let ray = []
+// // ray.push(allBook)
+// //// const spots = await Spot.findAll({
+// ////   include:{
+// ////     model:Booking,
+// ////     attributes:["id","spotId"]
+// ////   }
+// //// })
+// // const booking = await Booking.findAll({
+// //   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"],
+// //   where:{
+// //     userId:req.user.id
+// //   },
+// // })
+// // const user = await
 // const booking = await Booking.findAll({
-//   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"],
-//   where:{
-//     userId:req.user.id
-//   },
-// })
-// const user = await
-const booking = await Booking.findAll({
-  where:{
-    userId:req.user.id,
-  },
-  //attributes:["id", "spotId"],
-  include:{
-    model:Spot,
-    attributes:JSON.parse(JSON.stringify(
-      ["address","city","state",
-      "country","lat","lng","name",
-      "price","previewImage"]))
-  },
-//   require:true,
-//   attributes:["id",'spotId'],
-//   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"].join(""),
-//  // raw:true
-
-})
-
-// const bookings = await Booking.findAll({
 //   where:{
 //     userId:req.user.id,
 //   },
-//   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"]
+//   //attributes:["id", "spotId"],
+//   include:{
+//     model:Spot,
+//     attributes:JSON.parse(JSON.stringify(
+//       ["address","city","state",
+//       "country","lat","lng","name",
+//       "price","previewImage"]))
+//   },
+// //   require:true,
+// //   attributes:["id",'spotId'],
+// //   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"].join(""),
+// //  // raw:true
+
 // })
 
-// let order = JSON.parse(JSON.stringify( booking,
-//   ["id","spotId","address","city","state",
-//   "country","lat","lng","name",
-//   "price","previewImage","userId","startDate",
-//   "endDate","createdAt","updatedAt"]));
-// // bookings.push(booking)
-res.json(booking)
-});
+// // const bookings = await Booking.findAll({
+// //   where:{
+// //     userId:req.user.id,
+// //   },
+// //   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"]
+// // })
+
+// // let order = JSON.parse(JSON.stringify( booking,
+// //   ["id","spotId","address","city","state",
+// //   "country","lat","lng","name",
+// //   "price","previewImage","userId","startDate",
+// //   "endDate","createdAt","updatedAt"]));
+// // // bookings.push(booking)
+// res.json(booking)
+// });
 module.exports = router
