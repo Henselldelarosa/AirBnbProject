@@ -128,8 +128,6 @@ router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
 // })
 // const user = await
 const booking = await Booking.findAll({
-  attributes:[
-    "id","spotId","userId","startDate".split(" ")[0],"endDate","createdAt","updatedAt"],
   where:{
     userId:req.user.id,
   },
@@ -148,19 +146,19 @@ const booking = await Booking.findAll({
 
 })
 
-const bookings = await Booking.findAll({
-  where:{
-    userId:req.user.id,
-  },
-  attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"]
-})
+// const bookings = await Booking.findAll({
+//   where:{
+//     userId:req.user.id,
+//   },
+//   attributes:["userId", "startDate", "endDate", "createdAt", "updatedAt"]
+// })
 
-let order = JSON.parse(JSON.stringify( booking,
-  ["id","spotId","address","city","state",
-  "country","lat","lng","name",
-  "price","previewImage","userId","startDate",
-  "endDate","createdAt","updatedAt"]));
-// bookings.push(booking)
+// let order = JSON.parse(JSON.stringify( booking,
+//   ["id","spotId","address","city","state",
+//   "country","lat","lng","name",
+//   "price","previewImage","userId","startDate",
+//   "endDate","createdAt","updatedAt"]));
+// // bookings.push(booking)
 res.json(booking)
 });
 module.exports = router
