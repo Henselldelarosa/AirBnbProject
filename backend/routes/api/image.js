@@ -1,14 +1,13 @@
 const express = require('express');
-const { check } = require('express-validator');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { handleValidationErrors, validateSignup } = require('../../utils/validation');
-const { User,Image,Spot,Review } = require('../../db/models');
 const router = express.Router();
 
-router.get('/', requireAuth, async(req,res,next)=>{
-const image = await Image.findAll()
-res.json(image)
-})
+const { User,Image,Spot,Review } = require('../../db/models');
+const { requireAuth} = require('../../utils/auth');
+
+// router.get('/', requireAuth, async(req,res,next)=>{
+// const image = await Image.findAll()
+// res.json(image)
+// })
 router.delete('/:imageId', requireAuth, async(req,res,next)=>{
   const {imageId} = req.params
 
