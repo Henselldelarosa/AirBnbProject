@@ -61,29 +61,29 @@ const router = express.Router();
 
 //*Get all Reviews of the Current User
 //!GET
-router.get('/reviews',[restoreUser,requireAuth], async(req,res,next)=>{
-const reviews = await Review.findAll({
-  where:{
-    userId:req.user.id
-  },
-  include:[
-    {
-      model:User,
-      attributes:["id", "firstName","lastName"]
-    },
-    {
-      model:Spot,
-      attributes:["id","ownerId","address","city","state","country","lat","lng","name","price"]
-    },
-    {
-      model:Image,
-      attributes: JSON.parse(JSON.stringify(
-        ["id","imageableId","url"]))
-    }
-  ],
-})
-res.json({Reviews:reviews})
-})
+// router.get('/reviews',[restoreUser,requireAuth], async(req,res,next)=>{
+// const reviews = await Review.findAll({
+//   where:{
+//     userId:req.user.id
+//   },
+//   include:[
+//     {
+//       model:User,
+//       attributes:["id", "firstName","lastName"]
+//     },
+//     {
+//       model:Spot,
+//       attributes:["id","ownerId","address","city","state","country","lat","lng","name","price"]
+//     },
+//     {
+//       model:Image,
+//       attributes: JSON.parse(JSON.stringify(
+//         ["id","imageableId","url"]))
+//     }
+//   ],
+// })
+// res.json({Reviews:reviews})
+// })
 
 //*Get all of the Current User's Bookings
 //!GET

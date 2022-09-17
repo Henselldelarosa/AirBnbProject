@@ -6,13 +6,35 @@ const { User, Review,Image } = require('../../db/models');
 const router = express.Router();
 
 
-router.get('/', async(req,res,next)=>{
-  const review = await Review.findAll()
-  res.json(review)
-})
+// router.get('/', async(req,res,next)=>{
+//   const review = await Review.findAll()
+//   res.json(review)
+// })
 
 
-
+router.get('/current',[restoreUser,requireAuth], async(req,res,next)=>{
+  const reviews = await Review.findAll({
+    where:{
+      userId:req.user.id
+    },
+    include:[
+      {
+        model:User,
+        attributes:["id", "firstName","lastName"]
+      },
+      {
+        model:Spot,
+        attributes:["id","ownerId","address","city","state","country","lat","lng","name","price"]
+      },
+      {
+        model:Image,
+        attributes: JSON.parse(JSON.stringify(
+          ["id","imageableId","url"]))
+      }
+    ],
+  })
+  res.json({Reviews:reviews})
+  })
 
 //*Add an Image to a Review based on the Review's id
 //!POST
