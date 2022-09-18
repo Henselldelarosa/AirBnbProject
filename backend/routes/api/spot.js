@@ -114,7 +114,7 @@ router.get('/current', [restoreUser, requireAuth], async(req,res)=>{
      })
 
      const avgRating = ratings/eachReview
-
+     console.log(spot.dataValues.avgRating)
      spot.dataValues.avgRating = avgRating
 
   }
@@ -378,9 +378,11 @@ if(!spot){
 const addUrl = await spot.createImage({
   url
 })
-spot.dataValues.previewImage = addUrl
 const create = await Image.findByPk(addUrl.id)
-res.json(create)
+spot.previewImage = addUrl
+spot.save()
+
+res.json(spot)
 })
 
 //*Get all Reviews by a Spot's id
@@ -426,6 +428,7 @@ for (let review of reviews){
     }
     images.push(eachImage)
   })
+
   review.dataValues['Images'] = images
 }
 

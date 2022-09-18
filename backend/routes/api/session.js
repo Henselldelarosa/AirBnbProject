@@ -77,13 +77,13 @@ const { handleValidationErrors,validateLogin } = require('../../utils/validation
 // //     });
 // //   }
 // // );
-// router.delete(
-//   '/',
-//   (_req, res) => {
-//     res.clearCookie('token');
-//     return res.json({ message: 'success' });
-//   }
-// );
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
+);
 // //restore session user
 router.get(
   '/',
