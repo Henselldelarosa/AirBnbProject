@@ -378,7 +378,7 @@ if(!spot){
 const addUrl = await spot.createImage({
   url
 })
-spot.dataValues["previewImage"] = addUrl
+spot.dataValues.previewImage = addUrl
 const create = await Image.findByPk(addUrl.id)
 res.json(create)
 })
