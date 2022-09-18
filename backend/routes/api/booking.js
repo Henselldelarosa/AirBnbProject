@@ -191,12 +191,18 @@ router.delete("/:bookingId", requireAuth, async(req,res,next)=>{
     return next(error)
   }
 
+  const spot = await Spot.findOne({
+    where:{
+      ownerId:user.id
+    }
+  })
 const booking = await Booking.findOne({
   where:{
-    id:bookingId
+    id:bookingId,
+    userId:user.id
   }
 })
-  if(!booking){
+  if(!booking || !spot ){
     const error = Error("Booking couldn't be found");
     error.status = 404;
     return next(error);

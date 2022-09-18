@@ -375,14 +375,19 @@ if(!spot){
   return next(error);
 }
 //? adds an Image
-const addUrl = await spot.createImage({
-  url
+const addUrl = await Image.create({
+  url:url,
+  imageableId:spotId,
+  imageableType:'spot'
 })
-const create = await Image.findByPk(addUrl.id)
-spot.previewImage = addUrl
+//const create = await Image.findByPk(addUrl.id)
+spot.previewImage = addUrl.url
 spot.save()
 
-res.json(spot)
+res.json({
+  id:addUrl.id,
+imageableId:addUrl.imageableId,
+imageableType:addUrl.imageableType})
 })
 
 //*Get all Reviews by a Spot's id
