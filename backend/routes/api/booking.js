@@ -207,6 +207,15 @@ const booking = await Booking.findOne({
     error.status = 404;
     return next(error);
   }
+
+  const dateNowCompare = new Date().getTime()
+  let bookingStart = new Date(booking.startDate).getTime()
+
+  if (bookingStart < dateNowCompare) {
+    const err = Error("Bookings that have been started can't be deleted");
+    err.status = 403;
+    return next(err);
+  }
   booking.destroy()
   res.json({
     message: "Successfully deleted",
