@@ -6,10 +6,6 @@ const { User, Review,Image,Spot } = require('../../db/models');
 const router = express.Router();
 
 
-// router.get('/', async(req,res,next)=>{
-//   const review = await Review.findAll()
-//   res.json(review)
-// })
 
 
 router.get('/current',[restoreUser,requireAuth], async(req,res,next)=>{

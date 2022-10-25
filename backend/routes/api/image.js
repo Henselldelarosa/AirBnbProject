@@ -4,10 +4,7 @@ const router = express.Router();
 const { User,Image,Spot,Review } = require('../../db/models');
 const { requireAuth} = require('../../utils/auth');
 
-// router.get('/', requireAuth, async(req,res,next)=>{
-// const image = await Image.findAll()
-// res.json(image)
-// })
+
 router.delete('/:imageId', requireAuth, async(req,res,next)=>{
   const {imageId} = req.params
 
