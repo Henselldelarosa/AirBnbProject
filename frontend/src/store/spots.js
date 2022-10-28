@@ -7,7 +7,7 @@ const ADD_SPOT = 'spot/ADD_SPOT'
 const GET_SPOT = 'spot/GET_SPOT'
 
 const getSpots = (spots)=>({
-  type:GET_SPOT,
+  type:GET_SPOTS,
   spots
 })
 
@@ -98,15 +98,15 @@ export const deleteSpot = (spotId) => async dispatch=>{
 
 let initialState = {}
 const spotReducer = (state = initialState,action) =>{
-
+let newState;
   switch(action.type){
 
     case GET_SPOTS:
-      initialState = {}
+      newState = {...state}
       action.spots.forEach(spot => {
-        initialState[spot.id] = spot
+        newState[spot.id] = spot
       });
-      return initialState
+      return newState
 
       case GET_SPOT:
         return {
@@ -122,9 +122,9 @@ const spotReducer = (state = initialState,action) =>{
         }
 
       case REMOVE_SPOT:
-        initialState = {...state}
-        delete initialState[action.id]
-        return initialState
+        newState = {...state}
+        delete newState[action.id]
+        return newState
 
     default:
       return state

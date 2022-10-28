@@ -27,7 +27,7 @@ function LoginFormPage() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
+      <ul>/home/henseldelarosa/appAcademy/projects/1p/project/airBnbProject/frontend/src/store
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>

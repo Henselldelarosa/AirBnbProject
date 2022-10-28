@@ -1,50 +1,68 @@
 import './Spot.css'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllSpots } from '../../store/spots'
-import { useParams } from 'react-router-dom'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect, Route,useParams } from 'react-router-dom'
+import * as spotsAction from '../../store/spots'
+import CreateSpotForm from '../CreatSpot/CreateSpotForm'
+import Fab from '../Fab'
 
 
 const SpotBrowser=()=>{
 const dispatch = useDispatch()
+const user = useSelector(state => state.session.user)
+const spots = useSelector(state => Object.values(state.spots))
 const {spotId} = useParams()
-const spot = useSelector(state=>{
-  return Object.values.map(state.spots)
-})
-
+const [showForm, setShowForm] = useState(false)
 useEffect(()=>{
-  dispatch(getAllSpots())
+  dispatch(spotsAction.getAllSpots())
 },[dispatch])
 
-if(!spot){
-  return null
+if(!user){
+  <Redirect to='/'/>
 }
-  return(
-    <div className="SpotLayout">
-        {/* <Fab hidden={showForm} onClick={() => setShowForm(true)} /> */}
-        {spot.map((spot) => {
-          return (
-            <NavLink key={spot.name} to={`/spot/${spot.id}`}>
-              <div
-                className={
-                  Number.parseInt(spotId) === spot.id
-                    ? "nav-entry is-selected"
-                    : "nav-entry"
-                }
-              >
-                <div
-                  className="nav-entry-image"
-                  style={{ backgroundImage: `url('${spot.imageUrl}')` }}
-                ></div>
-                <div>
-                  <div className="primary-text">{spot.name}</div>
-                </div>
+
+if(!spots) return null
+
+  return (
+    <main>
+      <nav>
+        <Fab hidden={showForm} onClick={()=>setShowForm(true)}/>
+    <div className='spot_content'>
+      <h1 className='spots_header'>Spots</h1>
+      {spots && spots.map((spot)=>{
+        return (
+          <div className='spots_detail' key ={spot.id}>
+
+            <div className='spot_image'>
+
+              <div className='spots_image_content'>
+                <img className='spot_image_show' src={spot.previewImage} alt={spot.name}/>
               </div>
-            </NavLink>
-          );
-        })}
+            </div>
+
+            <div className='spot_detail'>
+
+              <div className='spot_name'>
+                <NavLink className='spot_name_link' to={`/spots/${spot.id}`}>{spot.name}</NavLink>
+              </div>
+              <div className='spot_description'>{spot.description}</div>
+            </div>
+
+           </div>
+        )
+      })}
     </div>
+      </nav>
+      {showForm ?(
+        <CreateSpotForm hideForm={() => setShowForm(false)}/>
+      ) : (
+        <Route path='/spots/:spotId'>
+
+        </Route>
+      )}
+
+     </main>
+
   )
 }
 

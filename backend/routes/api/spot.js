@@ -40,12 +40,13 @@ const router = express.Router();
 const spots = await Spot.findAll({
   include:{
     model:Image,
-    attributes:[]
+    attributes:['url']
   },
   where,
   limit,
   offset
 })
+console.log(spots)
 
 for(let spot of spots){
   const {id} = spot
@@ -70,6 +71,12 @@ for(let spot of spots){
    spot.dataValues.avgRating = avgRating
 
 }
+console.log(spots)
+// res.json({
+//   Spots: spots,
+//    page,
+//   size
+// })
 let order = JSON.parse(JSON.stringify( spots,
   ["id","ownerId","address","city","state",
   "country","lat","lng","name","description",

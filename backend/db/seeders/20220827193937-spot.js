@@ -13,7 +13,8 @@ module.exports = {
       lng: -122.4730327,
       name: "App Academy",
       description: "Place where web developers are created",
-      price: 123
+      price: 123,
+      previewImage: 'https://rew-online.com/wp-content/uploads/2019/05/90-fifth-avenue-ny-ny.jpg'
     },
 
     {
@@ -26,7 +27,8 @@ module.exports = {
       lng: -122.4,
       name: "The Ghetto",
       description: "right next to ms.168",
-      price: 400
+      price: 400,
+      previewImage: "https://images1.apartments.com/i2/_MfRvyDp-3rqwoWuT9FXNyGPl0UNtMTOr8hSoljCXqA/111/2772-valentine-ave-bronx-ny-building-photo.jpg"
     }
    ],{})
   },
