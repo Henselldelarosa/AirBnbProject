@@ -26,15 +26,8 @@ const deleteASpot = (e)=>{
   }
 }
 
-{/* <div className='spot_addree'>{spot.address}</div>
-<div className='spot_city'>{spot.city}</div>
-<div className='spot_state'>{spot.state}</div>
-<div className='spot_country'>{spot.country}</div>
-<div className='spot_lat'>{spot.lat}</div>
-<div className='spot_lng'>{spot.lng}</div>
-<div className='spot_description'>{spot.description}</div>
-<div className='spot_price'><small>$</small>{spot.price}</div>
-<div className='spot_avgRating'>{spot.avgRating}</div> */}
+
+
   return (
     <div>
      {spot &&
@@ -49,15 +42,18 @@ const deleteASpot = (e)=>{
       <div className='edit_spot_content'>
         <img className='edit_spotImage' src={spot.previewImage}/>
       </div>
-      <div className='spot_addree'>{spot.address}</div>
-      <div className='spot_city'>{spot.city}</div>
-      <div className='spot_state'>{spot.state}</div>
-      <div className='spot_country'>{spot.country}</div>
-      <div className='spot_lat'>{spot.lat}</div>
-      <div className='spot_lng'>{spot.lng}</div>
-      <div className='spot_description'>{spot.description}</div>
-      <div className='spot_price'><small>$</small>{spot.price}</div>
-      <div className='spot_avgRating'>{spot.avgRating}</div>
+      <div className='spot_outer_info'>
+        <div className='spot_addree'>{spot.address}</div>
+        <div className='spot_city'>{spot.city}</div>
+        <div className='spot_state'>{spot.state}</div>
+        <div className='spot_country'>{spot.country}</div>
+        <div className='spot_lat'>{spot.lat}</div>
+        <div className='spot_lng'>{spot.lng}</div>
+        <div className='spot_description'>{spot.description}</div>
+        <div className='spot_price'><small>$</small>{spot.price}</div>
+        <div className='spot_avgRating'>{spot.avgRating}</div>
+      </div>
+
       </div>
       }
     </div>
