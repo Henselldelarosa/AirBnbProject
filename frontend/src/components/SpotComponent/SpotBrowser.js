@@ -38,7 +38,9 @@ if(!spots) return null
             <div className='spot_image'>
 
               <div className='spots_image_content'>
+              <NavLink className='spot_name_link' to={`/spots/${spot.id}`}>
                 <img className='spot_image_show' src={spot.previewImage} alt={spot.name}/>
+                </NavLink>
               </div>
             </div>
 
@@ -47,15 +49,7 @@ if(!spots) return null
               <div className='spot_name'>
                 <NavLink className='spot_name_link' to={`/spots/${spot.id}`}>{spot.name}</NavLink>
               </div>
-              <div className='spot_addree'>{spot.address}</div>
-              <div className='spot_city'>{spot.city}</div>
-              <div className='spot_state'>{spot.state}</div>
-              <div className='spot_country'>{spot.country}</div>
-              <div className='spot_lat'>{spot.lat}</div>
-              <div className='spot_lng'>{spot.lng}</div>
-              <div className='spot_description'>{spot.description}</div>
-              <div className='spot_price'><small>$</small>{spot.price}</div>
-              <div className='spot_avgRating'>{spot.avgRating}</div>
+
             </div>
 
            </div>

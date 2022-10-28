@@ -82,10 +82,10 @@ export const updateSpot = data => async dispatch =>{
   })
   if(response.ok){
     const spot = await response.json()
-    dispatch(update(spot))
+    dispatch(add(spot))
     return spot
   }
-
+  return response
 }
 
 export const deleteSpot = (spotId) => async dispatch=>{

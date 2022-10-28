@@ -7,6 +7,8 @@ import { addSpot } from '../../store/spots'
 const CreateSpotForm = ({spot}) => {
 const dispatch = useDispatch()
 const user = useSelector(state => state.session.user)
+
+//!State
 const [errorMessages, setErrorMessages] = useState([])
 const history = useHistory()
 const [address, setAddress] = useState('')
@@ -20,6 +22,7 @@ const [description, setDescription] = useState('')
 const [price, setPrice] = useState('')
 const [previewImage, setPreviewImage] = useState('')
 
+//!updates
 const updateAddress = (e)=> setAddress(e.target.value)
 const updateCity = (e)=> setCity(e.target.value)
 const updateState = (e)=> setState(e.target.value)
