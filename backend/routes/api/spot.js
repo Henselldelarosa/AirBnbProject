@@ -203,7 +203,8 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   } = req.body
 
   const user = await User.findOne({
@@ -225,7 +226,8 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   })
 
 
@@ -234,8 +236,8 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
   let order = JSON.parse(JSON.stringify( returnNewSpot,
     ["id","ownerId","address","city","state",
     "country","lat","lng","name","description",
-    "price","createdAt","updatedAt"]));
-  res.json(order)
+    "price","createdAt","updatedAt","previewImage"]));
+  return res.json(order)
 })
 
 //!PUT

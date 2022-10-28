@@ -36,6 +36,10 @@ function App() {
             <SignupFormPage />
           </Route>
 
+          <Route exact path='/spots/create'>
+            <CreateSpotForm/>
+          </Route>
+
           <Route exact path='/spots'>
             <SpotBrowser/>
           </Route>
@@ -44,9 +48,6 @@ function App() {
             <EditSpotForm/>
           </Route>
 
-          <Route>
-            <CreateSpotForm/>
-          </Route>
         </Switch>
       )}
     </>

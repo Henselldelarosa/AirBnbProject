@@ -5,6 +5,8 @@ import { NavLink, Redirect, Route,useParams } from 'react-router-dom'
 import * as spotsAction from '../../store/spots'
 import CreateSpotForm from '../CreatSpot/CreateSpotForm'
 import Fab from '../Fab'
+import SpotDetail from '../SpotDetail/SpotDetail'
+
 
 
 const SpotBrowser=()=>{
@@ -26,7 +28,7 @@ if(!spots) return null
   return (
     <main>
       <nav>
-        <Fab hidden={showForm} onClick={()=>setShowForm(true)}/>
+
     <div className='spot_content'>
       <h1 className='spots_header'>Spots</h1>
       {spots && spots.map((spot)=>{
@@ -45,7 +47,15 @@ if(!spots) return null
               <div className='spot_name'>
                 <NavLink className='spot_name_link' to={`/spots/${spot.id}`}>{spot.name}</NavLink>
               </div>
+              <div className='spot_addree'>{spot.address}</div>
+              <div className='spot_city'>{spot.city}</div>
+              <div className='spot_state'>{spot.state}</div>
+              <div className='spot_country'>{spot.country}</div>
+              <div className='spot_lat'>{spot.lat}</div>
+              <div className='spot_lng'>{spot.lng}</div>
               <div className='spot_description'>{spot.description}</div>
+              <div className='spot_price'><small>$</small>{spot.price}</div>
+              <div className='spot_avgRating'>{spot.avgRating}</div>
             </div>
 
            </div>
@@ -53,13 +63,17 @@ if(!spots) return null
       })}
     </div>
       </nav>
-      {showForm ?(
+      {/* {showForm ?(
         <CreateSpotForm hideForm={() => setShowForm(false)}/>
       ) : (
         <Route path='/spots/:spotId'>
-
+          <SpotDetail/>
         </Route>
-      )}
+      )} */}
+
+      <NavLink to='/spots/create'>
+      <Fab hidden={showForm} onClick={()=>setShowForm(true)}/>
+      </NavLink>
 
      </main>
 
