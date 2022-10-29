@@ -1,0 +1,68 @@
+form{
+  display:flex;
+  align-items: center;
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
+   border-radius: 10px;
+   border:10px;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 100px;
+  font-weight: bolder;
+  height: 600px;
+  width: 400px;
+  font-size: 20px;
+  text-align: center;
+  color:gold
+}
+ .loginBody{
+  background-image: linear-gradient(to right,rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
+                  url("https://www.citypng.com/public/uploads/small/31600816469elytuhvoibsiypqwvgl9irqp2n9yzauotxjaigggqttkiolfyizhv02zvkmqu92lkzmkhxnyd6ltgpuhwjdle4q3dsvtwk45kw7t.png");
+
+  /* align-items: center; */
+ }
+
+ button{
+  background-color: black;
+  color: gold;
+  cursor:pointer;
+  justify-content: space-between;
+  display: flex;
+ }
+
+ button:hover{
+  background-color: lightslategray;
+   border-radius: 10px;
+   align-items: center;
+   padding: 0 30px;
+ }
+
+ /* label{
+  align-items: center;
+
+ } */
+
+ input[type=text],[type=password]{
+
+  display: block;
+  background-color:transparent;
+  color:gold;
+  font-weight: bold;
+  border:2px solid rgba(25,25,25);
+  /* float: left; */
+  outline-width: 5px solid black;
+  margin-bottom: 10px;
+
+
+ }
+
+
+
+ /* label,input {
+  display: block;
+  width: 150px;
+  float: left;
+  margin-bottom: 10px;
+  background-color: transparent;
+  outline-width: 5px solid black;
+
+ } */

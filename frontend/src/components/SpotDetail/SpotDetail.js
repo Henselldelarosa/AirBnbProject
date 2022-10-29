@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
-import { getSpotById,deleteSpot } from '../../store/spots'
+import * as spotsAction from '../../store/spots'
 
 
 function SpotDetail() {
@@ -21,9 +21,9 @@ console.log(spot)
 const deleteASpot = (e)=>{
   e.preventDefault()
   if(spot.ownerId === user.id){
-    dispatch(deleteSpot(spot))
-    history.push('/spots')
+    dispatch(spotsAction.deleteSpot(spot.id))
   }
+  history.push('/spots')
 }
 
 {/* <div className='spot_addree'>{spot.address}</div>

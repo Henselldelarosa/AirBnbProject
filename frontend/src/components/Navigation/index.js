@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import HomeButton from './HomeButton'
+import LoginButton from './LoginButton';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -10,25 +13,38 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <div className='header'>
+
+        <div className='nav_link'>
+        <HomeButton/>
+        <NavLink className='link' to='/spots'><HomeOutlinedIcon/></NavLink>
+        <NavLink className='link' to='/spots/create'> Create Spot</NavLink>
+        <ProfileButton className='profile' user={sessionUser} />
+
+        </div>
+      </div>
     );
   } else {
     sessionLinks = (
-      <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+      <div className='header'>
+        <div className='nav_link'>
+
+        <HomeButton/>
+
+        <button>
+        <NavLink className='link' to='/spots'>Spots</NavLink>
+        </button>
+
+        <button>
+        <NavLink className='link' to="/signup">Sign Up</NavLink>
+        </button>
+       <LoginButton className='login'/>
+        </div>
+      </div>
     );
   }
 
-  return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
-  );
+  return (isLoaded && sessionLinks)
 }
 
 export default Navigation;
