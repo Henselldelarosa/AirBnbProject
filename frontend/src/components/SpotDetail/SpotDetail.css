@@ -1,0 +1,12 @@
+.edit_spotImage{
+  height: 200px;
+  width:200px;
+}
+
+.spot_buttons{
+  display: flex;
+}
+
+.delete_button{
+  margin-left: 20px;
+}

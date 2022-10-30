@@ -1,11 +1,10 @@
 import './Spot.css'
 import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, Redirect, Route,useParams } from 'react-router-dom'
+import { NavLink, Redirect} from 'react-router-dom'
 import * as spotsAction from '../../store/spots'
-import CreateSpotForm from '../CreatSpot/CreateSpotForm'
 import Fab from '../Fab'
-import SpotDetail from '../SpotDetail/SpotDetail'
+
 
 
 
@@ -13,7 +12,6 @@ const SpotBrowser=()=>{
 const dispatch = useDispatch()
 const user = useSelector(state => state.session.user)
 const spots = useSelector(state => Object.values(state.spots))
-const {spotId} = useParams()
 const [showForm, setShowForm] = useState(false)
 useEffect(()=>{
   dispatch(spotsAction.getAllSpots())
@@ -64,10 +62,12 @@ if(!spots) return null
           <SpotDetail/>
         </Route>
       )} */}
-
+      <div className='nav'>
       <NavLink to='/spots/create'>
       <Fab hidden={showForm} onClick={()=>setShowForm(true)}/>
+      Create A New Spot
       </NavLink>
+      </div>
 
      </main>
 

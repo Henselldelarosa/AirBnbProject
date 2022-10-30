@@ -73,6 +73,7 @@ export const addSpot = (data) => async(dispatch)=>{
 }
 
 export const updateSpot = data => async dispatch =>{
+  console.log(data)
   const response = await csrfFetch(`/api/spots/${data.id}`,{
     method:'put',
     headers:{
@@ -82,10 +83,10 @@ export const updateSpot = data => async dispatch =>{
   })
   if(response.ok){
     const spot = await response.json()
-    dispatch(add(spot))
+    dispatch(update(spot))
     return spot
   }
-  return response
+
 }
 
 export const deleteSpot = (spotId) => async dispatch=>{

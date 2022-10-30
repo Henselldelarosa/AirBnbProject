@@ -255,7 +255,8 @@ router.put('/:spotId',[restoreUser,requireAuth,validateSpot], async(req,res,next
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   } = req.body;
 
   const allowed = await Spot.findByPk(spotId)
@@ -298,13 +299,14 @@ const editedSpot = await spot.update(
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
 })
 const newUpdate = await Spot.findByPk(editedSpot.id)
 let order = JSON.parse(JSON.stringify( newUpdate,
   ["id","ownerId","address","city","state",
   "country","lat","lng","name","description",
-  "price","createdAt","updatedAt"]));
+  "price","createdAt","updatedAt",'previewImage']));
 return res.json(order)
 })
 

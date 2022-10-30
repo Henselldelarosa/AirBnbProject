@@ -1,6 +1,6 @@
 import './CreateSpotForm.css'
-import React, {useState, useEffect} from "react"
-import { useHistory, useParams } from "react-router-dom"
+import React, {useState} from "react"
+import { useHistory} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addSpot } from '../../store/spots'
 
@@ -175,7 +175,5 @@ onChange={updatePrice}
 )
 
 }
-
-
 
 export default CreateSpotForm
