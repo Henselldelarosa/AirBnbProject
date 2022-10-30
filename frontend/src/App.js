@@ -11,9 +11,9 @@ import Navigation from "./components/Navigation";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import SpotBrowser from "./components/SpotComponent/SpotBrowser";
-import EditSpotForm from './components/EditSpot/EditSpotForm'
 import CreateSpotForm from "./components/CreatSpot/CreateSpotForm";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
+import EditSpotForm from "./components/EditSpot/EditSpotForm";
 //rfce
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function App() {
             <SpotDetail/>
           </Route>
 
-          <Route>
+          <Route exact path='spots/:spotId/edit'>
             <EditSpotForm/>
           </Route>
 

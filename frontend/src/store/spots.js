@@ -21,10 +21,9 @@ const update = (spot) =>({
   spot
 })
 
-const remove = (spotId) =>({
+const remove = (id) =>({
   type: REMOVE_SPOT,
-  spotId,
-
+  id
 })
 
 const add = (spot)=>({
@@ -74,6 +73,7 @@ export const addSpot = (data) => async(dispatch)=>{
 }
 
 export const updateSpot = data => async dispatch =>{
+  console.log(data)
   const response = await csrfFetch(`/api/spots/${data.id}`,{
     method:'put',
     headers:{
@@ -83,10 +83,10 @@ export const updateSpot = data => async dispatch =>{
   })
   if(response.ok){
     const spot = await response.json()
-    dispatch(add(spot))
+    dispatch(update(spot))
     return spot
   }
-  return response
+
 }
 
 export const deleteSpot = (spotId) => async dispatch=>{
@@ -94,9 +94,9 @@ export const deleteSpot = (spotId) => async dispatch=>{
     method: 'delete'
   })
   if(response.ok){
-    await response.json()
-    dispatch(remove(spotId))
-    return response
+    const {id:deleteId} = await response.json()
+    dispatch(remove(deleteId))
+    return deleteId
   }
 }
 
@@ -127,7 +127,7 @@ let newState;
 
       case REMOVE_SPOT:
         newState = {...state}
-        delete newState[action.spotId]
+        delete newState[action.id]
         return newState
 
     default:
