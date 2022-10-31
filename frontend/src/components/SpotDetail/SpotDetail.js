@@ -3,6 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 //!!START SILENT
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotsAction from '../../store/spots'
+import BookingBrowser from '../BookingComponents/BookingComponent/BookingBrower';
+
 
 //!!END
 //!!ADD
@@ -62,6 +64,7 @@ const deleteASpot = (e)=>{
     <div className='spot_description'>{spot.description}</div>
     <div className='spot_price'><small>$</small>{spot.price}</div>
     <div className='spot_avgRating'>{spot.avgRating}</div>
+    <BookingBrowser/>
       </div>
     );
   }
@@ -76,6 +79,7 @@ const deleteASpot = (e)=>{
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
             )}
             <button className='delete_button' onClick={deleteASpot}>Delete Spot</button>
+          <button className='booking_button' > Create Booking</button>
           </div>
         </div>
 

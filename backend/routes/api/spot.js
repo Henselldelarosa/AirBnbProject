@@ -533,7 +533,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
   if (!spotOwned) {
     bookings = await Booking.findAll({
-      attributes:["spotId", "startDate","endDate"],
+      attributes:["id","spotId", "startDate","endDate"],
       where: {
         spotId
       }
@@ -541,7 +541,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   } else {
 
     bookings = await Booking.findAll({
-      attributes:["spotId", "startDate","endDate","createdAt","updatedAt"],
+      attributes:["id","spotId", "startDate","endDate","createdAt","updatedAt"],
       where: {
         spotId
       },
@@ -553,7 +553,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     ]
     });
   }
-
+console.log(undefined)
   res.json({
     Bookings: bookings
   });

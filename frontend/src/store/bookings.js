@@ -1,44 +1,47 @@
 import { csrfFetch } from "./csrf";
+import { getSpotById } from "./spots";
 
 const GET_BOOKINGS = 'booking/GET_BOOKINGS'
 const REMOVE_BOOKING ='booking/REMOVE_BOOKING'
 const CREATE_BOOKING = 'booking/CREATE_BOOKING'
 const GET_BOOKING = 'booking/GET_BOOKING'
 
-const getBookings = (booking) => ({
-  type:GET_BOOKINGS,
-  booking,
-  spotId
+const createBooking = (booking) => {
+  return{
+    type:CREATE_BOOKING,
+    booking
+  }
+}
+
+const remove = (id) => ({
+  type:REMOVE_BOOKING,
+  id
 })
 
-const createBooking = (booking) => ({
-  type:CREATE_BOOKING,
+const getBookings = (booking) => ({
+  type:GET_BOOKINGS,
   booking
 })
+
 
 const getBooking = (id) => ({
   type:GET_BOOKING,
   id
 })
 
-const remove = (bookingId) => ({
-  type:REMOVE_BOOKING,
-  bookingId
-})
 
 export const getAllBookings = () => async(dispatch)=>{
-const response = await csrfFetch('/api/bookings')
+const response = await csrfFetch(`/api/bookings`)
 
 if(response.ok){
   const data = await response.json()
-  dispatch(getBookings(data.Bookings))
-
-  return response
+  dispatch(getBookings(data.booking))
+  // return response
 }
 }
 
-export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
-  const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
+export const getCurrentSpotBooking = (id) => async(dispatch)=>{
+  const response = await csrfFetch(`/api/bookings/${id}`)
 
   if(response.ok){
     const data = await response.json()
@@ -59,9 +62,9 @@ export const createABooking = (data) => async(dispatch)=>{
   if(response.ok){
     const booking = await response.json()
     dispatch(createBooking(booking))
-    return spot
+    return booking
   }
-  return response
+  // return response
 }
 
 export const deleteBooking = (bookingId) => async(dispatch) => {
@@ -82,9 +85,11 @@ let newState;
 switch(action.type){
 
   case GET_BOOKINGS:
-    newState = {...state}
+  newState = {}
     action.bookings.forEach(booking =>{
+      console.log(booking)
       newState[booking.id] = booking
+
     })
     return newState
 

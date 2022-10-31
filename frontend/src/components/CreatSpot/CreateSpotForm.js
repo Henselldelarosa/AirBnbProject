@@ -4,7 +4,7 @@ import { useHistory} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addSpot } from '../../store/spots'
 
-const CreateSpotForm = ({spot}) => {
+const CreateSpotForm = ({hideForm}) => {
 const dispatch = useDispatch()
 const user = useSelector(state => state.session.user)
 
@@ -67,20 +67,17 @@ try{
   console.log(response)
 }
 
+hideForm()
 
-  // if(createSpot){
-  //   setErrorMessages([])
-  //   history.push(`/spots/${createSpot.id}`)
-
-  // }
  }
 
 const handleCancelClick = (e) => {
   e.preventDefault();
   //!!START SILENT
-  setErrorMessages([]);
+   setErrorMessages([]);
   //!!END
-  // spot();
+  history.push('/')
+   hideForm();
 };
 
 return(

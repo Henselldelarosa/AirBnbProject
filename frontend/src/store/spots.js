@@ -73,8 +73,7 @@ export const addSpot = (data) => async(dispatch)=>{
 }
 
 export const updateSpot = data => async dispatch =>{
-  console.log(data)
-  const response = await csrfFetch(`/api/spots/${data.id}`,{
+  const response = await csrfFetch(`/api/spots/:${data.spotId}`,{
     method:'put',
     headers:{
       'Content-Type': 'application/json'
