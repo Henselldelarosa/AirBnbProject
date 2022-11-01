@@ -18,7 +18,7 @@ import BookingBrowser from "./components/BookingBrower";
 import CreateBookingForm from "./components/CreateBooking/CreateBookingForm";
 import CurrentUserBooking from "./components/currentUserBooking/CurrentUserBooking";
 import Home from "./components/HomeComponent/Home";
-import CurrentUserBookingDetail from "./components/currentUserBooking/CurrentUserBookingDetail";
+
 // import EditSpotForm from "./components/EditSpot/EditSpotForm";
 //rfce
 function App() {
@@ -58,9 +58,6 @@ function App() {
 
           <Route exact path='/spots'>
             <SpotBrowser/>
-          </Route>
-          <Route exact path='bookings/:bookingId'>
-            <CurrentUserBookingDetail/>
           </Route>
 
           <Route exact path='/bookings/current'>
