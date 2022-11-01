@@ -80,7 +80,7 @@ function CreateBookingForm({spotId}) {
       value={endDate}
       onChange={updateEndDate}
       />
-      <button type='submit'>Create new Spot</button>
+      <button type='submit'>Create Booking</button>
       {/* <button type='button' onClick={handleCancelClick}>Cancel</button> */}
 
     </form>

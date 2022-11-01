@@ -1,17 +1,18 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink} from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import * as bookingAction from '../../store/booking'
 
 function CurrentUserBooking() {
   const dispatch = useDispatch()
-
+  const history = useHistory
   const user = useSelector(state => state.session.user)
     const bookings = useSelector(state => Object.values(state.bookings))
-  //  const booking = useSelector((state)=>{
-  //   return bookings.map(bookingId => state.bookin)
-  //  })
+    let {id} = useParams()
+   const booking = useSelector((state)=>{
+    return bookings.map(bookingId => state.bookin)
+   })
   //  console.log(booking)
     const userBookings = bookings.map(booking =>{
       if(booking.userId === user.id){
@@ -21,19 +22,19 @@ function CurrentUserBooking() {
     })
 
 
-    //  console.log(userBookings[0].id)
+     console.log(userBookings[1])
 
   useEffect(()=>{
     dispatch(bookingAction.getAllBookingsForUser())
   },[dispatch])
 
-  // const deleteABooking = async(e)=>{
-  //   e.preventDefault()
-  //   if(bookings){
-  //      await dispatch(bookingAction.deleteBooking(userBookings[bookingId]))
-  //   }
-  //   history.push('/')
-  // }
+  const deleteABooking = async(e)=>{
+    e.preventDefault()
+    if(bookings){
+       await dispatch(bookingAction.deleteBooking(userBookings[id]))
+    }
+    history.push('/')
+  }
 
   return (
     <main>
@@ -43,25 +44,19 @@ function CurrentUserBooking() {
 
              return(
                <div className='spot_booking_detail' key={booking.id}>
-
+                 <button onClick={deleteABooking}>Delete Booking</button>
                  <div className='booking_name'>{booking.Spot.name}</div>
-                  <NavLink to={`/bookings/${booking.id}`}>
                  <div className='booking_previewImage'>
-                  <img scr={booking.Spot.previewImage} alt=''/>
-                  </div>
-                  </NavLink>
+                  <img scr={booking.Spot.previewImage} alt=''/></div>
                  <div className='start_date'>Start Date: {booking.startDate}</div>
                  <div className='end_date'>End Date: {booking.endDate}</div>
-                 <div className='booking_info'>
-          <div className='booking_address'>{thisBooking.Spot.address}</div>
-          <div className='booking_city'>{thisBooking.Spot.city}</div>
-          <div className='booking_state'>{thisBooking.Spot.state}</div>
-          <div className='booking_country'>{thisBooking.Spot.country}</div>
-          <div className='booking_lat'>{thisBooking.Spot.lat}</div>
-          <div className='booking_lng'>{thisBooking.Spot.lng}</div>
-          <div className='booking_price'>${thisBooking.Spot.price}</div>
-          </div>
-
+                 <div className='booking_address'>{booking.Spot.address}</div>
+                 <div className='booking_city'>{booking.Spot.city}</div>
+                 <div className='booking_state'>{booking.Spot.state}</div>
+                 <div className='booking_country'>{booking.Spot.country}</div>
+                 <div className='booking_lat'>{booking.Spot.lat}</div>
+                 <div className='booking_lng'>{booking.Spot.lng}</div>
+                 <div className='booking_price'>${booking.Spot.price}</div>
                  </div>
              )
         })}

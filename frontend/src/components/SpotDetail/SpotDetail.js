@@ -86,10 +86,10 @@ const SpotDetail = () => {
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
             )}
             {(!showBooking) && (
-           <button className='show_bookings' onClick ={() => setShowBooking(true)}>Create Booking</button>
+           <button className='show_bookings' onClick ={() => setShowBooking(true)}>See Bookings</button>
               )}
               <button className='delete_button' onClick={deleteASpot}>Delete Spot</button>
-          <button className='booking_button' > Create Booking</button>
+          {/* <button className='booking_button' > Create Booking</button> */}
           </div>
         </div>
      </div>
