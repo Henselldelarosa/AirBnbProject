@@ -2,7 +2,7 @@
 //react and redux imports
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch,useParams } from "react-router-dom";
+import { Route, Router, Switch,useParams } from "react-router-dom";
 //actions
 import * as sessionActions from "./store/session";
 import * as spotAction from './store/spots'
@@ -17,6 +17,8 @@ import SpotDetail from "./components/SpotDetail/SpotDetail";
 import BookingBrowser from "./components/BookingBrower";
 import CreateBookingForm from "./components/CreateBooking/CreateBookingForm";
 import CurrentUserBooking from "./components/currentUserBooking/CurrentUserBooking";
+import Home from "./components/HomeComponent/Home";
+import CurrentUserBookingDetail from "./components/currentUserBooking/CurrentUserBookingDetail";
 // import EditSpotForm from "./components/EditSpot/EditSpotForm";
 //rfce
 function App() {
@@ -34,6 +36,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path ='/'>
+            <Home/>
+          </Route>
 
           <Route path="/login">
             <LoginFormPage />
@@ -47,17 +52,21 @@ function App() {
             <CreateSpotForm/>
           </Route>
 
-          <Route exact path='/spots/:spotId'>
+          <Route  path='/spots/:spotId'>
             <SpotDetail/>
           </Route>
 
           <Route exact path='/spots'>
             <SpotBrowser/>
           </Route>
+          <Route exact path='bookings/:bookingId'>
+            <CurrentUserBookingDetail/>
+          </Route>
 
-          <Route exact path='/bookings/:userId'>
+          <Route exact path='/bookings/current'>
             <CurrentUserBooking/>
           </Route>
+
           {/* <Route exact path='/spots/:spotId'>
             <SpotDetail/>
           </Route> */}

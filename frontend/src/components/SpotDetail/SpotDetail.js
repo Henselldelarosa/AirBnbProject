@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 //!!START SILENT
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotsAction from '../../store/spots'
-import BookingBrowser from '../BookingBrower';
+// import BookingBrowser from '../BookingBrower';
 import CreateBookingForm from '../CreateBooking/CreateBookingForm';
 import GetUserBookings from '../SpotBooking/GetSpotBookings';
 
@@ -19,17 +19,22 @@ const SpotDetail = () => {
   const [showEditSpotForm, setShowEditSpotForm] = useState(false);
   const [showBooking, setShowBooking] = useState(false)
   const [showCreateBookingForm, setShowCreateBookingForm] = useState(false)
-
   const user = useSelector(state=>state.session.user)
 
-  useEffect(() => {
-    dispatch(spotsAction.getSpotById(spotId));
+  // useEffect(() => {
+  //   dispatch(spotsAction.getSpotById(spotId));
 
-    setShowEditSpotForm(false);
+  //   setShowEditSpotForm(false);
 
-  }, [dispatch, spotId]);
+  // }, [dispatch,spotId]);
 
-
+  const deleteASpot = async(e)=>{
+    e.preventDefault()
+    if(spot.ownerId === user.id){
+        await dispatch(spotsAction.deleteSpot(spotId))
+    }
+    history.push('/spots')
+  }
 
 
   let content = null;
@@ -52,39 +57,30 @@ const SpotDetail = () => {
     <CreateBookingForm
     />
   }
-   else {
+   else if(spot){
     content = (
+    <main>
 
-      <div className="spot-detail-lists">
-          <div className='edit_spot_content'>
-         <img className='edit_spotImage' src={spot.previewImage} alt={spot.name}/>
-       </div>
-       <div className='spot_addree'>{spot.address}</div>
-    <div className='spot_city'>{spot.city}</div>
-    <div className='spot_state'>{spot.state}</div>
-    <div className='spot_country'>{spot.country}</div>
-    <div className='spot_lat'>{spot.lat}</div>
-    <div className='spot_lng'>{spot.lng}</div>
-    <div className='spot_description'>{spot.description}</div>
-    <div className='spot_price'><small>$</small>{spot.price}</div>
-    <div className='spot_avgRating'>{spot.avgRating}</div>
-    <CreateBookingForm spotId={spot.id}/>
-    {/* <BookingBrowser/> */}
-      </div>
-    );
-  }
-  const deleteASpot = async(e)=>{
-    e.preventDefault()
-    if(spot.ownerId === user.id){
-       await dispatch(spotsAction.deleteSpot(spotId))
-    }
-    history.push('/spots')
-  }
-  return (
-    <div className="pokemon-detail">
-        <div className='spot_button'>
-        <div>
+      <div className={`pokemon-detail-image-background`}>
+        <div className='edit_spot_content'>
+          {/* <div>{spot.previewImage}</div> */}
+
           <h1 className="bigger">{spot.name}</h1>
+       <img className='spot_image' src={spot.previewImage} alt={spot.previewImage}/>
+    <div className="spot-detail-lists">
+     <div className='spot_addree'>{spot.address}</div>
+  <div className='spot_city'>{spot.city}</div>
+  <div className='spot_state'>{spot.state}</div>
+  <div className='spot_country'>{spot.country}</div>
+  <div className='spot_lat'>{spot.lat}</div>
+  <div className='spot_lng'>{spot.lng}</div>
+  <div className='spot_description'>{spot.description}</div>
+  <div className='spot_price'><small>$</small>{spot.price}</div>
+  <div className='spot_avgRating'>{spot.avgRating}</div>
+     </div>
+       <div className='spot_button'>
+        <div>
+
           <div className='spot_buttons'>
           {(!showEditSpotForm) && (
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
@@ -96,10 +92,18 @@ const SpotDetail = () => {
           <button className='booking_button' > Create Booking</button>
           </div>
         </div>
-
      </div>
-      <div className={`pokemon-detail-image-background`}>
       </div>
+  <CreateBookingForm spotId={spot.id}/>
+    </div>
+    </main>
+
+    )};
+
+
+  return (
+    <div className="pokemon-detail">
+
       {content}
 
       <div><GetUserBookings/></div>

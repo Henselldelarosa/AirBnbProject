@@ -12,6 +12,12 @@ const SpotBrowser=()=>{
 const dispatch = useDispatch()
 const user = useSelector(state => state.session.user)
 const spots = useSelector(state => Object.values(state.spots))
+const spot = spots.map((notOwner) => {
+  if(notOwner.ownerId !== user.id) {
+    return notOwner
+  }
+  return notOwner
+})
 const [showForm, setShowForm] = useState(false)
 useEffect(()=>{
   dispatch(spotsAction.getAllSpots())
@@ -21,6 +27,7 @@ if(!user){
   <Redirect to='/'/>
 }
 
+console.log(spot)
 if(!spots) return null
 
   return (
@@ -29,15 +36,15 @@ if(!spots) return null
 
     <div className='spot_content'>
       <h1 className='spots_header'>Spots</h1>
-      {spots && spots.map((spot)=>{
+      {spot && spot.map((notOwner)=>{
         return (
-          <div className='spots_detail' key ={spot.id}>
+          <div className='spots_detail' key ={notOwner.id}>
 
             <div className='spot_image'>
 
               <div className='spots_image_content'>
-              <NavLink className='spot_name_link' to={`/spots/${spot.id}`}>
-                <img className='spot_image_show' src={spot.previewImage} alt={spot.name}/>
+              <NavLink className='spot_name_link' to={`/spots/${notOwner.id}`}>
+                <img className='spot_image_show' src={notOwner.previewImage} alt={notOwner.name}/>
                 </NavLink>
               </div>
             </div>

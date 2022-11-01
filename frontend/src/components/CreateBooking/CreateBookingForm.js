@@ -29,8 +29,8 @@ function CreateBookingForm({spotId}) {
 
 
     const payload = {
-      spotId,
       userId:user.id,
+      spotId,
       startDate,
       endDate
     }

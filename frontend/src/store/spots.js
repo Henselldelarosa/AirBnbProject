@@ -21,9 +21,9 @@ const update = (spot) =>({
   spot
 })
 
-const remove = (id) =>({
+const remove = (spotId) =>({
   type: REMOVE_SPOT,
-  id
+  spotId
 })
 
 const add = (spot)=>({
@@ -93,9 +93,9 @@ export const deleteSpot = (spotId) => async dispatch=>{
     method: 'delete'
   })
   if(response.ok){
-    const {id:deleteId} = await response.json()
-    dispatch(remove(deleteId))
-    return deleteId
+     await response.json()
+    dispatch(remove(spotId))
+    return response
   }
 }
 

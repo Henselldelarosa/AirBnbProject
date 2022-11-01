@@ -3,8 +3,9 @@ import { csrfFetch } from "./csrf";
 
 const SET_REVIEW = 'review/SET_REVIEWS'
 const REMOVE_REVIEW = 'review/REMOVE_REVIEW'
-const GET_REVIEWS = 'review/GET_REVIEWS'
 const GET_REVIEW = 'review/GET_REVIEW'
+const GET_SPOT_REVIEWS = 'review/GET_SPOT_REVIEWS'
+const GET_USER_REVIEWS = 'review/GET_USER_REVIEWS'
 
 const setReview = review =>{
   return{
@@ -13,21 +14,21 @@ const setReview = review =>{
   }
 }
 
-const removeReview = (id) =>{
+const removeReview = (reviewId) =>{
   return{
     type:REMOVE_REVIEW,
-    id
+    reviewId
   }
 }
 
-const getReviews = reviews =>{
+const getUserReview = reviews =>{
   return{
-    type:GET_REVIEWS,
+    type:GET_USER_REVIEWS,
     reviews
   }
 }
 
-const getReview = review =>{
+const getSpotReview = review =>{
   return{
     type:GET_REVIEW,
     review
@@ -56,5 +57,5 @@ if(response.ok){
 
 
 export const addReview = review => async (dispatch) => {
-  
+
 }
