@@ -43,7 +43,7 @@ const updateEndDate = (e) => setEndDate(e.target.value)
       createBooking = await dispatch(createABooking(payload))
       setErrorMessages([])
       history.push(`/spots/${spotId}/bookings`)
-      console.log(history)
+
 
     }catch(e){
       const response = await e.json()
