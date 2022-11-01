@@ -14,8 +14,6 @@ import SignupFormPage from "./components/SignupFormPage";
 import SpotBrowser from "./components/SpotComponent/SpotBrowser";
 import CreateSpotForm from "./components/CreatSpot/CreateSpotForm";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
-import BookingBrowser from "./components/BookingBrower";
-import CreateBookingForm from "./components/CreateBooking/CreateBookingForm";
 import CurrentUserBooking from "./components/currentUserBooking/CurrentUserBooking";
 import Home from "./components/HomeComponent/Home";
 

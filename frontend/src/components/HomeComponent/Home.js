@@ -1,4 +1,4 @@
-
+import './Home.css'
 import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Redirect} from 'react-router-dom'
