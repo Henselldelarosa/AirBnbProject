@@ -3,7 +3,7 @@
 const router = require('express').Router();;
 
 const sessionRouter = require('./session.js');
-const bookigRouter = require('./booking')
+const bookigRouter = require('./booking.js')
 const usersRouter = require('./users.js');
 const imageRouter = require('./image')
 const spotRouter = require('./spot.js')

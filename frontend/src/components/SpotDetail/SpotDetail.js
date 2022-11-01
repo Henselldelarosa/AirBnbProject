@@ -3,8 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 //!!START SILENT
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotsAction from '../../store/spots'
-import BookingBrowser from '../BookingComponents/BookingComponent/BookingBrower';
-
+import BookingBrowser from '../BookingBrower';
+import CreateBookingForm from '../CreateBooking/CreateBookingForm';
 
 //!!END
 //!!ADD
@@ -21,14 +21,17 @@ const SpotDetail = () => {
   const spot = useSelector(state => state.spots[spotId]);
   const dispatch = useDispatch();
   const [showEditSpotForm, setShowEditSpotForm] = useState(false);
+  const [showBooking, setShowBooking] = useState(false)
+  const [showCreateBookingForm, setShowCreateBookingForm] = useState(false)
+
   const user = useSelector(state=>state.session.user)
 
-  // useEffect(() => {
-  //   dispatch(spotsAction.getSpotById(spotId));
+  useEffect(() => {
+    dispatch(spotsAction.getSpotById(spotId));
 
-  //   setShowEditSpotForm(false);
+    setShowEditSpotForm(false);
 
-  // }, [dispatch, spotId]);
+  }, [dispatch, spotId]);
 
 
 const deleteASpot = (e)=>{
@@ -48,12 +51,23 @@ const deleteASpot = (e)=>{
         hideForm={() => setShowEditSpotForm(false)}
       />
     );
-  } else {
+  }
+  else if(showBooking){
+    <CreateBookingForm
+    spotId={spot.id}
+    hideForm={() => setShowBooking(false)}
+    />
+  }
+  else if (showCreateBookingForm){
+    <CreateBookingForm
+    />
+  }
+   else {
     content = (
 
-      <div className="pokemon-detail-lists">
+      <div className="spot-detail-lists">
           <div className='edit_spot_content'>
-         <img className='edit_spotImage' src={spot.previewImage} alt=''/>
+         <img className='edit_spotImage' src={spot?.previewImage} alt=''/>
        </div>
        <div className='spot_addree'>{spot.address}</div>
     <div className='spot_city'>{spot.city}</div>
@@ -64,7 +78,8 @@ const deleteASpot = (e)=>{
     <div className='spot_description'>{spot.description}</div>
     <div className='spot_price'><small>$</small>{spot.price}</div>
     <div className='spot_avgRating'>{spot.avgRating}</div>
-    <BookingBrowser/>
+    <CreateBookingForm spotId={spot.id}/>
+    {/* <BookingBrowser/> */}
       </div>
     );
   }
@@ -78,7 +93,10 @@ const deleteASpot = (e)=>{
           {(!showEditSpotForm) && (
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
             )}
-            <button className='delete_button' onClick={deleteASpot}>Delete Spot</button>
+            {(!showBooking) && (
+           <button className='show_bookings' onClick ={() => setShowBooking(true)}>Create Booking</button>
+              )}
+              <button className='delete_button' onClick={deleteASpot}>Delete Spot</button>
           <button className='booking_button' > Create Booking</button>
           </div>
         </div>

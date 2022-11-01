@@ -1,21 +1,22 @@
 import { csrfFetch } from "./csrf";
-import { getSpotById } from "./spots";
+// import { getSpotById } from "./spots";
 
 const GET_BOOKINGS = 'booking/GET_BOOKINGS'
 const REMOVE_BOOKING ='booking/REMOVE_BOOKING'
 const CREATE_BOOKING = 'booking/CREATE_BOOKING'
 const GET_BOOKING = 'booking/GET_BOOKING'
 
-const createBooking = (booking) => {
+const addBooking = (booking) => {
   return{
     type:CREATE_BOOKING,
     booking
   }
 }
 
-const remove = (id) => ({
+const remove = (bookingId, spotId) => ({
   type:REMOVE_BOOKING,
-  id
+  bookingId,
+  spotId
 })
 
 const getBookings = (booking) => ({
@@ -24,34 +25,36 @@ const getBookings = (booking) => ({
 })
 
 
-const getBooking = (id) => ({
+const getBooking = (booking,spotId) => ({
   type:GET_BOOKING,
-  id
+  booking,
+  spotId
 })
 
 
-export const getAllBookings = () => async(dispatch)=>{
-const response = await csrfFetch(`/api/bookings`)
+export const getAllBookingsForUser = (userId) => async(dispatch)=>{
+
+const response = await csrfFetch(`/api/spots/${userId}/bookings`)
 
 if(response.ok){
   const data = await response.json()
-  dispatch(getBookings(data.booking))
+  dispatch(getBookings(data.Bookings))
   // return response
 }
 }
 
-export const getCurrentSpotBooking = (id) => async(dispatch)=>{
-  const response = await csrfFetch(`/api/bookings/${id}`)
+export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
 
+  console.log(spotId)
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
   if(response.ok){
     const data = await response.json()
-    dispatch(getBooking(data))
+    dispatch(getBooking(data.Bookings))
   }
-  return response
 }
 
-export const createABooking = (data) => async(dispatch)=>{
-  const response = await csrfFetch(`/api/spots/:spotId/bookings`,{
+export const createABooking = (data,spotId) => async(dispatch)=>{
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`,{
     method:'POST',
     header: {
       'Content-Type': 'application/json'
@@ -59,15 +62,16 @@ export const createABooking = (data) => async(dispatch)=>{
     body: JSON.stringify(data)
   })
 
+  const booking = await response.json()
   if(response.ok){
-    const booking = await response.json()
-    dispatch(createBooking(booking))
-    return booking
+    dispatch(addBooking(booking))
   }
+  return booking
   // return response
 }
 
 export const deleteBooking = (bookingId) => async(dispatch) => {
+
 const response = await csrfFetch(`/api/${bookingId}`,{
   method:'DELETE'
 })
@@ -81,33 +85,29 @@ if(response.ok){
 
 let initialState = {}
 const bookingReducer = (state = initialState,action)=>{
-let newState;
+let newState = {...state}
 switch(action.type){
 
-  case GET_BOOKINGS:
-  newState = {}
-    action.bookings.forEach(booking =>{
-      console.log(booking)
+  case GET_BOOKING:
+  newState = {...state}
+    action.booking.forEach(booking =>{
+      // console.log(booking)
       newState[booking.id] = booking
 
     })
     return newState
 
 
-    case GET_BOOKING:
-      return{
-        ...state,
-        [action.booking.id]: action.booking
-      }
+    case GET_BOOKINGS:
+      action.bookings.forEach((booking)=> (newState[booking.id] = booking))
+      console.log(action.bookings)
+        return newState
 
     case CREATE_BOOKING:
-      return{
-        ...state,
-        [action.spot.id]: action.booking
-      }
+     newState[action.booking.id] = action.booking
+     return newState
 
       case REMOVE_BOOKING:
-      newState={...state}
       delete newState[action.id]
       return newState
 

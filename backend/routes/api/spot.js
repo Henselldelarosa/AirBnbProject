@@ -137,9 +137,9 @@ router.get('/:spotId', async(req,res,next)=>{
   const {spotId} = req.params
   const spots = await Spot.findByPk(spotId)
 const spot = await Spot.findOne({
-attributes:{exclude:["previewImage"]}
-  // '*'
-,
+// attributes:{exclude:["previewImage"]}
+//   // '*'
+// ,
 where:{
   id: spotId
 },
@@ -659,7 +659,7 @@ for (let i = 0; i < findBooking.length;i++){
     });
 
 
-    res.json(booking);
+    res.json({Bookings:booking});
   });
 
 

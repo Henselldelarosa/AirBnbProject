@@ -64,7 +64,6 @@ try{
 }catch(e){
   const response = await e.json()
   setErrorMessages(response.errors)
-  console.log(response)
 }
 
 hideForm()

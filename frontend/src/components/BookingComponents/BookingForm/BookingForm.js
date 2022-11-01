@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import  {useDispatch,useSelector} from 'react-redux'
-import * as bookingAction from '../../../store/booking'
+import * as bookingAction from '../../../store/bookings'
 import './BookingForm.css'
 
 function BookingForm({bookingId,hideForm,spotId}) {
   const dispatch = useDispatch()
   let booking = useSelector(state=>state.bookings[bookingId])
-
+  let user = useSelector(state=>state.session.user)
+  let spot = useSelector(state => state.spots[spotId])
 
   const [startDate, setStartDate] = useState(booking.startDate)
   const [endDate, setEndDate] = useState(booking.endDate)
@@ -18,6 +19,8 @@ function BookingForm({bookingId,hideForm,spotId}) {
   const isAdd = !booking
   if(!booking){
     booking = {
+      userId:user.id,
+      spotId: spot.id,
       startDate: "",
       endDate:""
     }
@@ -26,12 +29,13 @@ const handleSubmit = async(e) =>{
   e.preventDefault()
 
   const payload ={
+    ...booking,
     startDate,
     endDate
   }
 
   const createBooking = isAdd
-  await dispatch(bookingAction.createABooking(payload, spotId))
+    await dispatch(bookingAction.createABooking(payload, spotId))
 
   if(createBooking){
     hideForm()
@@ -60,7 +64,7 @@ const handleCancel = (e) =>{
           value={endDate}
           onChange={updateEndDate}
         />
-        <button type='submit'>Create Booking</button>
+        <button type='submit'>{isAdd}Create Booking</button>
         <button type='button' onClick={handleCancel}>Cancel</button>
       </form>
     </div>

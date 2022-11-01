@@ -2,7 +2,7 @@
 //react and redux imports
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch,useParams } from "react-router-dom";
 //actions
 import * as sessionActions from "./store/session";
 import * as spotAction from './store/spots'
@@ -14,17 +14,18 @@ import SignupFormPage from "./components/SignupFormPage";
 import SpotBrowser from "./components/SpotComponent/SpotBrowser";
 import CreateSpotForm from "./components/CreatSpot/CreateSpotForm";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
-import BookingBrowser from "./components/BookingComponents/BookingComponent/BookingBrower";
+import BookingBrowser from "./components/BookingBrower";
+import CreateBookingForm from "./components/CreateBooking/CreateBookingForm";
 // import EditSpotForm from "./components/EditSpot/EditSpotForm";
 //rfce
-
 function App() {
+  // const {spotId} = useParams()
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(spotAction.getAllSpots())
-    dispatch(bookingAction.getAllBookings())
+  //  dispatch(bookingAction.getCurrentSpotBooking(spotId))
   }, [dispatch]);
 
   return (
@@ -45,20 +46,24 @@ function App() {
             <CreateSpotForm/>
           </Route>
 
-          <Route exact path='/spots'>
-            <SpotBrowser/>
-          </Route>
-
           <Route exact path='/spots/:spotId'>
             <SpotDetail/>
           </Route>
 
+          <Route exact path='/spots'>
+            <SpotBrowser/>
+          </Route>
+
+          {/* <Route exact path='/spots/:spotId'>
+            <SpotDetail/>
+          </Route> */}
+
           {/* <Route exact path='spots/:spotId/edit'>
             <EditSpotForm/>
           </Route> */}
-          <Route exact path='/bookings'>
+          {/* <Route exact path='/spots/:spotId/bookings'>
             <BookingBrowser/>
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>

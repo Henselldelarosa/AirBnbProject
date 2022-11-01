@@ -22,7 +22,11 @@ const deleteBooking = (e) =>{
 
 
   return (
-<></>
+    <div className='booking_detail'>
+      <div className='startDate'>{booking.startDate}</div>
+      <div>{booking.endDate}</div>
+
+    </div>
   )
 }
 
