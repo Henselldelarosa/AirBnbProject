@@ -73,7 +73,7 @@ export const addSpot = (data) => async(dispatch)=>{
 }
 
 export const updateSpot = data => async dispatch =>{
-  const response = await csrfFetch(`/api/spots/:${data.spotId}`,{
+  const response = await csrfFetch(`/api/spots/${data.spotId}`,{
     method:'put',
     headers:{
       'Content-Type': 'application/json'
@@ -127,8 +127,8 @@ let newState;
 
       case REMOVE_SPOT:
         newState = {...state}
-        delete newState[action.id]
-        return newState
+        delete newState[action.spotId]
+         return newState
 
     default:
       return state

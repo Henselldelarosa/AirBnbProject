@@ -3,26 +3,25 @@ import './CreateBookingForm.css'
 import React,{useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import {createABooking} from '../../store/bookings'
+import {createABooking} from '../../store/booking'
 
 
 function CreateBookingForm({spotId}) {
-const history = useHistory()
-const dispatch = useDispatch()
-// const {spotId} = useParams()
-const user = useSelector(state => state.session.user)
-const spot = useSelector(state => state.spots[spotId])
-// console.log(spot)
-// console.log(user)
+  const history = useHistory()
+  const dispatch = useDispatch()
 
-const [errorMessages, setErrorMessages] = useState([])
-const [startDate, setStartDate] = useState('')
-const [endDate, setEndDate] = useState('')
-// const [user, setUser]= useState()
+  const user = useSelector(state => state.session.user)
+  const spot = useSelector(state => state.spots[spotId])
 
 
-const updateStartDate = (e) => setStartDate(e.target.value)
-const updateEndDate = (e) => setEndDate(e.target.value)
+  const [errorMessages, setErrorMessages] = useState([])
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+
+
+
+  const updateStartDate = (e) => setStartDate(e.target.value)
+  const updateEndDate = (e) => setEndDate(e.target.value)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,30 +29,29 @@ const updateEndDate = (e) => setEndDate(e.target.value)
 
 
     const payload = {
-      spotId:spot.id,
+      spotId,
       userId:user.id,
       startDate,
       endDate
     }
 
-    console.log(payload)
+
     let createBooking
 
     try{
-      createBooking = await dispatch(createABooking(payload))
+      createBooking = await dispatch(createABooking(payload,spotId))
       setErrorMessages([])
-      history.push(`/spots/${spotId}/bookings`)
+      history.push(`/spots/${spotId}`)
 //hello
 
-    }catch(e){
-      const response = await e.json()
-      setErrorMessages(response.errors)
-    }
-    console.log(createABooking)
-    // hideForm()
-  }
+}catch(e){
+  const response = await e.json()
+  setErrorMessages(response.errors)
+}
+// hideForm()
+}
 
-  // const handleCancelClick = (e) => {
+// const handleCancelClick = (e) => {
   //   e.preventDefault();
   //   //!!START SILENT
   //    setErrorMessages([]);

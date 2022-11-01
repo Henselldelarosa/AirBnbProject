@@ -6,7 +6,7 @@ import { Route, Switch,useParams } from "react-router-dom";
 //actions
 import * as sessionActions from "./store/session";
 import * as spotAction from './store/spots'
-import * as bookingAction from './store/bookings'
+import * as bookingAction from './store/booking'
 //components
 import Navigation from "./components/Navigation";
 import LoginFormPage from "./components/LoginFormPage";
@@ -16,6 +16,7 @@ import CreateSpotForm from "./components/CreatSpot/CreateSpotForm";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
 import BookingBrowser from "./components/BookingBrower";
 import CreateBookingForm from "./components/CreateBooking/CreateBookingForm";
+import CurrentUserBooking from "./components/currentUserBooking/CurrentUserBooking";
 // import EditSpotForm from "./components/EditSpot/EditSpotForm";
 //rfce
 function App() {
@@ -54,6 +55,9 @@ function App() {
             <SpotBrowser/>
           </Route>
 
+          <Route exact path='/bookings/:userId'>
+            <CurrentUserBooking/>
+          </Route>
           {/* <Route exact path='/spots/:spotId'>
             <SpotDetail/>
           </Route> */}

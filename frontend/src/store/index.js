@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import spotReducer from './spots';
-import bookingReducer from './bookings';
+import bookingReducer from './booking';
 
 
 /* Create a rootReducer that calls

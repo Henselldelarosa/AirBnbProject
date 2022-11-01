@@ -82,7 +82,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {NavLink, Redirect, useParams} from 'react-router-dom'
 import SpotDetail from './SpotDetail/SpotDetail'
 import * as spotsAction from '../store/spots'
-import * as bookingAction from '../store/bookings'
+import * as bookingAction from '../store/booking'
 // {bookingId}
 const BookingBrowser = () => {
   const dispatch = useDispatch()

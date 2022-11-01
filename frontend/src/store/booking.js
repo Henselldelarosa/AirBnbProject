@@ -5,11 +5,15 @@ const GET_BOOKINGS = 'booking/GET_BOOKINGS'
 const REMOVE_BOOKING ='booking/REMOVE_BOOKING'
 const CREATE_BOOKING = 'booking/CREATE_BOOKING'
 const GET_BOOKING = 'booking/GET_BOOKING'
+const GET_USER_BOOKING = 'booking/GET_USER_BOOKING'
+const GET_SPOT_BOOKING = 'booking/GET_SPOT_BOOKING'
 
-const addBooking = (booking) => {
+
+const addBooking = (booking,spotId) => {
   return{
     type:CREATE_BOOKING,
-    booking
+    booking,
+    spotId
   }
 }
 
@@ -19,11 +23,18 @@ const remove = (bookingId, spotId) => ({
   spotId
 })
 
-const getBookings = (booking) => ({
-  type:GET_BOOKINGS,
-  booking
+// const getBookings = (booking) => ({
+//   type:GET_BOOKINGS,
+//   booking
+// })
+
+const getUserBooking = (bookings) =>({
+  type:GET_USER_BOOKING,
+  bookings
 })
 
+// const getSpotBooking = (bookings)
+// GET_SPOT_BOOKING
 
 const getBooking = (booking,spotId) => ({
   type:GET_BOOKING,
@@ -32,20 +43,18 @@ const getBooking = (booking,spotId) => ({
 })
 
 
-export const getAllBookingsForUser = (userId) => async(dispatch)=>{
-
-const response = await csrfFetch(`/api/spots/${userId}/bookings`)
-
+export const getAllBookingsForUser = () => async(dispatch)=>{
+const response = await csrfFetch(`/api/bookings/current`)
 if(response.ok){
-  const data = await response.json()
-  dispatch(getBookings(data.Bookings))
+  const bookings = await response.json()
+  dispatch(getUserBooking(bookings.Bookings))
   // return response
 }
 }
 
 export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
 
-  console.log(spotId)
+  // console.log(spotId)
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
   if(response.ok){
     const data = await response.json()
@@ -54,6 +63,7 @@ export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
 }
 
 export const createABooking = (data,spotId) => async(dispatch)=>{
+  console.log(spotId)
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`,{
     method:'POST',
     header: {
@@ -89,19 +99,22 @@ let newState = {...state}
 switch(action.type){
 
   case GET_BOOKING:
-  newState = {...state}
+  newState = Object.assign({}, state);
     action.booking.forEach(booking =>{
       // console.log(booking)
-      newState[booking.id] = booking
+      newState.booking.id = booking
 
     })
     return newState
 
 
-    case GET_BOOKINGS:
-      action.bookings.forEach((booking)=> (newState[booking.id] = booking))
-      console.log(action.bookings)
-        return newState
+
+    case GET_USER_BOOKING:
+      newState = {...state}
+      action.bookings.forEach(booking => {
+        newState[action.bookings.id] = booking
+      });
+      return newState
 
     case CREATE_BOOKING:
      newState[action.booking.id] = action.booking

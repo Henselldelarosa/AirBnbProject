@@ -25,7 +25,7 @@ const booking = await Booking.findAll({
 
 })
 
-res.json(booking)
+res.json({Bookings:booking})
 });
 //*Edit a booking
 router.put('/:bookingId', requireAuth, async (req, res, next) => {

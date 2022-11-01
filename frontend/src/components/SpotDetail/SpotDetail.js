@@ -5,15 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as spotsAction from '../../store/spots'
 import BookingBrowser from '../BookingBrower';
 import CreateBookingForm from '../CreateBooking/CreateBookingForm';
+import GetUserBookings from '../SpotBooking/GetSpotBookings';
 
-//!!END
-//!!ADD
-// import { useSelector } from 'react-redux';
-//!!END_ADD
-// import PokemonItems from './PokemonItems';
 import EditSpotForm from '../EditSpot/EditSpotForm';
 import './SpotDetail.css'
-//import ItemForm from './ItemForm';
+
 
 const SpotDetail = () => {
   const history = useHistory()
@@ -34,13 +30,7 @@ const SpotDetail = () => {
   }, [dispatch, spotId]);
 
 
-const deleteASpot = (e)=>{
-  e.preventDefault()
-  if(spot.ownerId === user.id){
-    dispatch(spotsAction.deleteSpot(spotId))
-  }
-  history.push('/spots')
-}
+
 
   let content = null;
 
@@ -67,7 +57,7 @@ const deleteASpot = (e)=>{
 
       <div className="spot-detail-lists">
           <div className='edit_spot_content'>
-         <img className='edit_spotImage' src={spot?.previewImage} alt=''/>
+         <img className='edit_spotImage' src={spot.previewImage} alt={spot.name}/>
        </div>
        <div className='spot_addree'>{spot.address}</div>
     <div className='spot_city'>{spot.city}</div>
@@ -83,7 +73,13 @@ const deleteASpot = (e)=>{
       </div>
     );
   }
-
+  const deleteASpot = async(e)=>{
+    e.preventDefault()
+    if(spot.ownerId === user.id){
+       await dispatch(spotsAction.deleteSpot(spotId))
+    }
+    history.push('/spots')
+  }
   return (
     <div className="pokemon-detail">
         <div className='spot_button'>
@@ -105,6 +101,8 @@ const deleteASpot = (e)=>{
       <div className={`pokemon-detail-image-background`}>
       </div>
       {content}
+
+      <div><GetUserBookings/></div>
     </div>
   );
 };

@@ -19,6 +19,7 @@ function Navigation({ isLoaded }){
         <HomeButton/>
         <NavLink className='link' to='/spots'><HomeOutlinedIcon/></NavLink>
         <NavLink className='link' to='/spots/create'> Create Spot</NavLink>
+        <NavLink className='link' to='/bookings/current'>See Your Bookings</NavLink>
         <ProfileButton className='profile' user={sessionUser} />
 
         </div>
