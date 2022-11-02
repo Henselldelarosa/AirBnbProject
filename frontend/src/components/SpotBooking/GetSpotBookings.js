@@ -44,7 +44,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Redirect} from 'react-router-dom'
 import * as spotsAction from '../../store/spots'
 import Fab from '../Fab'
-import { getCurrentSpotBooking,deleteBooking } from '../../store/booking'
+import { getCurrentSpotBooking,getAllBookingsForUser } from '../../store/booking'
 import { useParams } from 'react-router-dom'
 
 
@@ -75,8 +75,21 @@ if(!user){
   <Redirect to='/'/>
 }
 
-console.log(spotBookings)
+    // e.preventDefault()
+    // if(spot.ownerId === user.id){
+    //     await dispatch(spotsAction.deleteSpot(spotId))
+    // }
+    // history.push('/spots')
 
+
+
+const deleteBooking = async(e)=>{
+   e.preventDefault()
+    if(spot.ownerId === user.id){
+        await dispatch(spotsAction.deleteSpot(spotId))
+    }
+    history.push('/spots')
+}
 
   return (
     <div>
@@ -84,7 +97,7 @@ console.log(spotBookings)
       {spotBookings && spotBookings.map((bookings)=>{
         return(
 
-          <div key={bookings.id}>
+        <div>
         <div>{bookings.startDate}</div>
         <div>{bookings.endDate}</div>
         </div>

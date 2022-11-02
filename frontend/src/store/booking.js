@@ -5,7 +5,7 @@ import { csrfFetch } from "./csrf";
 // const GET_BOOKINGS = 'booking/GET_BOOKINGS'
 const REMOVE_BOOKING ='booking/REMOVE_BOOKING'
 const CREATE_BOOKING = 'booking/CREATE_BOOKING'
- const GET_BOOKING = 'booking/GET_BOOKING'
+//  const GET_BOOKING = 'booking/GET_BOOKING'
 const GET_USER_BOOKING = 'booking/GET_USER_BOOKING'
 const GET_SPOT_BOOKING = 'booking/GET_SPOT_BOOKING'
 
@@ -24,10 +24,10 @@ const remove = (bookingId,userId) => ({
   userId
 })
 
-const getBooking = (booking) => ({
-  type:GET_BOOKING,
-  booking
-})
+// const getBooking = (booking) => ({
+//   type:GET_BOOKING,
+//   booking
+// })
 
 const getUserBooking = (bookings) =>({
   type:GET_USER_BOOKING,
@@ -82,13 +82,13 @@ export const createABooking = (data,spotId) => async(dispatch)=>{
   // return response
 }
 
-export const deleteBooking = (bookingId,userId) => async(dispatch) => {
+export const deleteBooking = (bookingId,spotId) => async(dispatch) => {
 const response = await csrfFetch(`/api/bookings/${bookingId}`,{
   method:'DELETE'
 })
 if(response.ok){
   const { id: deletedBookingId } = await response.json();
-  dispatch(remove(deletedBookingId, userId));
+  dispatch(remove(deletedBookingId, spotId));
   return deletedBookingId;
 }
 }
@@ -121,10 +121,9 @@ switch(action.type){
       }
 
       case REMOVE_BOOKING:
-        newState={...state}
-      delete newState[action.bookingId]
-      return newState
-
+        newState = { ...state };
+        delete newState[action.bookingId];
+        return newState;
   default:
     return state
 }

@@ -64,7 +64,7 @@ function CreateBookingForm({spotId}) {
     <form className='create_booking_form' onSubmit={handleSubmit}>
       <h1>Create A Booking</h1>
       <ul>
-    {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
+      {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
       </ul>
 
       <input

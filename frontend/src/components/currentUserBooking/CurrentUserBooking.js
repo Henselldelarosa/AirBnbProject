@@ -4,16 +4,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import * as bookingAction from '../../store/booking'
 
-function CurrentUserBooking() {
+function CurrentUserBooking ({bookings})  {
   const dispatch = useDispatch()
   const history = useHistory
+  const booking = useSelector((state)=>{
+    if(bookings.Spots) return null
+    return bookings.Spots.map(bookingId=> state.bookings[bookingId])
+  })
+console.log(booking)
   const user = useSelector(state => state.session.user)
-    const bookings = useSelector(state => Object.values(state.bookings))
-    let {id} = useParams()
-   const booking = useSelector((state)=>{
-    return bookings.map(bookingId => state.bookin)
-   })
+    // const booking = useSelector(state => Object.values(state.bookings))
+    // let {id} = useParams()
+  //  const booking = useSelector((state)=>{
+  //   return bookings.map(bookingId => state.bookin)
+  //  })
   //  console.log(booking)
+
+
     const userBookings = bookings.map(booking =>{
       if(booking.userId === user.id){
         return booking
@@ -31,7 +38,7 @@ function CurrentUserBooking() {
   const deleteABooking = async(e)=>{
     e.preventDefault()
     if(bookings){
-       await dispatch(bookingAction.deleteBooking(userBookings[id]))
+
     }
     history.push('/')
   }
