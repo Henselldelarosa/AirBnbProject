@@ -41,13 +41,13 @@ function CreateBookingForm({spotId}) {
     try{
       createBooking = await dispatch(createABooking(payload,spotId))
       setErrorMessages([])
-      history.push(`/spots/${spotId}`)
-//hello
+      //hello
 
-}catch(e){
-  const response = await e.json()
-  setErrorMessages(response.errors)
-}
+    }catch(e){
+      const response = await e.json()
+      setErrorMessages(response.errors)
+    }
+    history.push(`/bookings/current`)
 // hideForm()
 }
 

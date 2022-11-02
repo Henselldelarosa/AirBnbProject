@@ -1,0 +1,4 @@
+'https://www.citypng.com/public/uploads/preview/-31600819747ndlx1rghih.png'
+new HtmlWebpackPlugin({
+    favicon: "https://www.citypng.com/public/uploads/preview/-31600819747ndlx1rghih.png"
+})

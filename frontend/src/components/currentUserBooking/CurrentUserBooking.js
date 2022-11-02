@@ -3,38 +3,46 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import * as bookingAction from '../../store/booking'
-
+import './CurrentUserBookings.css'
 function CurrentUserBooking() {
   const dispatch = useDispatch()
-  const history = useHistory
+  const history = useHistory()
   const user = useSelector(state => state.session.user)
-    const bookings = useSelector(state => Object.values(state.bookings))
-    let {id} = useParams()
-   const booking = useSelector((state)=>{
-    return bookings.map(bookingId => state.bookin)
-   })
-  //  console.log(booking)
+  const bookings = useSelector(state => Object.values(state.bookings))
+  const {id} = useParams()
+  // const booking = useSelector(state => state.bookings[id])
+
+
+  //   (async func = async(bookings) =>{
+  //   for wait (let i = 0 ; i < bookings.length;i++){
+  //     each.push(Object.values(bookings[i]))
+  //   }
+
+  // }
+    // console.log(each)
+  useEffect(()=>{
+    dispatch(bookingAction.getAllBookingsForUser())
+  },[dispatch])
+
+  const deleteABooking = (id)=>{
+    // id.preventDefault()
+      dispatch(bookingAction.deleteBooking(id))
+    }
+    // }
+
+
     const userBookings = bookings.map(booking =>{
       if(booking.userId === user.id){
         return booking
       }
       return booking
     })
+    // console.log(userBookings[0].id)
 
-
-     console.log(userBookings[1])
 
   useEffect(()=>{
     dispatch(bookingAction.getAllBookingsForUser())
   },[dispatch])
-
-  const deleteABooking = async(e)=>{
-    e.preventDefault()
-    if(bookings){
-       await dispatch(bookingAction.deleteBooking(userBookings[id]))
-    }
-    history.push('/')
-  }
 
   return (
     <main>
@@ -43,11 +51,12 @@ function CurrentUserBooking() {
         {userBookings && userBookings.map((booking)=>{
 
              return(
-               <div className='spot_booking_detail' key={booking.id}>
+              <div>
                  <button onClick={deleteABooking}>Delete Booking</button>
+               <div className='spot_booking_detail' key={booking.id}>
                  <div className='booking_name'>{booking.Spot.name}</div>
                  <div className='booking_previewImage'>
-                  <img scr={booking.Spot.previewImage} alt=''/></div>
+                  <img scr={booking.Spot.previewImage} alt={booking.Spot.previewImage}/></div>
                  <div className='start_date'>Start Date: {booking.startDate}</div>
                  <div className='end_date'>End Date: {booking.endDate}</div>
                  <div className='booking_address'>{booking.Spot.address}</div>
@@ -57,6 +66,7 @@ function CurrentUserBooking() {
                  <div className='booking_lat'>{booking.Spot.lat}</div>
                  <div className='booking_lng'>{booking.Spot.lng}</div>
                  <div className='booking_price'>${booking.Spot.price}</div>
+                 </div>
                  </div>
              )
         })}

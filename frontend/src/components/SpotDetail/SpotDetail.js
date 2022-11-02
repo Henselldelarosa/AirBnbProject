@@ -6,10 +6,11 @@ import * as spotsAction from '../../store/spots'
 // import BookingBrowser from '../BookingBrower';
 import CreateBookingForm from '../CreateBooking/CreateBookingForm';
 import GetUserBookings from '../SpotBooking/GetSpotBookings';
-
+import CurrentUserBooking from '../currentUserBooking/CurrentUserBooking';
+import GetSpotsBookings from '../SpotBooking/GetSpotBookings';
 import EditSpotForm from '../EditSpot/EditSpotForm';
 import './SpotDetail.css'
-
+import { deleteBooking } from '../../store/booking';
 
 const SpotDetail = () => {
   const history = useHistory()
@@ -20,7 +21,7 @@ const SpotDetail = () => {
   const [showBooking, setShowBooking] = useState(false)
   const [showCreateBookingForm, setShowCreateBookingForm] = useState(false)
   const user = useSelector(state=>state.session.user)
-
+  const bookings = useSelector(state=> Object.values(state.bookings))
   // useEffect(() => {
   //   dispatch(spotsAction.getSpotById(spotId));
 
@@ -36,6 +37,10 @@ const SpotDetail = () => {
     history.push('/spots')
   }
 
+  const deleteABooking = async(e)=>{
+    e.preventDefault()
+    dispatch(deleteBooking())
+  }
 
   let content = null;
 
@@ -61,7 +66,7 @@ const SpotDetail = () => {
     content = (
     <main>
 
-      <div className={`pokemon-detail-image-background`}>
+      <div className={`spot-detail-image-background`}>
         <div className='edit_spot_content'>
           {/* <div>{spot.previewImage}</div> */}
 
@@ -87,7 +92,8 @@ const SpotDetail = () => {
             )}
             {(!showBooking) && (
            <button className='show_bookings' onClick ={() => setShowBooking(true)}>See Bookings</button>
-              )}
+           )}
+           <button onClick={deleteABooking}>Delete Booking</button>
               <button className='delete_button' onClick={deleteASpot}>Delete Spot</button>
           {/* <button className='booking_button' > Create Booking</button> */}
           </div>
@@ -106,7 +112,7 @@ const SpotDetail = () => {
 
       {content}
 
-      <div><GetUserBookings/></div>
+      <div><GetSpotsBookings/></div>
     </div>
   );
 };

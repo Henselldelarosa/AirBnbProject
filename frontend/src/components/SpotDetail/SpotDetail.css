@@ -1,4 +1,4 @@
-.edit_spotImage{
+.spot_image{
   height: 200px;
   width:200px;
 }
@@ -9,4 +9,16 @@
 
 .delete_button{
   margin-left: 20px;
+}
+
+.edit_spot_content{
+  font-weight: bolder;
+}
+
+
+.spot-detail-image-background{
+background-color: gray;
+}
+main{
+  background-color: gray;
 }
