@@ -5,7 +5,7 @@ import { csrfFetch } from "./csrf";
 // const GET_BOOKINGS = 'booking/GET_BOOKINGS'
 const REMOVE_BOOKING ='booking/REMOVE_BOOKING'
 const CREATE_BOOKING = 'booking/CREATE_BOOKING'
- const GET_BOOKING = 'booking/GET_BOOKING'
+//  const GET_BOOKING = 'booking/GET_BOOKING'
 const GET_USER_BOOKING = 'booking/GET_USER_BOOKING'
 const GET_SPOT_BOOKING = 'booking/GET_SPOT_BOOKING'
 
@@ -20,15 +20,15 @@ const addBooking = (booking,spotId) => {
 
 
 
-const remove = (id) => ({
+const remove = (bookingId) => ({
   type:REMOVE_BOOKING,
-  id,
+  bookingId,
 })
 
-const getBooking = (booking) => ({
-  type:GET_BOOKING,
-  booking
-})
+// const getBooking = (booking) => ({
+//   type:GET_BOOKING,
+//   booking
+// })
 
 const getUserBooking = (bookings) =>({
   type:GET_USER_BOOKING,
@@ -37,11 +37,11 @@ const getUserBooking = (bookings) =>({
 
 
 
-const getSpotBookings = (booking,spotId) => {
+const getSpotBookings = (bookings,spotId) => {
 
   return {
   type:GET_SPOT_BOOKING,
-  booking,
+  bookings,
   spotId
   }
 }
@@ -66,7 +66,7 @@ export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
 }
 
 export const createABooking = (data,spotId) => async(dispatch)=>{
-
+console.log(spotId)
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`,{
     method:'POST',
     header: {
@@ -76,8 +76,9 @@ export const createABooking = (data,spotId) => async(dispatch)=>{
   })
 
   const booking = await response.json()
+  console.log(booking)
   if(response.ok){
-    dispatch(addBooking(booking))
+    dispatch(addBooking(booking,spotId))
   }
   return booking
   // return response
@@ -85,17 +86,20 @@ export const createABooking = (data,spotId) => async(dispatch)=>{
 
 
 
-export const deleteBooking = (id) => async(dispatch) => {
-const response = await csrfFetch(`/api/bookings/${id}`,{
+export const deleteBooking = (bookingId) => async(dispatch) => {
+  console.log(bookingId)
+const response = await csrfFetch(`/api/bookings/${bookingId}`,{
   method:'DELETE',
   header:{
     'Content-Type': 'application/json'
   }
 })
 const data = await response.json()
+console.log(data)
 // const { id: deletedBookingId } = await response.json();
 dispatch(remove(data.id));
 if(response.ok){
+  console.log(bookingId)
   return data
 }
 }
@@ -106,7 +110,7 @@ const bookingReducer = (state = initialState,action)=>{
 let newState;
 switch(action.type){
   case GET_SPOT_BOOKING:
-  newState = {}
+  newState = {...state}
   action.bookings.forEach(booking => {
       newState[booking.id] = booking
     });
@@ -122,14 +126,15 @@ switch(action.type){
       return newState
 
     case CREATE_BOOKING:
+
       return{
         ...state,
-        [action.booking.id] : action.spot
+        [action.booking.id] : action.booking
       }
 
       case REMOVE_BOOKING:
         newState={...state}
-      delete newState[action.id]
+      delete newState[action.bookingId]
       return newState
 
   default:

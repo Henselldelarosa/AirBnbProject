@@ -1,0 +1,38 @@
+.current_spot_info{
+  color: white;
+}
+
+.user_spot_reviews{
+  color:red;
+}
+
+.owner_name{
+  color:white;
+}
+
+.spot_images{
+  height: 200px;
+  width: 200px;
+}
+
+.user_spot_avg_Rating{
+  color:gold;
+}
+
+.spot_detail_image{
+  width: 200px;
+  height: 200px;
+}
+
+.owne_info{
+  color:white;
+}
+
+.user_spot_image{
+  width: 200px;
+  height: 200px;
+}
+
+ .MuiSvgIcon-root{
+  color: gold;
+}

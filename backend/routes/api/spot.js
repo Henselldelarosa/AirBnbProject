@@ -46,7 +46,7 @@ const spots = await Spot.findAll({
   limit,
   offset
 })
-console.log(spots)
+
 
 for(let spot of spots){
   const {id} = spot
@@ -71,7 +71,7 @@ for(let spot of spots){
    spot.dataValues.avgRating = avgRating
 
 }
-console.log(spots)
+
 // res.json({
 //   Spots: spots,
 //    page,
@@ -121,7 +121,7 @@ router.get('/current', [restoreUser, requireAuth], async(req,res)=>{
      })
 
      const avgRating = ratings/eachReview
-     console.log(spot.dataValues.avgRating)
+
      spot.dataValues.avgRating = avgRating
 
   }
@@ -213,7 +213,7 @@ router.post('/', [restoreUser,requireAuth,validateSpot], async(req,res)=>{
     }
   })
   // const allSpots = await Spot.findAll()
-  // console.log(allSpots.length, "allSpots")
+
   //?create a Spot
   const newSpot = await Spot.create({
     // id:allSpots.length,
@@ -553,7 +553,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     ]
     });
   }
-console.log(undefined)
+
   res.json({
     Bookings: bookings
   });

@@ -1,0 +1,23 @@
+.current_user_spots{
+color: white;
+}
+
+.current_user_spot_container{
+  color:white;
+  font-size: 15px;
+  font-weight: bolder;
+  display: flex;
+}
+
+.user_spot_image{
+  width: 200px;
+  height: 200px;
+}
+
+.user_spot_price{
+  color: green;
+}
+
+.user_spot_avg_Rating{
+  color: gold;
+}

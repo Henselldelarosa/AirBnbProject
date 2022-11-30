@@ -1,0 +1,44 @@
+.home_button_image{
+  height: 40px;
+}
+
+/* object-fit: contain;
+height: 100px;
+margin-left:20px; */
+.header{
+  background-color: rgba(53, 49, 49, 0.815);
+  position: sticky;
+  padding: 15px, 20px;
+  justify-content: space-between;
+  z-index:100;
+  padding:15px, 20px;
+  height: 40px;
+}
+
+.nav_link{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MuiSvgIcon-root{
+  font-size: 40px;
+  color:black
+}
+
+.link{
+  font-weight: bolder;
+  font-size: 20px;
+  color:silver;
+  background-color: black;
+  text-decoration: none;
+}
+
+.profile{
+  color:silver
+}
+
+.spots_button{
+  size: 20px;
+ }

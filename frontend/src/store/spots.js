@@ -5,6 +5,7 @@ const UPDATE_SPOT = 'spot/UPDATE_SPOT'
 const REMOVE_SPOT = 'spot/REMOVE_SPOT'
 const ADD_SPOT = 'spot/ADD_SPOT'
 const GET_SPOT = 'spot/GET_SPOT'
+// const
 
 const getSpots = (spots)=>({
   type:GET_SPOTS,
@@ -42,8 +43,8 @@ export const getAllSpots = () => async(dispatch)=>{
   }
 }
 
-export const getSpotById = (id) => async(dispatch) =>{
-  const response = await csrfFetch(`/api/spots/${id}`)
+export const getSpotById = (spotId) => async(dispatch) =>{
+  const response = await csrfFetch(`/api/spots/${spotId}`)
 
   if (response.ok){
     const data = await response.json()
@@ -53,7 +54,13 @@ export const getSpotById = (id) => async(dispatch) =>{
   }
 }
 
-
+export const currentUserSpots = () => async(dispatch) => {
+const response = await csrfFetch('/api/spots/current')
+if(response.ok){
+  const data = await response.json()
+  dispatch(getSpots(data.Spots))
+}
+}
 
 
 export const addSpot = (data) => async(dispatch)=>{
@@ -66,6 +73,7 @@ export const addSpot = (data) => async(dispatch)=>{
   })
   if(response.ok){
     const spot = await response.json()
+    console.log(dispatch(add(spot)))
     dispatch(add(spot))
     return spot
   }
@@ -73,7 +81,7 @@ export const addSpot = (data) => async(dispatch)=>{
 }
 
 export const updateSpot = data => async dispatch =>{
-  const response = await csrfFetch(`/api/spots/${data.spotId}`,{
+  const response = await csrfFetch(`/api/spots/${data.id}`,{
     method:'put',
     headers:{
       'Content-Type': 'application/json'

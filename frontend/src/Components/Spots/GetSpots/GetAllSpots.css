@@ -1,0 +1,22 @@
+.spot_name{
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  font-weight: bolder;
+}
+
+.spot_image_show{
+  width: 200px;
+  height: 200px;
+}
+
+/* .spot_content{
+  display: flex;
+ padding-right: 20px;
+ justify-content: space-around;
+} */
+
+.spot_content{
+object-fit: cover;
+vertical-align: bottom;
+}
