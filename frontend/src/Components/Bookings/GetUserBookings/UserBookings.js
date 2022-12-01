@@ -15,7 +15,6 @@ function UserBookings() {
     }
     return booking
   })
-  const booking =
   useEffect(() => {
     dispatch(bookingAction.getAllBookingsForUser())
   },[dispatch])
@@ -28,7 +27,7 @@ const deleteABooking = (e,id) =>{
     <main>
       <div className ='user_booking_content'>
         <h1></h1>
-        {userBookings && userBookings.map((booking) =>{
+        {userBookings && userBookings && userBookings.map((booking) =>{
           return (
             <div className='booking_content' key={booking.id}>
               <button onClick={(e) => {deleteABooking(e, booking.id)}}> Delete this booking</button>

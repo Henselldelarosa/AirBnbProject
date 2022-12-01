@@ -4,10 +4,12 @@ import React from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { useState } from 'react'
 import {createABooking} from '../../../store/booking'
+import { Redirect, useHistory } from 'react-router-dom'
 
 function CreateBookingForm({spotId}) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
+  const history = useHistory()
   // const spot =  useSelector(state => state.spots[spotId] )
   const [errorMessages, setErrorMessages] = useState([])
   const [startDate, setStartDate] = useState('')
@@ -38,6 +40,9 @@ function CreateBookingForm({spotId}) {
       // const response = await e.json()
       // setErrorMessages(response.errors)
     }
+  //   if (createNewBooking){
+  //     history.push('/bookings/current')
+  //   }
   }
   return (
     <form className='create_booking_form' onSubmit={handleSubmit}>

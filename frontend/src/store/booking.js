@@ -20,9 +20,9 @@ const addBooking = (booking,spotId) => {
 
 
 
-const remove = (bookingId) => ({
+const remove = (bookingId,) => ({
   type:REMOVE_BOOKING,
-  bookingId,
+  bookingId
 })
 
 // const getBooking = (booking) => ({
@@ -37,12 +37,11 @@ const getUserBooking = (bookings) =>({
 
 
 
-const getSpotBookings = (bookings,spotId) => {
+const getSpotBookings = (bookings) => {
 
   return {
   type:GET_SPOT_BOOKING,
   bookings,
-  spotId
   }
 }
 
@@ -78,7 +77,7 @@ console.log(spotId)
   const booking = await response.json()
   console.log(booking)
   if(response.ok){
-    dispatch(addBooking(booking,spotId))
+    // dispatch(addBooking(booking,spotId))
   }
   return booking
   // return response
@@ -87,7 +86,6 @@ console.log(spotId)
 
 
 export const deleteBooking = (bookingId) => async(dispatch) => {
-  console.log(bookingId)
 const response = await csrfFetch(`/api/bookings/${bookingId}`,{
   method:'DELETE',
   header:{
@@ -97,45 +95,67 @@ const response = await csrfFetch(`/api/bookings/${bookingId}`,{
 const data = await response.json()
 console.log(data)
 // const { id: deletedBookingId } = await response.json();
-dispatch(remove(data.id));
+dispatch(remove(bookingId));
 if(response.ok){
   console.log(bookingId)
-  return data
+  return (data)
 }
 }
+
+// export const deleteBooking = (bookingId, spotId) => async dispatch => {
+//   const response = await csrfFetch(`/api/bookings/${bookingId}`,{
+//       method:'DELETE',
+//       header:{
+//         'Content-Type': 'application/json'
+//       }
+//     })
+
+//   if (response.ok) {
+//     const { id: deletebookingId } = await response.json();
+//     dispatch(remove(deletebookingId, spotId));
+//     return deletebookingId;
+//   }
+// };
 
 
 let initialState = {}
 const bookingReducer = (state = initialState,action)=>{
-let newState;
+// let newState;
 switch(action.type){
-  case GET_SPOT_BOOKING:
-  newState = {...state}
-  action.bookings.forEach(booking => {
-      newState[booking.id] = booking
-    });
-    return newState
+  case GET_SPOT_BOOKING:{
+
+    const newState = {...state}
+    action.bookings.forEach(booking => {
+        newState[booking.id] = booking
+      });
+      return newState
+  }
 
 
 
-    case GET_USER_BOOKING:
-      newState = {...state}
+    case GET_USER_BOOKING:{
+
+      const newState = {...state}
       action.bookings.forEach(booking => {
         newState[booking.id] = booking
       });
       return newState
+    }
 
-    case CREATE_BOOKING:
+    case CREATE_BOOKING:{
 
       return{
         ...state,
         [action.booking.id] : action.booking
       }
+    }
+
 
       case REMOVE_BOOKING:
-        newState={...state}
+      const newState={...state}
       delete newState[action.bookingId]
       return newState
+
 
   default:
     return state
