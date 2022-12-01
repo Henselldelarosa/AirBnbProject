@@ -1,4 +1,10 @@
 'use strict';
+// NEW: add this code to each create table migration file
+let options = {};
+options.tableName = 'Spots'
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 module.exports = {
   async up(queryInterface, Sequelize) {
 
@@ -62,9 +68,9 @@ module.exports = {
       previewImage: {
         type: Sequelize.STRING
       }
-    });
+    },options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spots');
+    await queryInterface.dropTable('Spots',options);
   }
 };

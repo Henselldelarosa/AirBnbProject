@@ -1,8 +1,13 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 const bcrypt = require("bcryptjs");
 module.exports = {
   async up (queryInterface, Sequelize) {
-   return queryInterface.bulkInsert('Images', [
+    options.tableName = 'Images';
+   return queryInterface.bulkInsert(options, [
     {
       url: "https://i.ytimg.com/vi/CUowt8pwRCM/maxresdefault.jpg",
       imageableType: "Spot",
@@ -23,7 +28,8 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Images', {
+    options.tableName = 'Images'; // define table name in options object
+    return queryInterface.bulkDelete(options, {
       imageableId: { [Op.in]: [1, 2] }
     }, {});
   }
