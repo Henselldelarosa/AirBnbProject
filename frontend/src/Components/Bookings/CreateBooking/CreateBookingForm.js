@@ -2,7 +2,7 @@ import './CreateBookingForm.css'
 
 import React from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {createABooking} from '../../../store/booking'
 import { Redirect, useHistory } from 'react-router-dom'
 
@@ -18,6 +18,12 @@ function CreateBookingForm({spotId}) {
   const updateStartDate = (e) => setStartDate(e.target.value)
   const updateEndDate = (e) => setEndDate(e.target.value)
 
+
+  // useEffect(() => {
+  //   if(startDate >= endDate){
+  //     setErrorMessages.push('endDate cannot be on or before startDate')
+  //   }
+  // },[startDate,endDate])
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorMessages([])
@@ -31,18 +37,19 @@ function CreateBookingForm({spotId}) {
     }
 
     let createNewBooking
+   createNewBooking = await dispatch(createABooking(newBook,spotId))
+   console.log(createNewBooking)
+    // try{
+    //   createNewBooking = await dispatch(createABooking(newBook,spotId))
+    //   setErrorMessages([])
 
-    try{
-      createNewBooking = await dispatch(createABooking(newBook,spotId))
-      setErrorMessages([])
-
-    }catch(e){
-      // const response = await e.json()
-      // setErrorMessages(response.errors)
-    }
-  //   if (createNewBooking){
-  //     history.push('/bookings/current')
-  //   }
+    // }catch(e){
+    //    setErrorMessages(e.errors)
+    //    console.log(e)
+    // }
+    //  if (createNewBooking){
+    //  history.push('/bookings/current')
+    //  }
   }
   return (
     <form className='create_booking_form' onSubmit={handleSubmit}>
@@ -57,7 +64,7 @@ function CreateBookingForm({spotId}) {
 
       <h1>Create A Booking</h1>
       <ul>
-      {/* {errorMessages.map((error,id)=> <li key={id}>{error}</li>)} */}
+      {errorMessages && errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
       </ul>
       <input
       type='date'

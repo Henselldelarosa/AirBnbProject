@@ -83,6 +83,27 @@ console.log(spotId)
   // return response
 }
 
+// export const createABooking = (data,spotId) => async(dispatch)=>{
+//   console.log(spotId)
+//     const response = await csrfFetch(`/api/spots/${spotId}/bookings`,{
+//       method:'POST',
+//       header: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(data)
+//     })
+
+//     const booking = await response.json()
+//     console.log(booking)
+//     if(response.ok){
+//       // dispatch(addBooking(booking,spotId))
+//     }else{
+//       return response.errors;
+//     }
+//     return booking
+//     // return response
+//   }
+
 
 
 export const deleteBooking = (bookingId) => async(dispatch) => {

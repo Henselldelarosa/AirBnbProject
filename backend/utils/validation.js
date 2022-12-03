@@ -2,6 +2,7 @@
 const { validationResult } = require('express-validator');
 const { check } = require('express-validator');
 const { query } = require('express-validator/check');
+const {Booking} = require('../db/models')
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -115,6 +116,53 @@ const validateReview = [
   handleValidationErrors
 ];
 
+const validateBooking = [
+  check('startDate')
+  .exists({checkFalsy:true})
+  .withMessage('Start Date is Required'),
+  check('endDate')
+  .exists({checkFalsy:true})
+  .withMessage('End Date is Required'),
+
+  check("endDate", "startDate")
+    .custom((a, b) => {
+      const { startDate, endDate } = b.req.body;
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      if (start >= end) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .withMessage("endDate cannot be on or before startDate"),
+    check('startDate', 'endDate')
+    .custom( async (a,b) =>{
+      const {spotId} = a.req.body
+      const { startDate, endDate } = b.req.body;
+      const firstDate = new Date(startDate);
+
+      const findBooking = await Booking.findAll({
+        where:{
+          spotId
+        }
+      })
+
+      for (let i = 0; i < findBooking.length; i++){
+        let booking = findBooking[i]
+        let bookingStart = new Date(booking.startDate).getTime()
+        let bookingEnd = new Date(booking.endDate).getTime()
+        if(firstDate.getTime() >= bookingStart && firstDate.getTime()<= bookingEnd){
+          return false
+           }else{
+            return true
+           }
+      }
+    })
+    .withMessage("Sorry, this spot is already booked for the specified dates"),
+  handleValidationErrors,
+]
+
 const validateQuery = [
   query('page')
     .isInt({ min: 0 })
@@ -153,11 +201,14 @@ const validateQuery = [
   handleValidationErrors
 ];
 
+
+
 module.exports = {
   validateQuery,
   handleValidationErrors,
   validateLogin,
   validateSignup,
   validateSpot,
-  validateReview
+  validateReview,
+  validateBooking
 };
