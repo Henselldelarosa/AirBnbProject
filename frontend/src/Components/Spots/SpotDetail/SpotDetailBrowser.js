@@ -13,9 +13,6 @@ function SpotDetailBrowser() {
   const history = useHistory()
   const user = useSelector(state => state.session.user)
   const spot = useSelector(state => state.spots[spotId]);
-  // const images = spot.Images
-
-// const [showImage,setShowImage] = useState(true)
 const [showEditSpotForm, setShowEditSpotForm] = useState(false);
 
   useEffect(() => {
@@ -32,12 +29,6 @@ const [showEditSpotForm, setShowEditSpotForm] = useState(false);
     }
   }
 
-// if(!showEditSpotForm){
-//   <EditSpotForm
-//         spot={spot}
-//         hideForm={() => setShowEditSpotForm(true)}
-//       />
-// }
 let content =null
 
 if (showEditSpotForm) {
@@ -79,7 +70,9 @@ if (showEditSpotForm) {
             )
           })}
         </div>
+        {(user.id !== spot.ownerId) && (
             <CreateBookingForm spotId={spotId}/>
+        )}
         <div className='current_spot_info'>
 
         <div className='user_spot_name'>{spot.name}</div>
@@ -99,14 +92,6 @@ if (showEditSpotForm) {
         <div className='user_spot_avg_Rating'> <small><StarIcon/></small> <big> {spot.avgStarRating}</big></div>
 
         </div>
-
-        {/* <div className='owne_info'>
-          <h3 >Owened by: {spot.Owner && spot.Owner.map((owner)=>{
-            <div key={owner.id}>
-              {owner.firstName} {owner.lastName}
-            </div>
-          })}  </h3> */}
-        {/* </div> */}
       </div>
       :<></>
     )
