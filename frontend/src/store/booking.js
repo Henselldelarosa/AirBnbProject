@@ -119,7 +119,7 @@ console.log(data)
 dispatch(remove(bookingId));
 if(response.ok){
   console.log(bookingId)
-  return data
+  return (data)
 }
 }
 

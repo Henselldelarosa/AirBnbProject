@@ -24,7 +24,7 @@ function CreateBookingForm({spotId}) {
   //     setErrorMessages.push('endDate cannot be on or before startDate')
   //   }
   // },[startDate,endDate])
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorMessages([])
 
@@ -36,25 +36,20 @@ function CreateBookingForm({spotId}) {
       endDate
     }
 
-    // return dispatch(createABooking(newBook,spotId))
-    // .catch(async (res) => {
-    //   const data = await res.json();
-    //   if (data && data.errors) setErrorMessages(data.errors);
-    // });
     let createNewBooking
-  //  createNewBooking = await dispatch(createABooking(newBook,spotId))
-  //  console.log(createNewBooking)
-    try{
-      createNewBooking =  dispatch(createABooking(newBook,spotId))
-      setErrorMessages([])
+   createNewBooking = await dispatch(createABooking(newBook,spotId))
+   console.log(createNewBooking)
+    // try{
+    //   createNewBooking = await dispatch(createABooking(newBook,spotId))
+    //   setErrorMessages([])
 
-    }catch(e){
-       setErrorMessages(e.errors)
-       console.log(e)
-    }
-     if (createNewBooking){
-     history.push('/bookings/current')
-     }
+    // }catch(e){
+    //    setErrorMessages(e.errors)
+    //    console.log(e)
+    // }
+    //  if (createNewBooking){
+    //  history.push('/bookings/current')
+    //  }
   }
   return (
     <form className='create_booking_form' onSubmit={handleSubmit}>

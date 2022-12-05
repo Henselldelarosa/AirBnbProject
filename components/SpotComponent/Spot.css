@@ -1,4 +1,4 @@
-/* .spot_image_show{
+.spot_image_show{
   width:200px;
   height: 200px;
 }
@@ -17,4 +17,4 @@ color: silver;
 .spot_content{
   font-display: flex;
   flex-direction: row;
-} */
+}
