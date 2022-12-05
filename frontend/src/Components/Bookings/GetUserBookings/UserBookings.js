@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import * as bookingAction from '../../../store/booking'
 import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 
 function UserBookings() {
   const dispatch = useDispatch()
@@ -15,16 +16,32 @@ function UserBookings() {
     }
     return booking
   })
+  const [errors, setError] = useState([])
+  let today = new Date().getTime()
+
   useEffect(() => {
+    if(userBookings.startDate <= today){
+      setError.push('sorry')
+    }
+  },[userBookings,setError])
+
+  useEffect(()=>{
     dispatch(bookingAction.getAllBookingsForUser())
   },[dispatch])
 
 const deleteABooking = (e,id) =>{
   e.preventDefault()
   dispatch(bookingAction.deleteBooking(id))
+  .catch(async(res)=>{
+    const data = await res.json()
+    if (data && data.errors) setError(data.errors)
+  })
 }
   return (
     <main>
+      <ul>
+        {errors.map((errors ,i) => <li key={i}>{errors}</li>)}
+      </ul>
       <div className ='user_booking_content'>
         <h1></h1>
         {userBookings && userBookings && userBookings.map((booking) =>{

@@ -136,31 +136,82 @@ const validateBooking = [
       }
     })
     .withMessage("endDate cannot be on or before startDate"),
-    check('startDate', 'endDate')
-    .custom( async (a,b) =>{
-      const {spotId} = a.req.body
+    check("startDate")
+    .custom((a,b) => {
       const { startDate, endDate } = b.req.body;
-      const firstDate = new Date(startDate);
-
-      const findBooking = await Booking.findAll({
-        where:{
-          spotId
-        }
-      })
-
-      for (let i = 0; i < findBooking.length; i++){
-        let booking = findBooking[i]
-        let bookingStart = new Date(booking.startDate).getTime()
-        let bookingEnd = new Date(booking.endDate).getTime()
-        if(firstDate.getTime() >= bookingStart && firstDate.getTime()<= bookingEnd){
-          return false
-           }else{
-            return true
-           }
+      const start = new Date(startDate);
+      const today = new Date();
+      if (start < today) {
+        return false;
+      } else {
+        return true;
       }
     })
-    .withMessage("Sorry, this spot is already booked for the specified dates"),
-  handleValidationErrors,
+    .withMessage("Sorry the Start Date can't be the current day or before the current day"),
+    // check('endDate')
+    // .custom((a,b) =>{
+    //   const {startDate, endDate} = b.req.body
+    //   const today = new Date()
+
+    //   if(endDate <= today){
+    //     return false
+    //   }
+    //   return true
+    // })
+    // .withMessage("Sorry the end Date can't be the current day or before the current day"),
+    // // check('startDate', 'endDate')
+    // .custom( async (a,b) =>{
+    //   const {spotId} = a.req.body
+    //   const { startDate, endDate } = b.req.body;
+    //   const firstDate = new Date(startDate);
+
+    //   const findBooking = await Booking.findAll({
+    //     where:{
+    //       spotId
+    //     }
+    //   })
+
+    //   for (let i = 0; i < findBooking.length; i++){
+    //     let booking = findBooking[i]
+    //     let bookingStart = new Date(booking.startDate).getTime()
+    //     let bookingEnd = new Date(booking.endDate).getTime()
+    //     if(firstDate.getTime() >= bookingStart && firstDate.getTime()<= bookingEnd){
+    //       return false
+    //        }else{
+    //         return true
+    //        }
+    //   }
+    // })
+    // .withMessage("Sorry, this spot is already booked for the specified dates"),
+
+  handleValidationErrors
+]
+
+const deleteBookingValidation = [
+  check('startDate')
+  .custom((a)=>{
+    const {startDate} = a.req.body
+    const today = new Date()
+
+    if(startDate <= today){
+      return false
+    }
+    return true
+  })
+  .withMessage('Cant Cancel a booking that has already started'),
+
+  check('endDate')
+  .custom((a)=>{
+    const {endDate} = a.req.body
+    const today = new Date()
+
+    if(endDate <= today){
+      return false
+    }
+    return true
+  })
+  .withMessage('Cant Cancel a booking for a day that has already passed'),
+  handleValidationErrors
 ]
 
 const validateQuery = [
@@ -210,5 +261,6 @@ module.exports = {
   validateSignup,
   validateSpot,
   validateReview,
-  validateBooking
+  validateBooking,
+  deleteBookingValidation
 };

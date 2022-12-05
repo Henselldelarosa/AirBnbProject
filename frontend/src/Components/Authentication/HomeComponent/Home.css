@@ -1,0 +1,26 @@
+/* .spot_content{
+  margin:10px;
+  border: 0px solid black;
+  overflow: hidden;
+  box-shadow: 0px 6px 18px -9px rgba(0,0,0,0.75);
+  transition: transform 100ms ease-in;
+  cursor: pointer;
+}
+
+.spot_image_show{
+  object-fit: fill;
+  min-width: 300px;
+  min-height: 200px;
+  width:100%;
+} */
+
+/* spot_content */
+.spot_content{
+  display: flex;
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+.spot_content>*{
+  flex: 1 1 160px;
+}

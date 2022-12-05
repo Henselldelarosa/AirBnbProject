@@ -1,4 +1,4 @@
-form{
+/* form{
   display:flex;
   align-items: center;
    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
@@ -13,47 +13,47 @@ form{
   font-size: 20px;
   text-align: center;
   color:gold
-}
- .loginBody{
+} */
+ /* .loginBody{
   background-image: linear-gradient(to right,rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-                  url("https://www.citypng.com/public/uploads/small/31600816469elytuhvoibsiypqwvgl9irqp2n9yzauotxjaigggqttkiolfyizhv02zvkmqu92lkzmkhxnyd6ltgpuhwjdle4q3dsvtwk45kw7t.png");
+                  url("https://www.citypng.com/public/uploads/small/31600816469elytuhvoibsiypqwvgl9irqp2n9yzauotxjaigggqttkiolfyizhv02zvkmqu92lkzmkhxnyd6ltgpuhwjdle4q3dsvtwk45kw7t.png"); */
 
-  /* align-items: center; */
- }
 
- button{
+ /* } */
+
+ /* button{
   background-color: black;
   color: gold;
   cursor:pointer;
   justify-content: space-between;
   display: flex;
- }
+ } */
 
- button:hover{
+ /* button:hover{
   background-color: lightslategray;
    border-radius: 10px;
    align-items: center;
    padding: 0 30px;
- }
+ } */
 
  /* label{
   align-items: center;
 
  } */
 
- input[type=text],[type=password]{
+ /* input[type=text],[type=password]{
 
   display: block;
   background-color:transparent;
   color:gold;
   font-weight: bold;
-  border:2px solid rgba(25,25,25);
+  border:2px solid rgba(25,25,25); */
   /* float: left; */
-  outline-width: 5px solid black;
+  /* outline-width: 5px solid black;
   margin-bottom: 10px;
 
 
- }
+ } */
 
 
 

@@ -2,6 +2,7 @@ const express = require('express');
 const {requireAuth, restoreUser } = require('../../utils/auth');
 const { User, Booking,Spot } = require('../../db/models');
 const router = express.Router();
+const {deleteBookingValidation} = require('../../utils/validation')
 
 router.get('/', async(req,res)=>{
   const booking = await Booking.findAll()
@@ -53,7 +54,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
   if (bookingAuthorize && bookingAuthorize.userId !== req.user.id) {
     const err = Error("Forbidden");
     err.status = 403;
-    return next(err);
+    throw res.json(err);
   }
 
 
@@ -118,7 +119,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
 //*Delete a booking
 //!DELETE
-router.delete("/:bookingId", requireAuth, async(req,res,next)=>{
+router.delete("/:bookingId", requireAuth,async(req,res)=>{
   const {bookingId} = req.params
 
   const user = await User.findOne({
@@ -127,12 +128,12 @@ router.delete("/:bookingId", requireAuth, async(req,res,next)=>{
     }
   })
 
-  const allowed = await Booking.findByPk(bookingId)
-  if(allowed && allowed.userId !== req.user.id){
-    const error = Error('This Action Is Forbidden')
-    error.status = 403
-    return next(error)
-  }
+  // const allowed = await Booking.findByPk(bookingId)
+  // if(allowed && allowed.userId !== req.user.id){
+  //   const error = Error('This Action Is Forbidden')
+  //   error.status = 403
+  //   throw next(error)
+  // }
 
   // const spot = await Spot.findOne({
   //   where:{
@@ -147,18 +148,18 @@ const booking = await Booking.findOne({
 })
 console.log(booking)
   if(!booking){
-    const error = Error("Booking couldn't be found");
+    const error = new Error("Booking couldn't be found");
     error.status = 404;
-    return next(error);
+    throw res.json(error);
   }
 
   const dateNowCompare = new Date().getTime()
   let bookingStart = new Date(booking.startDate).getTime()
 
   if (bookingStart < dateNowCompare) {
-    const err = Error("Bookings that have been started can't be deleted");
+    const err = new Error("Bookings that have been started can't be deleted");
     err.status = 403;
-    return next(err);
+    throw err;
   }
   booking.destroy()
   res.json({
