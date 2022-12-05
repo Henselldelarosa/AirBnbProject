@@ -34,7 +34,7 @@ function App() {
     dispatch(spotAction.getAllSpots())
 
   }, [dispatch]);
-
+let h = 'h'
   return (
     <>
       <Navigation isLoaded={isLoaded} />
