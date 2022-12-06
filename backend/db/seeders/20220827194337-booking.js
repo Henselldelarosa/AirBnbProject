@@ -7,7 +7,7 @@ const { Booking, User, Spot } = require('../models');
 
 // Today's date
 const moment = require('moment-timezone');
-const today = moment.utc().format('YYYY-MM-DD');
+const today = moment.tz('America/Pennsylvania').format('YYYY-MM-DD');
 
 const bookings = [
   {

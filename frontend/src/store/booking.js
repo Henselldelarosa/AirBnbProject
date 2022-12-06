@@ -65,7 +65,6 @@ export const getCurrentSpotBooking = (spotId) => async(dispatch)=>{
 }
 
 export const createABooking = (data,spotId) => async(dispatch)=>{
-console.log(spotId)
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`,{
     method:'POST',
     header: {
@@ -73,13 +72,26 @@ console.log(spotId)
     },
     body: JSON.stringify(data)
   })
+  // .then(async response =>{
+  //   const data = await response.json()
+  //   dispatch(addBooking(data,spotId))
+  // })
+  .catch(async response =>{
+    const newData = await response.json()
+    return newData.message
+  })
 
-  const booking = await response.json()
-  console.log(booking)
-  if(response.ok){
-    // dispatch(addBooking(booking,spotId))
+
+
+  if(response === 'Sorry, this spot is already booked for the specified dates'){
+    return response
+  }else{
+    const data = await response.json()
+    const booking = data.Bookings
+    console.log(booking)
+    dispatch(addBooking(booking,spotId))
   }
-  return booking
+
   // return response
 }
 
@@ -114,8 +126,7 @@ const response = await csrfFetch(`/api/bookings/${bookingId}`,{
   }
 })
 const data = await response.json()
-console.log(data)
-// const { id: deletedBookingId } = await response.json();
+
 dispatch(remove(bookingId));
 if(response.ok){
   console.log(bookingId)
@@ -164,7 +175,7 @@ switch(action.type){
     }
 
     case CREATE_BOOKING:{
-
+      console.log(action.booking)
       return{
         ...state,
         [action.booking.id] : action.booking

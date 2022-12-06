@@ -23,11 +23,14 @@ const deleteABooking = (e,id) =>{
   e.preventDefault()
   dispatch(bookingAction.deleteBooking(id))
 }
-  return (
+let content = null
+if(userBookings){
+  content = (
+    userBookings?
     <main>
       <div className ='user_booking_content'>
         <h1></h1>
-        {userBookings && userBookings && userBookings.map((booking) =>{
+        {userBookings && userBookings.map((booking) =>{
           return (
             <div className='booking_content' key={booking.id}>
               <button onClick={(e) => {deleteABooking(e, booking.id)}}> Delete this booking</button>
@@ -43,7 +46,10 @@ const deleteABooking = (e,id) =>{
 
       </div>
     </main>
+    :<></>
   )
+}
+  return content
 }
 
 export default UserBookings
