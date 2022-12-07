@@ -1,15 +1,15 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
+// import React from 'react'
+// import {NavLink} from 'react-router-dom'
 
-function HomeButton() {
-  return (
-    <div>
-      <NavLink exact to ='/'>
-        <img title='Home' className='home_button_image' src= "http://i.pinimg.com/originals/3c/bf/be/3cbfbe148597341fa56f2f87ade90956.png"
-      alt=''/>
-      </NavLink>
-    </div>
-  )
-}
+// function HomeButton() {
+//   return (
+//     <div>
+//       <NavLink exact to ='/'>
+//         <img title='Home' className='home_button_image' src= "https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png "
+//       alt=''/>
+//       </NavLink>
+//     </div>
+//   )
+// }
 
-export default HomeButton
+// export default HomeButton

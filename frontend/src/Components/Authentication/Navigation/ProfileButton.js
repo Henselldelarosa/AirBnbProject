@@ -40,7 +40,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-    <AccountCircleOutlinedIcon onClick={openMenu} className='user_logo'/>
+    <i class="fa-regular fa-circle-user" onClick={openMenu}/>
       {showMenu && (
         <div className="profile-dropdown">
           <div>{user.username}</div>
