@@ -1,5 +1,4 @@
 .card{
-<<<<<<< HEAD
   margin: 10px;
   border-radius: 10px;
   overflow: hidden;
@@ -42,45 +41,3 @@ margin-bottom: 8px;
   height: 300px;
   width: 200px;
 } */
-=======
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem 3rem;
-  gap:1rem;
-
-}
-
-.card_link{
-  text-decoration: none;
-  color: black;
-}
-.card_image{
-  height: 300px;
-  width: 300px;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-.card_info{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.card_rating{
-  display: flex;
-  align-items: center;
-  gap:0.5rem;
-}
-
-.card_container > h5{
-  font-weight: lighter;
-}
-
-.card_container{
-  margin: 1rem;
-}
->>>>>>> css
