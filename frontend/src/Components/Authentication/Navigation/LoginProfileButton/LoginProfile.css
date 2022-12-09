@@ -1,0 +1,32 @@
+.profile_button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  color: #717171;
+  border: 1px solid var(--gray);
+  padding: 0.5rem;
+  border-radius: 2rem;
+  font-size: .9rem;
+}
+
+.profile_button:hover{
+cursor: pointer;
+box-shadow:  1px 2px rgb(0 0 0 / 15%), 0 4px 12px rgb(0 0 0 /10%);
+transition: .2s;
+}
+
+.menu_bars{
+  color:black
+}
+
+.avatar{
+  font-size: 22px;
+}
+
+.menu_item1{
+  font-weight: bolder !important;
+  margin-top: .5rem !important;
+  padding: .5rem !important;
+  font-size: .9rem;
+}

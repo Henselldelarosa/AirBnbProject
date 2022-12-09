@@ -1,20 +1,24 @@
 /* TODO Add site wide styles */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,600;0,800;1,300&display=swap");
 *{
   margin:0;
-}
-
-body{
-  background-color: #fff;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
 /* body{
   background-color: #fff;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-  color: #222;
+} */
+
+:root{
+  --black: #000;
+  --gray: #ddd;
+  --white: #ffffff;
+}
+
+body{
+  /* font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif; */
   margin: 0;
-      margin-top: 0px;
-      margin-right: 0px;
-      margin-bottom: 0px;
-      margin-left: 0px;
-  } */
+  font-family: 'Nunito Sans', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  }

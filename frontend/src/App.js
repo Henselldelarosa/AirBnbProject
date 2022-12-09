@@ -24,7 +24,8 @@ import GetAllSpots from "./Components/Spots/GetSpots/GetAllSpots";
 import SpotDetailBrowser from "./Components/Spots/SpotDetail/SpotDetailBrowser";
 import CreateSpotForm from "./Components/Spots/CreateSpot/CreateSpotForm";
 import UserBookings from "./Components/Bookings/GetUserBookings/UserBookings";
-
+import Home from "./Components/Authentication/HomeComponent/Home";
+import Footer from './Components/Authentication/FooterComponent/Footer'
 function App() {
 
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ let h = 'h'
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/'>
+            <Home/>
+          </Route>
 
           <Route path='/Login'>
             <LoginForm/>
@@ -48,6 +52,7 @@ let h = 'h'
           <Route path='/signup'>
             <SignupForm/>
           </Route>
+
           {/* <Route  exact path ='/spots/current'>
             <GetUserSpots/>
           </Route> */}
@@ -112,6 +117,7 @@ let h = 'h'
           </Route> */}
         </Switch>
       )}
+      {/* <Footer/> */}
     </>
   );
 }
