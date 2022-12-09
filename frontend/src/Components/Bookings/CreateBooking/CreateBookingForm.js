@@ -45,45 +45,32 @@ if(startSecs - todaySecs <= 60000) validationError.push('Your start date can not
 setErrors(validationError)
 },[endDate,startDate])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setErrors([])
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setErrors([])
 
+  // if (errorMessages.length > 0) return setErrorMessages(errorMessages)
+  const newBook = {
+    userId:user.id,
+    spotId,
+    startDate,
+    endDate
+  }
 
-    const newBook = {
-      userId:user.id,
-      spotId,
-      startDate,
-      endDate
-    }
+  let createNewBooking
+ createNewBooking = await dispatch(createABooking(newBook,spotId))
+  // try{
+  //   createNewBooking = await dispatch(createABooking(newBook,spotId))
+  //   setErrorMessages([])
 
-
-// try getting history to work
-//go to currentuser bookings and do a if(userBooking)
-      const errors = await dispatch(createABooking(newBook,spotId))
-      if (errors === 'Sorry, this spot is already booked for the specified dates'){
-        setErrors([errors])
-      }else{
-        // history.push('/bookings/current')
-        alert('Booking Created')
-      }
-    }
-    // const errors = await dispatch(createABooking(newBook,spotId))
-    // if (errors){
-    //   setErrors([errors])
-    // }else if(!errors){
-    //   history.push('/bookings/current')
-
-    let createNewBooking
-   createNewBooking = await dispatch(createABooking(newBook,spotId))
-    // try{
-    //   createNewBooking = await dispatch(createABooking(newBook,spotId))
-    //   setErrorMessages([])
-
-
-    // }
-
-
+  // }catch(e){
+  //    setErrorMessages(e.errors)
+  //    console.log(e)
+  // }
+  //  if (createNewBooking){
+  //  history.push('/bookings/current')
+  //  }
+}
   return (
     <div className='create_booking_body'>
 
