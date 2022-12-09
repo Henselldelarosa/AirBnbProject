@@ -73,11 +73,11 @@ export default function BasicMenu({user}) {
           boxShadow:'0 1px 2px rgb(0 0 0 /8%), 0 4px 12px rgb(0 0 0 / 5%)'}}}
       >
         {/* <MenuItem className='menu_item1' onClick={handleClose}>Messages</MenuItem> */}
-        <MenuItem className='menu_item1' onClick={handleClose}>See Your Bookings</MenuItem>
+        <MenuItem className='menu_item1' onClick={seeBookings}>See Your Bookings</MenuItem>
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
         <hr/>
-        <MenuItem className='menu_item2' onClick={seeBookings}>Airbnb your home</MenuItem>
+        <MenuItem className='menu_item2' onClick={createSpot}>Airbnb your home</MenuItem>
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Host an Experience</MenuItem> */}
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Account</MenuItem> */}
         <hr/>
