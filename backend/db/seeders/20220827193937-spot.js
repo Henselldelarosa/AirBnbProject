@@ -58,7 +58,7 @@ module.exports = {
       country: "Africa",
       lat: 37.7,
       lng: -122.4,
-      name: "The Ghetto",
+      name: "Wakanda",
       description: "If you book a stay steal me some vibranium",
       price: 400,
       previewImage: "https://media.architecturaldigest.com/photos/5a970759891f6e6a41b121d4/16:9/w_2560%2Cc_limit/STT0020_v014_031049.1092.jpg"
@@ -86,7 +86,7 @@ module.exports = {
       country: "United States of America",
       lat: 37.7,
       lng: -122.4,
-      name: "The Ghetto",
+      name: "Nuke Town",
       description: "Visit at your own risk",
       price: 400,
       previewImage: "https://callofdutymaps.com/wp-content/uploads/nuketown5.jpg"

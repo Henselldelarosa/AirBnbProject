@@ -57,9 +57,13 @@ if (showEditSpotForm) {
       {(user.id === spot.ownerId) && (
         <div className='spot_button'>
           {(!showEditSpotForm) && (
+            <div className='edit_div'>
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
+            </div>
             )}
+            <div className='delete_div'>
           <button className='delete_spot_button' onClick={deleteASpot}>Delete Spot</button>
+          </div>
         </div>
       )}
         <div className='spot_image'>
