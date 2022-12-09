@@ -74,12 +74,22 @@ console.log(spotId)
     body: JSON.stringify(data)
   })
 
-  const booking = await response.json()
-  console.log(booking)
-  if(response.ok){
-    // dispatch(addBooking(booking,spotId))
+  .catch(async response =>{
+    const newData = await response.json()
+    return newData.message
+  })
+
+
+
+  if(response === 'Sorry, this spot is already booked for the specified dates'){
+    return response
+  }else{
+    const data = await response.json()
+    const booking = data.Bookings
+    console.log(booking)
+    //dispatch(addBooking(booking,spotId))
   }
-  return booking
+
   // return response
 }
 
