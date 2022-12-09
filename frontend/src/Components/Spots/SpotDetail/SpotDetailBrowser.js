@@ -13,6 +13,14 @@ function SpotDetailBrowser() {
   const history = useHistory()
   const user = useSelector(state => state.session.user)
   const spot = useSelector(state => state.spots[spotId]);
+
+    const ratingCheck = (rating) =>{
+      if(rating === null){
+        return rating = 'new'
+      }else{
+        return rating
+      }
+    }
   // const images = spot.Images
 
 // const [showImage,setShowImage] = useState(true)
