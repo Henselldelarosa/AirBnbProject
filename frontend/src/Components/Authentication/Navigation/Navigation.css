@@ -79,6 +79,7 @@ display: flex;
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
+  background-color: white;
 }
 
 .header_icon{
@@ -154,4 +155,13 @@ cursor: pointer;
 .globe:hover{
   background-color: #f7f7f7;
   cursor: pointer;
+}
+
+.globe_link{
+  color: black;
+}
+
+.airbnb_link{
+  text-decoration: none;
+  color: black;
 }

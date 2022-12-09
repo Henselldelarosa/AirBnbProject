@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import './ProfileMenu.css'
+import './LoginProfile.css'
 import {useHistory} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import * as sessionAction from '../../../../store/session'
 
 
-export default function BasicMenu({user}) {
+export default function BasicLoginMenu({user}) {
   const history = useHistory()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,23 +20,16 @@ export default function BasicMenu({user}) {
     setAnchorEl(null);
   };
 
-  const logout = (e) => {
-    e.preventDefault();
-    handleClose()
-    dispatch(sessionAction.logout());
-    history.push('/')
-  };
-
-  const createSpot = (e) =>{
+  const signUp = (e) =>{
     e.preventDefault()
     handleClose()
-    history.push('/spots/create')
+    history.push('/signup')
   }
 
-  const seeBookings = (e) =>{
+  const login = (e) =>{
     e.preventDefault()
     handleClose()
-    history.push('/bookings/current')
+    history.push('/login')
   }
 
   return (
@@ -73,16 +66,16 @@ export default function BasicMenu({user}) {
           boxShadow:'0 1px 2px rgb(0 0 0 /8%), 0 4px 12px rgb(0 0 0 / 5%)'}}}
       >
         {/* <MenuItem className='menu_item1' onClick={handleClose}>Messages</MenuItem> */}
-        <MenuItem className='menu_item1' onClick={handleClose}>See Your Bookings</MenuItem>
+        <MenuItem className='menu_item1' onClick={login}>Login</MenuItem>
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
-        <hr/>
-        <MenuItem className='menu_item2' onClick={seeBookings}>Airbnb your home</MenuItem>
+        <MenuItem className='menu_item1' onClick={signUp}>Sign up</MenuItem>
+        {/* <hr/> */}
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Host an Experience</MenuItem> */}
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Account</MenuItem> */}
-        <hr/>
+        {/* <hr/> */}
         {/* <MenuItem className='menu_item2' onClick={handleClose}>help</MenuItem> */}
-        <MenuItem className='menu_item2' onClick={logout}>Log out</MenuItem>
+        {/* <MenuItem className='menu_item2' onClick={logout}>Log out</MenuItem> */}
       </Menu>
     </div>
   );

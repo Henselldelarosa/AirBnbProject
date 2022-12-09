@@ -1,17 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from '../Navigation/ProfileButton';
+// import ProfileButton from '../Navigation/ProfileButton';
 import './Navigation.css';
-import HomeButton from './HomeButton'
-import LoginButton from './LoginButton';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import BasicMenu from './ProfileComponent/ProfileMenu';
-function Navigation({ isLoaded }){
+import BasicLoginMenu from './LoginProfileButton/LoginProfile';
 
-  return(
-    <div className='header'>
-      <img className='header_icon' src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt='' />
+function Navigation({ isLoaded }){
+  const sessionUser = useSelector(state => state.session.user);
+  let sessionLinks;
+
+  if(sessionUser){
+    sessionLinks= (
+<div className='header'>
+      <NavLink className="home_image"to='/'>
+      <img title='Home' className='header_icon' src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt='' />
+      </NavLink>
       <div className='search_bar'>
         <div className='search_bar_text'>Any where</div>
         <div className='search_bar_text'>Any week</div>
@@ -21,16 +25,51 @@ function Navigation({ isLoaded }){
         </div>
       </div>
       <div className='profile_container'>
-        <div className='air_bnb_your_home'>Airbnb your home</div>
+        <div className='air_bnb_your_home'>
+          <NavLink title='Create A Spot'className="airbnb_link"to='/spots/create'>
+          Airbnb your home
+          </NavLink>
+          </div>
           <div className='globe'>
-          <i class="fa-solid fa-globe"></i>
+            <NavLink to='spots/create' className='globe_link'>
+          <i title='See your bookings'class="fa-solid fa-globe"></i>
+            </NavLink>
         </div>
         <div className='profile'>
-          <BasicMenu/>
+          <BasicMenu user={sessionUser}/>
         </div>
       </div>
     </div>
-  )
+    )
+  }else{
+    sessionLinks =sessionLinks= (
+      <div className='header'>
+            <NavLink to='/'>
+            <img className='header_icon' src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt='' />
+            </NavLink>
+            <div className='search_bar'>
+              <div className='search_bar_text'>Any where</div>
+              <div className='search_bar_text'>Any week</div>
+              <div className='search_bar_text2'> Add guests</div>
+              <div className='search_icon'>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+            </div>
+            <div className='profile_container'>
+              <div className='air_bnb_your_home'>
+                Airbnb your home
+                </div>
+                <div className='globe'>
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              <div className='profile'>
+                <BasicLoginMenu/>
+              </div>
+            </div>
+          </div>
+          )
+  }
+  return (isLoaded && sessionLinks)
   // const sessionUser = useSelector(state => state.session.user);
 
   // let sessionLinks;
