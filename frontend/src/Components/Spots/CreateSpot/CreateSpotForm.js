@@ -66,8 +66,6 @@ function CreateSpotForm() {
     setErrorMessages(response.errors)
   }
 
-  // hideForm()
-
    }
 
   const handleCancelClick = (e) => {
@@ -80,19 +78,21 @@ function CreateSpotForm() {
   };
 
   return(
+    <div className='create_spot_body'>
   <form className='create_spot_form' onSubmit={handleSubmit}>
+  <img className='login_logo'src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt=''/>
     <h1>Create Spot</h1>
     <ul>
       {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
     </ul>
+    <div className='address'>Address</div>
     <input
     type='text'
     placeholder='Address'
-
     value={address}
     onChange={updateAddress}
     />
-
+    <div className='city'>City</div>
     <input
     type='text'
     placeholder='City'
@@ -100,7 +100,7 @@ function CreateSpotForm() {
     value={city}
     onChange={updateCity}
     />
-
+<div className='state'>State</div>
   <input
   type='text'
   placeholder='State'
@@ -108,7 +108,7 @@ function CreateSpotForm() {
   value={state}
   onChange={updateState}
   />
-
+<div className='country'>Country</div>
   <input
   type='text'
   placeholder='Country'
@@ -116,7 +116,7 @@ function CreateSpotForm() {
   value={country}
   onChange={updateCountry}
   />
-
+<div className='lat'>Latitude</div>
   <input
   type='number'
   placeholder='Latitude'
@@ -124,7 +124,7 @@ function CreateSpotForm() {
   value={lat}
   onChange={updateLat}
   />
-
+<div className='lng'>Longtitude</div>
   <input
   type='number'
   placeholder='Longtitude'
@@ -132,7 +132,7 @@ function CreateSpotForm() {
   value={lng}
   onChange={updateLng}
   />
-
+<div className='name'>Name</div>
   <input
   type='text'
   placeholder='Name'
@@ -140,7 +140,7 @@ function CreateSpotForm() {
   value={name}
   onChange={updateName}
   />
-
+<div className='description'>Description</div>
   <input
   type='text'
   placeholder='Description'
@@ -148,7 +148,7 @@ function CreateSpotForm() {
   value={description}
   onChange={updateDescription}
   />
-
+<div className='price'>Price</div>
   <input
   type='number'
   placeholder='Price'
@@ -156,7 +156,7 @@ function CreateSpotForm() {
   value={price}
   onChange={updatePrice}
   />
-
+<div className='previewImage'>Preview image</div>
     <input
     type='text'
     placeholder='Image'
@@ -165,9 +165,10 @@ function CreateSpotForm() {
     onChange={updatePreviewImage}
     />
 
-  <button type='submit'>Create new Spot</button>
-  <button type='button' onClick={handleCancelClick}>Cancel</button>
+  <button className='create_spot_button'type='submit'>Create new Spot</button>
+  <button className='cancel_button' type='button' onClick={handleCancelClick}>Cancel</button>
   </form>
+    </div>
   )
 
   }

@@ -25,7 +25,7 @@ const [showEditSpotForm, setShowEditSpotForm] = useState(false);
 
     if(spot.ownerId === user.id){
       dispatch(deleteSpot(spot.id))
-      history.push('/spots')
+      history.push('/')
     }
   }
 
@@ -50,10 +50,6 @@ if (showEditSpotForm) {
           {(!showEditSpotForm) && (
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
             )}
-          {/* <EditASpotForm spot={spotId}/> */}
-           {/* {(!showEditSpotForm) && ( */}
-            {/* <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button> */}
-            {/* )} */}
           <button className='delete_spot_button' onClick={deleteASpot}>Delete Spot</button>
         </div>
       )}
@@ -61,21 +57,19 @@ if (showEditSpotForm) {
 
         <div className='current_user_spot_info'>
           <img className='user_spot_image' src={spot.previewImage} alt=''/>
-          {spot.Images && spot.Images.map((image) => {
+          {/* {spot.Images && spot.Images.map((image) => {
             return(
               <div key={image.id}>
 
-                <img className='spot_detail_image'src={image.url} alt=''/>
+              <img className='spot_detail_image'src={image.url} alt=''/>
               </div>
-            )
-          })}
+              )
+            })} */}
         </div>
-        {(user.id !== spot.ownerId) && (
             <CreateBookingForm spotId={spotId}/>
-        )}
         <div className='current_spot_info'>
-
         <div className='user_spot_name'>{spot.name}</div>
+
 
         <div className='user_spot_address_city'>{spot.address}, {spot.city}</div>
 
@@ -90,6 +84,7 @@ if (showEditSpotForm) {
         </div>
         <div className='user_spot_reviews'>Reviews: {spot.numReviews}</div>
         <div className='user_spot_avg_Rating'> <small><StarIcon/></small> <big> {spot.avgStarRating}</big></div>
+            <CreateBookingForm spotId={spotId}/>
 
         </div>
       </div>

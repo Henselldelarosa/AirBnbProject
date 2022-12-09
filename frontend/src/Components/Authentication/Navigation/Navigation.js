@@ -16,14 +16,14 @@ function Navigation({ isLoaded }){
       <NavLink className="home_image"to='/'>
       <img title='Home' className='header_icon' src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt='' />
       </NavLink>
-      <div className='search_bar'>
+      {/* <div className='search_bar'>
         <div className='search_bar_text'>Any where</div>
         <div className='search_bar_text'>Any week</div>
         <div className='search_bar_text2'> Add guests</div>
         <div className='search_icon'>
         <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-      </div>
+      </div> */}
       <div className='profile_container'>
         <div className='air_bnb_your_home'>
           <NavLink title='Create A Spot'className="airbnb_link"to='/spots/create'>
@@ -47,19 +47,19 @@ function Navigation({ isLoaded }){
             <NavLink to='/'>
             <img className='header_icon' src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt='' />
             </NavLink>
-            <div className='search_bar'>
-              <div className='search_bar_text'>Any where</div>
+            {/* <div className='search_bar'> */}
+              {/* <div className='search_bar_text'>Any where</div>
               <div className='search_bar_text'>Any week</div>
               <div className='search_bar_text2'> Add guests</div>
               <div className='search_icon'>
               <i class="fa-solid fa-magnifying-glass"></i>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div className='profile_container'>
               <div className='air_bnb_your_home'>
                 Airbnb your home
                 </div>
-                <div className='globe'>
+                <div className='signout_globe'>
                 <i class="fa-solid fa-globe"></i>
               </div>
               <div className='profile'>
