@@ -38,7 +38,6 @@ function CreateBookingForm({spotId}) {
 
     let createNewBooking
    createNewBooking = await dispatch(createABooking(newBook,spotId))
-   console.log(createNewBooking)
     // try{
     //   createNewBooking = await dispatch(createABooking(newBook,spotId))
     //   setErrorMessages([])
@@ -52,6 +51,8 @@ function CreateBookingForm({spotId}) {
     //  }
   }
   return (
+    <div className='create_booking_body'>
+
     <form className='create_booking_form' onSubmit={handleSubmit}>
       {/* {spot && ((currentSpot)=>{
         return(
@@ -66,22 +67,37 @@ function CreateBookingForm({spotId}) {
       <ul>
       {errorMessages && errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
       </ul>
+      <div className='inner_content'>
+        <div className='in_out'>
+
+      <div className='checking'>CHECK-IN
       <input
+      className='checking_in'
       type='date'
       placeholder='Start Date'
       value={startDate}
       onChange={updateStartDate}
       />
+      </div>
 
+      <div className='checkout'>CHECKOUT
       <input
       type='date'
       placeholder='End Date'
       value={endDate}
       onChange={updateEndDate}
+      className=''
       />
-      <button type='submit'>Create Booking</button>
+      </div>
+      </div>
+
+      <div className='reserve_div'>
+      <button className='reserve_button'type='submit'>Reserve</button>
+        </div>
+      </div>
       {/* <button type='button' onClick={handleCancelClick}>Cancel</button> */}
     </form>
+    </div>
   )
 }
 

@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../../store/session";
 import './SignupForm.css';
 
+
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -36,13 +37,17 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="signup_form">New User</h1>
+    <div className='signup_body'>
+    <form className='signup_form'onSubmit={handleSubmit}>
+      <img className='signup_logo'src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt=''/>
+      <h1 >New User</h1>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
+        <div>
         Email
+        </div>
         <input
           type="text"
           value={email}
@@ -51,7 +56,9 @@ function SignupFormPage() {
         />
       </label>
       <label>
+      <div>
         Password
+        </div>
         <input
           type="password"
           value={password}
@@ -60,7 +67,9 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Confirm Password
+        <div>
+          Confirm Password
+        </div>
         <input
           type="password"
           value={confirmPassword}
@@ -69,7 +78,7 @@ function SignupFormPage() {
         />
         </label>
         <label>
-        Username
+          <div>Username</div>
         <input
           type="text"
           value={username}
@@ -78,7 +87,9 @@ function SignupFormPage() {
         />
       </label>
       <label>
+      <div>
         First Name
+      </div>
         <input
           type="text"
           value={firstName}
@@ -87,7 +98,9 @@ function SignupFormPage() {
         />
          </label>
              <label>
-        Last Name
+             <div>
+              Last Name
+             </div>
         <input
           type="text"
           value={lastName}
@@ -97,8 +110,9 @@ function SignupFormPage() {
 
       </label>
 
-      <button type="submit">Sign Up</button>
+      <button className='signup_button'type="submit">Sign Up</button>
     </form>
+    </div>
   );
 }
 

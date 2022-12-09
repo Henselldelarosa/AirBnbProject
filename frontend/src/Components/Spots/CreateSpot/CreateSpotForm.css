@@ -1,0 +1,99 @@
+.create_spot_body{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #ff385c;
+  justify-content: space-around;
+}
+
+
+.create_spot_form{
+  display: flex;
+  flex-direction: column;
+}
+
+.cancel_button{
+  font-weight: bolder;
+  background-color: #ff385c;
+  color: whitesmoke;
+}
+
+.cancel_button:hover{
+  color: #ff385c;
+  background-color: white;
+  cursor: pointer;
+}
+
+.create_spot_button{
+  font-weight: bolder;
+  background-color: #ff385c;
+  color: whitesmoke;
+}
+
+.create_spot_button:hover{
+  color: #ff385c;
+  background-color: white;
+  cursor: pointer;
+}
+
+.address{
+font-weight: bolder;
+color: white;
+}
+
+.city{
+  font-weight: bolder;
+  color: white;
+}
+
+.state{
+  font-weight: bolder;
+  color: white;
+}
+
+.country{
+  font-weight: bolder;
+  color: white;
+}
+
+.latitude{
+  font-weight: bolder;
+  color: white;
+}
+
+.longtitude{
+  font-weight: bolder;
+  color: white;
+}
+
+.name{
+  font-weight: bolder;
+  color: white;
+}
+
+.description{
+  font-weight: bolder;
+  color: white;
+}
+
+.price{
+  font-weight: bolder;
+  color: white;
+}
+
+.previewImage{
+  font-weight: bolder;
+  color: white;
+}
+
+.create_spot_form >input{
+  background-color: white;
+  cursor: pointer;
+  color: #ff385c;
+}
+
+.create_spot_form > input:hover{
+  background-color: #ff385c;
+}
+
+/* .create_spot_form > input > [placeholder]:hover */

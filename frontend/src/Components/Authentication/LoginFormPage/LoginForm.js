@@ -28,7 +28,8 @@ function LoginFormPage() {
   return (
     <div className='loginBody'>
 
-    <form onSubmit={handleSubmit}>
+    <form className='login_form'onSubmit={handleSubmit}>
+      <img className='login_logo'src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt=''/>
       <h1>Login Form</h1>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -46,7 +47,9 @@ function LoginFormPage() {
         />
       </label>
       <label>
+        <div className='passWord'>
         Password
+        </div>
         <input
           type="password"
           value={password}
@@ -54,7 +57,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button className='login_buton'type="submit">Log In</button>
     </form>
     </div>
   );

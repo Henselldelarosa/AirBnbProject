@@ -97,14 +97,14 @@ display: flex;
   box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 /5%);
 }
 
-.search_bar:hover{
+/* .search_bar:hover{
   box-shadow:  1px 2px rgb(0 0 0 / 15%), 0 4px 12px rgb(0 0 0 /10%);
   transition: .2s;
   cursor:pointer;
 
-}
+} */
 
-.search_icon{
+/* .search_icon{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,13 +113,13 @@ display: flex;
   padding:.25rem;
   border-radius: 50%;
 
-}
-.search_bar_text{
+} */
+/* .search_bar_text{
   font-size: .8rem;
   font-weight: 600;
   border-right: 1px solid var(--gray);
   padding-right: 0.5rem;
-}
+} */
 
 .search_bar_text2{
   color:#717171;
@@ -141,10 +141,10 @@ display: flex;
   font-size: .9rem;
 }
 
-.air_bnb_your_home:hover{
+/* .air_bnb_your_home:hover{
 background-color: #f7f7f7;
 cursor: pointer;
-}
+} */
 .globe{
   padding: 1rem;
   font-weight: 600;

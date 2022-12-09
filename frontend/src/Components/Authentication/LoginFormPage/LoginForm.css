@@ -47,13 +47,22 @@
   background-color:transparent;
   color:gold;
   font-weight: bold;
-  border:2px solid rgba(25,25,25); */
+  border:2px solid rgba(25,25,25);
   /* float: left; */
   /* outline-width: 5px solid black;
   margin-bottom: 10px;
 
 
  } */
+
+ input[type=text],[type=password]{
+  display: block;
+  background-color:black;
+  color:#ff385c;
+  font-weight: bold;
+  border:2px solid rgba(25,25,25);
+
+ }
 
 
 
@@ -66,3 +75,36 @@
   outline-width: 5px solid black;
 
  } */
+
+ .loginBody{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #ff385c;
+ }
+
+ .login_buton{
+  color:white;
+  font-weight: bolder;
+  background-color: #ff385c;
+ }
+
+ .login_buton:hover{
+  color:#ff385c;
+  background-color: white;
+ }
+
+.login_form{
+  display: flex;
+  flex-direction: column;
+  border: solid white;
+}
+
+.login_logo{
+  background-color: white;
+}
+
+.login_logo{
+  object-fit: contain;
+  height: 150px;
+}

@@ -1,0 +1,28 @@
+.signup_body{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #ff385c;
+ }
+
+ .signup_button{
+  color:white;
+  font-weight: bolder;
+  background-color: #ff385c;
+ }
+
+ .signup_button:hover{
+  color:#ff385c;
+  background-color: white;
+ }
+
+.signup_form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.signup_logo{
+  object-fit: contain;
+  height: 150px;
+}
