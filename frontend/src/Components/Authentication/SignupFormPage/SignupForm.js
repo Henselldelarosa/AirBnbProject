@@ -119,11 +119,10 @@ function SignupFormPage() {
 
       </label>
 
-<<<<<<< HEAD
       <button className='signup_button' type="submit">Sign Up</button>
-=======
+
       <button className='signup_button'type="submit">Sign Up</button>
->>>>>>> css
+
     </form>
     </div>
   );

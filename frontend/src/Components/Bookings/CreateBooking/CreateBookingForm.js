@@ -57,7 +57,7 @@ setErrors(validationError)
       endDate
     }
 
-<<<<<<< HEAD
+
 // try getting history to work
 //go to currentuser bookings and do a if(userBooking)
       const errors = await dispatch(createABooking(newBook,spotId))
@@ -73,13 +73,13 @@ setErrors(validationError)
     //   setErrors([errors])
     // }else if(!errors){
     //   history.push('/bookings/current')
-=======
+
     let createNewBooking
    createNewBooking = await dispatch(createABooking(newBook,spotId))
     // try{
     //   createNewBooking = await dispatch(createABooking(newBook,spotId))
     //   setErrorMessages([])
->>>>>>> css
+
 
     // }
 
