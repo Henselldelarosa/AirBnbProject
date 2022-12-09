@@ -66,7 +66,6 @@ if (showEditSpotForm) {
               )
             })} */}
         </div>
-            <CreateBookingForm spotId={spotId}/>
         <div className='current_spot_info'>
         <div className='user_spot_name'>{spot.name}</div>
 
