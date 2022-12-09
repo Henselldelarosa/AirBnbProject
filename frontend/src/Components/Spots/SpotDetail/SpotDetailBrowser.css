@@ -37,3 +37,56 @@
   color: gold;
 } */
 
+<<<<<<< HEAD
+=======
+.user_spot_image{
+  height: 300px;
+  width: 300px;
+}
+
+
+.edit_form_button{
+  background-color: var(--theme);
+  font-weight: bolder;
+  color: white;
+  border: 1px solid black;
+}
+
+.delete_spot_button{
+  background-color: var(--theme);
+  font-weight: bolder;
+  color: white;
+  border: 1px solid black;
+}
+
+.spot_button{
+ display: flex;
+}
+
+.delete_div{
+  margin-left: 10px;
+}
+
+.user_spot_name{
+  font-size: 20px;
+}
+.spot_info{
+  display: flex;
+  font-weight: 300;
+}
+
+.user_spot_avg_Rating{
+  padding-right: 10px;
+}
+.user_spot_reviews{
+  padding-right: 10px;
+}
+
+.user_spot_lat_lng{
+  font-weight: bold;
+}
+
+.user_spot_price{
+  font-weight: bold;
+}
+>>>>>>> css

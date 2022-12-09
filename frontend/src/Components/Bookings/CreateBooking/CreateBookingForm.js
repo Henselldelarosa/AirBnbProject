@@ -13,10 +13,8 @@ function CreateBookingForm({spotId}) {
   // const bookings = useSelector(state => Object.values(state.bookings))
   // const spot =  useSelector(state => state.spots[spotId] )
   const [errors, setErrors] = useState([])
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
-
-
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const updateStartDate = (e) => setStartDate(e.target.value)
   const updateEndDate = (e) => setEndDate(e.target.value)
@@ -45,42 +43,60 @@ if(startSecs - todaySecs <= 60000) validationError.push('Your start date can not
 setErrors(validationError)
 },[endDate,startDate])
 
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  setErrors([])
+  useEffect(()=>{
 
-  // if (errorMessages.length > 0) return setErrorMessages(errorMessages)
-  const newBook = {
-    userId:user.id,
-    spotId,
-    startDate,
-    endDate
+    const today = new Date()
+
+    let todaySecs = today.getTime()
+    let startSecs = new Date(startDate).getTime()
+    const validationError =[]
+
+    if(startDate >= endDate) validationError.push('End date can not be on or before start date ')
+    if(startSecs - todaySecs <= 60000) validationError.push('Your start date can not be the current date')
+
+    // for(let i = 0; i < bookings.length; i++){
+    //   let booking = bookings[i]
+    //   let bookingStart = new Date(booking.startDate).getTime()
+    //   let bookingEnd = new Date(booking.endDate).getTime()
+
+    //   if(startSecs >= bookingStart && startSecs <= bookingEnd) validationError.push("Sorry, this spot is already booked for the specified dates")
+    //   if(endsecs >= bookingStart && endsecs <= bookingEnd) validationError.push('End date conflicts with an existing booking')
+    //   if(bookingStart >= startSecs && bookingStart <= endsecs) validationError.push("Start date conflicts with an existing booking")
+    // }
+
+    setErrors(validationError)
+    },[endDate,startDate])
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setErrors([])
+
+    // if (errorMessages.length > 0) return setErrorMessages(errorMessages)
+    const newBook = {
+      userId:user.id,
+      spotId,
+      startDate,
+      endDate
+    }
+// try getting history to work
+//go to currentuser bookings and do a if(userBooking)
+      const errors = await dispatch(createABooking(newBook,spotId))
+      if (errors === 'Sorry, this spot is already booked for the specified dates'){
+        setErrors([errors])
+      }else{
+        // history.push('/bookings/current')
+        alert('Booking Created')
+      }
   }
-
-  let createNewBooking
- createNewBooking = await dispatch(createABooking(newBook,spotId))
-  // try{
-  //   createNewBooking = await dispatch(createABooking(newBook,spotId))
-  //   setErrorMessages([])
-
-  // }catch(e){
-  //    setErrorMessages(e.errors)
-  //    console.log(e)
-  // }
-  //  if (createNewBooking){
-  //  history.push('/bookings/current')
-  //  }
-}
   return (
     <div className='create_booking_body'>
-
     <form className='create_booking_form' onSubmit={handleSubmit}>
-      <h1>Create A Booking</h1>
       <ul>
-      {errors.map((error,id)=><li key={id}>{error}</li>)}
+      {errors && errors.map((error,id)=> <li key={id}>{error}</li>)}
       </ul>
-      <div className='inner_content'>
-        <div className='in_out'>
+
+      <div className='checkin_checkout'>
 
       <div className='checking'>CHECK-IN
       <input
@@ -100,12 +116,12 @@ const handleSubmit = async (e) => {
       onChange={updateEndDate}
       className=''
       />
+      <hr/>
       </div>
       </div>
 
       <div className='reserve_div'>
       <button className='reserve_button'type='submit'>Reserve</button>
-        </div>
       </div>
       {/* <button type='button' onClick={handleCancelClick}>Cancel</button> */}
     </form>

@@ -83,6 +83,13 @@ export const createABooking = (data,spotId) => async(dispatch)=>{
 
 
 
+  .catch(async response =>{
+    const newData = await response.json()
+    return newData.message
+  })
+
+
+
   if(response === 'Sorry, this spot is already booked for the specified dates'){
     return response
   }else{

@@ -13,6 +13,17 @@ function SpotDetailBrowser() {
   const history = useHistory()
   const user = useSelector(state => state.session.user)
   const spot = useSelector(state => state.spots[spotId]);
+
+    const ratingCheck = (rating) =>{
+      if(rating === null){
+        return rating = 'new'
+      }else{
+        return rating
+      }
+    }
+  // const images = spot.Images
+
+// const [showImage,setShowImage] = useState(true)
 const [showEditSpotForm, setShowEditSpotForm] = useState(false);
 
   useEffect(() => {
@@ -44,45 +55,40 @@ if (showEditSpotForm) {
       spot?
     <div>
 
-      <h1 className='spot_detail'>Spot Detail</h1>
       {(user.id === spot.ownerId) && (
         <div className='spot_button'>
           {(!showEditSpotForm) && (
+            <div className='edit_div'>
             <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
+            </div>
             )}
+            <div className='delete_div'>
           <button className='delete_spot_button' onClick={deleteASpot}>Delete Spot</button>
+          </div>
         </div>
       )}
+      <h1 className='spot_detail'>{spot.name}</h1>
+
+      <div className='spot_info'>
+      <div className='user_spot_avg_Rating'><i class="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
+      <div className='user_spot_reviews'>{spot.numReviews} reviews</div>
+      <div className='user_spot_address_city'>{spot.address}, {spot.city}, {spot.state}, {spot.country}</div>
+      </div>
         <div className='spot_image'>
 
         <div className='current_user_spot_info'>
           <img className='user_spot_image' src={spot.previewImage} alt=''/>
-          {/* {spot.Images && spot.Images.map((image) => {
-            return(
-              <div key={image.id}>
-
-              <img className='spot_detail_image'src={image.url} alt=''/>
-              </div>
-              )
-            })} */}
         </div>
+
         <div className='current_spot_info'>
-        <div className='user_spot_name'>{spot.name}</div>
-
-
-        <div className='user_spot_address_city'>{spot.address}, {spot.city}</div>
-
-        <div className='user_spot_state'>{spot.state}, {spot.country}</div>
-
         <div className='user_spot_lat_lng'>{spot.lat}, {spot.lng}</div>
 
         <div className='user_spot_description'>{spot.description}</div>
 
-        <div className='user_spot_price'><small>$</small><big>{spot.price}</big></div>
+        <div className='user_spot_price'>${spot.price} night</div>
 
         </div>
-        <div className='user_spot_reviews'>Reviews: {spot.numReviews}</div>
-        <div className='user_spot_avg_Rating'> <small><StarIcon/></small> <big> {spot.avgStarRating}</big></div>
+
             <CreateBookingForm spotId={spotId}/>
 
         </div>

@@ -117,7 +117,7 @@ let h = 'h'
           </Route> */}
         </Switch>
       )}
-      {/* <Footer/> */}
+      <Footer/>
     </>
   );
 }

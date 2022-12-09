@@ -77,7 +77,7 @@ export default function BasicMenu({user}) {
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
         {/* <MenuItem className='menu_item1' onClick={handleClose}>See Your Spots</MenuItem> */}
         <hr/>
-        <MenuItem className='menu_item2' onClick={createSpot}>Airbnb your home</MenuItem>
+        <MenuItem className='menu_item2' onClick={createSpot}>Create Spot</MenuItem>
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Host an Experience</MenuItem> */}
         {/* <MenuItem className='menu_item2' onClick={handleClose}>Account</MenuItem> */}
         <hr/>

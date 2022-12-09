@@ -2,10 +2,14 @@
   display: flex;
   flex-direction: column;
 } */
+/* .inner_content{
+  height: 200px;
+  border: 1px solid black;
+} */
 /* .create_booking_form{
   display: flex;
-}
-.checking{
+} */
+/* .checking{
   display: flex;
   flex-direction: column;
   font-size: 10px;
@@ -22,7 +26,6 @@
 /* .checkout{
   display: flex;
   flex-direction: column;
-
   font-size: 10px;
 } */
 /* .reserve_button{
@@ -41,6 +44,7 @@
 /* .reserve_div{
   padding-left: 20px;
 } */
+
 /* .in_out{
   display: flex;
   border:1px solid black;
@@ -49,8 +53,7 @@
 
 /* input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
-
-} */
+}
 
 /* input[type="date"]{
   border:0;
@@ -58,7 +61,69 @@
   border-right: 1px solid black;
 } */
 
-/* .inner_content{
-  height: 200px;
-  border: 1px solid black;
+
+.checking{
+display: flex;
+flex-direction: column;
+border:1px solid rgb(221, 221, 221);
+border-radius: 12px;
+padding: 24px;
+box-shadow: rgb(0 0 0 /12%);
+font-weight: bold;
+font-size: 12px;
+}
+
+.checkout{
+display: flex;
+flex-direction: column;
+border:1px solid rgb(221, 221, 221);
+border-radius: 12px;
+padding: 24px;
+box-shadow: rgb(0 0 0 /12%);
+font-weight: bold;
+font-size: 12px;
+cursor: pointer;
+}
+
+/* .checkout>input{
+  cursor: pointer;
 } */
+
+.checkin_checkout{
+display: flex;
+  /* min-height: 56px !important;
+  width: 100% !important;
+  border: none !important;
+  outline: none !important;
+  margin: 0px !important;
+  padding: 26px 12px 10px !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: inherit !important;
+  line-height: 18px !important;
+  appearance: none !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important; */
+}
+
+.create_booking_form{
+border:1px solid rgb(221, 221, 221);
+border-radius: 12px;
+padding: 24px;
+box-shadow: rgb(0 0 0 /12%);
+width: 400px;
+height: 200px;
+}
+.reserve_button{
+  background-color: var(--theme);
+  color: white;
+  border: none;
+  width: 200px;
+  height: 75px;
+  border-radius:12px ;
+  margin-left: 50px;
+  cursor: pointer;
+}
