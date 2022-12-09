@@ -152,10 +152,10 @@ cursor: pointer;
   font-size: .9rem;
 }
 
-.globe:hover{
+/* .globe:hover{
   background-color: #f7f7f7;
   cursor: pointer;
-}
+} */
 
 .globe_link{
   color: black;

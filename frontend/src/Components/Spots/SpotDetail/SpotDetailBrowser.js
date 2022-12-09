@@ -61,7 +61,6 @@ if (showEditSpotForm) {
       spot?
     <div>
 
-      <h1 className='spot_detail'>Spot Detail</h1>
       {(user.id === spot.ownerId) && (
         <div className='spot_button'>
           {(!showEditSpotForm) && (
@@ -74,36 +73,28 @@ if (showEditSpotForm) {
           </div>
         </div>
       )}
+      <h1 className='spot_detail'>{spot.name}</h1>
+
+      <div className='spot_info'>
+      <div className='user_spot_avg_Rating'><i class="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
+      <div className='user_spot_reviews'>{spot.numReviews} reviews</div>
+      <div className='user_spot_address_city'>{spot.address}, {spot.city}, {spot.state}, {spot.country}</div>
+      </div>
         <div className='spot_image'>
 
         <div className='current_user_spot_info'>
           <img className='user_spot_image' src={spot.previewImage} alt=''/>
-          {/* {spot.Images && spot.Images.map((image) => {
-            return(
-              <div key={image.id}>
-
-              <img className='spot_detail_image'src={image.url} alt=''/>
-              </div>
-              )
-            })} */}
         </div>
+
         <div className='current_spot_info'>
-        <div className='user_spot_name'>{spot.name}</div>
-
-
-        <div className='user_spot_address_city'>{spot.address}, {spot.city}</div>
-
-        <div className='user_spot_state'>{spot.state}, {spot.country}</div>
-
         <div className='user_spot_lat_lng'>{spot.lat}, {spot.lng}</div>
 
         <div className='user_spot_description'>{spot.description}</div>
 
-        <div className='user_spot_price'>${spot.price}</div>
+        <div className='user_spot_price'>${spot.price} night</div>
 
         </div>
-        <div className='user_spot_reviews'>Reviews: {spot.numReviews}</div>
-        <div className='user_spot_avg_Rating'> <small><i class="fa-sharp fa-solid fa-star"/></small> <big> {ratingCheck(spot.avgStarRating)}</big></div>
+
             <CreateBookingForm spotId={spotId}/>
 
         </div>

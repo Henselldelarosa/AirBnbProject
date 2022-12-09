@@ -52,23 +52,12 @@ function CreateBookingForm({spotId}) {
   }
   return (
     <div className='create_booking_body'>
-
     <form className='create_booking_form' onSubmit={handleSubmit}>
-      {/* {spot && ((currentSpot)=>{
-        return(
-          <div className='spot_price_reviews'key={currentSpot.id}>
-            <div>{currentSpot.price} night</div>
-            <div>{currentSpot.avgStarRating}  {spot.numReviews}</div>
-          </div>
-        )
-      })} */}
-
-      <h1>Create A Booking</h1>
       <ul>
       {errorMessages && errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
       </ul>
-      <div className='inner_content'>
-        <div className='in_out'>
+
+      <div className='checkin_checkout'>
 
       <div className='checking'>CHECK-IN
       <input
@@ -88,12 +77,12 @@ function CreateBookingForm({spotId}) {
       onChange={updateEndDate}
       className=''
       />
+      <hr/>
       </div>
       </div>
 
       <div className='reserve_div'>
       <button className='reserve_button'type='submit'>Reserve</button>
-        </div>
       </div>
       {/* <button type='button' onClick={handleCancelClick}>Cancel</button> */}
     </form>

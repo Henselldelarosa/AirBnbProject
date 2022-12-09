@@ -26,14 +26,14 @@ function Navigation({ isLoaded }){
       </div> */}
       <div className='profile_container'>
         <div className='air_bnb_your_home'>
-          <NavLink title='Create A Spot'className="airbnb_link"to='/spots/create'>
+          {/* <NavLink title='Create A Spot'className="airbnb_link"to='/spots/create'> */}
           Airbnb your home
-          </NavLink>
+          {/* </NavLink> */}
           </div>
           <div className='globe'>
-            <NavLink to='spots/create' className='globe_link'>
+            {/* <NavLink to='spots/create' className='globe_link'> */}
           <i title='See your bookings'class="fa-solid fa-globe"></i>
-            </NavLink>
+            {/* </NavLink> */}
         </div>
         <div className='profile'>
           <BasicMenu user={sessionUser}/>

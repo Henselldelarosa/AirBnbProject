@@ -68,3 +68,22 @@
 .user_spot_name{
   font-size: 20px;
 }
+.spot_info{
+  display: flex;
+  font-weight: 300;
+}
+
+.user_spot_avg_Rating{
+  padding-right: 10px;
+}
+.user_spot_reviews{
+  padding-right: 10px;
+}
+
+.user_spot_lat_lng{
+  font-weight: bold;
+}
+
+.user_spot_price{
+  font-weight: bold;
+}
