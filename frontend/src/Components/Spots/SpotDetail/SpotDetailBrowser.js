@@ -99,11 +99,11 @@ if (showEditSpotForm) {
 
         <div className='user_spot_description'>{spot.description}</div>
 
-        <div className='user_spot_price'><small>$</small><big>{spot.price}</big></div>
+        <div className='user_spot_price'>${spot.price}</div>
 
         </div>
         <div className='user_spot_reviews'>Reviews: {spot.numReviews}</div>
-        <div className='user_spot_avg_Rating'> <small><StarIcon/></small> <big> {spot.avgStarRating}</big></div>
+        <div className='user_spot_avg_Rating'> <small><i class="fa-sharp fa-solid fa-star"/></small> <big> {ratingCheck(spot.avgStarRating)}</big></div>
             <CreateBookingForm spotId={spotId}/>
 
         </div>
