@@ -42,6 +42,7 @@ if(userBookings){
               <h2>${booking.Spot.price} night</h2>
             </div>
           )
+
         })}
 
       </div>

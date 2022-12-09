@@ -89,7 +89,7 @@ export const createABooking = (data,spotId) => async(dispatch)=>{
     const data = await response.json()
     const booking = data.Bookings
     console.log(booking)
-    dispatch(addBooking(booking,spotId))
+    //dispatch(addBooking(booking,spotId))
   }
 
   // return response
