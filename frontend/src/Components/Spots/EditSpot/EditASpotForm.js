@@ -92,6 +92,7 @@ const handleCancelClick = (e) => {
   value={address}
   onChange={updateAddress}
   />
+
 <div className='update_city'>City</div>
   <input
   type='text'
@@ -100,6 +101,7 @@ const handleCancelClick = (e) => {
   value={city}
   onChange={updateCity}
   />
+  
 <div className='update_state'>State</div>
 <input
 type='text'
