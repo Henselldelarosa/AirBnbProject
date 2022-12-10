@@ -87,3 +87,11 @@
 .user_spot_price{
   font-weight: bold;
 }
+
+.inner_content{
+height: 700px;
+}
+
+.spot_detail_content{
+  height: 650px;
+}

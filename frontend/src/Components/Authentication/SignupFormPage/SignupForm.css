@@ -3,6 +3,8 @@
   place-items: center;
   height: 100vh;
   background-color: #ff385c;
+  font-weight: bolder;
+  color: white;
  }
 
  .signup_button{
@@ -14,15 +16,25 @@
  .signup_button:hover{
   color:#ff385c;
   background-color: white;
+  cursor: pointer;
  }
 
 .signup_form{
   display: flex;
   flex-direction: column;
+  border: solid white;
 }
-
 
 .signup_logo{
   object-fit: contain;
   height: 150px;
 }
+
+ input[type=text],[type=password],[type=number]{
+  display: block;
+  background-color:white;
+  color:#ff385c;
+  font-weight: bolder;
+  border:2px solid rgba(25,25,25);
+  cursor:pointer;
+ }

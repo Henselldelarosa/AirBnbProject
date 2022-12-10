@@ -73,84 +73,114 @@ const handleCancelClick = (e) => {
   hideForm();
 };
   return (
+    <div>
 <form className='create_spot_form' onSubmit={handleSubmit}>
-  <h1>Update Spot</h1>
   <ul>
     {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
   </ul>
+
+  <div className='spot_for_update_info'>
+    <h1 className='update_spot_h1'>Update {spot.name}</h1>
+  <img className='update_spot_image'src={spot.previewImage} alt=''/>
+  </div>
+
+  <div className='update_address'>Address</div>
   <input
   type='text'
+  size='30'
   placeholder='Address'
   value={address}
   onChange={updateAddress}
   />
-
+<div className='update_city'>City</div>
   <input
   type='text'
+  size='30'
   placeholder='City'
   value={city}
   onChange={updateCity}
   />
-
+<div className='update_state'>State</div>
 <input
 type='text'
+size='30'
 placeholder='State'
 value={state}
 onChange={updateState}
 />
 
+<div className='update_country'>Country</div>
 <input
 type='text'
+size='30'
 placeholder='Country'
 value={country}
 onChange={updateCountry}
 />
 
+<div className='update_lat'>Latitude</div>
 <input
 type='number'
+style={{width:'251px'}}
 placeholder='Latitude'
 value={lat}
 onChange={updateLat}
 />
 
+<div className='update_lng'>Longtitude</div>
 <input
 type='number'
+style={{width:'251px'}}
 placeholder='Longtitude'
 value={lng}
 onChange={updateLng}
 />
 
+<div className='update_name'>Name</div>
 <input
 type='text'
+size='30'
 placeholder='Name'
 value={name}
 onChange={updateName}
 />
 
+<div className='update_description'>Description</div>
 <input
 type='text'
 placeholder='Description'
+size='30'
 value={description}
 onChange={updateDescription}
 />
 
+<div className='update_price'>Price</div>
 <input
 type='number'
+style={{width:'251px'}}
 placeholder='Price'
 value={price}
 onChange={updatePrice}
 />
 
-  <input
-  type='text'
-  placeholder='Image'
-  value={previewImage}
-  onChange={updatePreviewImage}
-  />
+<div className='update_previewImage'>Image</div>
+<input
+type='text'
+size='30'
+placeholder='Image'
+value={previewImage}
+onChange={updatePreviewImage}
+/>
 
-<button type='submit'>Update</button>
-<button type='button' onClick={handleCancelClick}>Cancel</button>
+<div className='update_div'>
+<button className='update_spot_button'type='submit'>Update</button>
+</div>
+
+<div className='cancel_div'>
+<button className='cancel_update_button'type='button' onClick={handleCancelClick}>Cancel</button>
+</div>
 </form>
+    </div>
 )
 }
 

@@ -4,18 +4,20 @@
   height: 100vh;
   background-color: #ff385c;
   justify-content: space-around;
+  color: white;
 }
 
 
 .create_spot_form{
   display: flex;
   flex-direction: column;
+  border: solid white;
 }
 
 .cancel_button{
   font-weight: bolder;
   background-color: #ff385c;
-  color: whitesmoke;
+  color: white;
 }
 
 .cancel_button:hover{

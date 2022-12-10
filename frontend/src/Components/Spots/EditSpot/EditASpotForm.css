@@ -1,0 +1,109 @@
+.create_spot_form{
+  height:950px;
+  padding-left: 200px;
+  padding-right: 200px;
+  align-items: center;
+  background-color: var(--theme);
+}
+
+.update_address{
+color: white;
+font-weight: bolder;
+}
+
+.update_city{
+  color: white;
+  font-weight: bolder
+}
+
+.update_state{
+  color: white;
+  font-weight: bolder
+}
+
+.update_country{
+  color: white;
+  font-weight: bolder
+}
+
+.update_lat{
+  color: white;
+  font-weight: bolder
+}
+
+.update_lng{
+  color: white;
+  font-weight: bolder
+}
+
+.update_name{
+  color: white;
+  font-weight: bolder
+}
+
+.update_description{
+  color: white;
+  font-weight: bolder
+}
+
+.update_price{
+  color: white;
+  font-weight: bolder
+}
+
+.update_previewImage{
+  color: white;
+  font-weight: bolder
+}
+
+.update_spot_button{
+  color:white;
+  font-weight: bolder;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  border: 2px groove white;
+}
+
+.cancel_update_button{
+  color:white;
+  font-weight: bolder;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: 2px groove white;
+  cursor: pointer;
+}
+
+.update_div{
+  margin-left: 30px;
+  padding-top: 20px;
+}
+
+.cancel_div{
+  margin-left: 30px;
+  padding-top: 20px;
+}
+
+.update_spot_image{
+  height:200px;
+  align-items: center;
+  padding-left:20px;
+}
+
+.update_spot_h1{
+  color: white;
+  align-items: center;
+  padding-top:20px;
+}
+
+.spot_for_update_info{
+  padding-bottom: 20px;
+  border: 2px groove white ;
+  border-radius: 10px;
+  padding-top: 20px;
+}

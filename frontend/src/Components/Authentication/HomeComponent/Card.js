@@ -16,7 +16,7 @@ function Card({src,place,rating,description,price}) {
       <div className='card_info'>
         <h3>{place}</h3>
         <div className='card_rating'>
-        <i class="fa-sharp fa-solid fa-star"/>
+        <i className="fa-sharp fa-solid fa-star"/>
         <p>{ratingCheck(rating)}</p>
          </div>
       </div>

@@ -88,12 +88,14 @@ function CreateSpotForm() {
     <div className='address'>Address</div>
     <input
     type='text'
+    size='30'
     placeholder='Address'
     value={address}
     onChange={updateAddress}
     />
     <div className='city'>City</div>
     <input
+    size='30'
     type='text'
     placeholder='City'
 
@@ -102,6 +104,7 @@ function CreateSpotForm() {
     />
 <div className='state'>State</div>
   <input
+  size='30'
   type='text'
   placeholder='State'
 
@@ -111,6 +114,7 @@ function CreateSpotForm() {
 <div className='country'>Country</div>
   <input
   type='text'
+  size='30'
   placeholder='Country'
 
   value={country}
@@ -119,6 +123,7 @@ function CreateSpotForm() {
 <div className='lat'>Latitude</div>
   <input
   type='number'
+  size='30'
   placeholder='Latitude'
 
   value={lat}
@@ -127,14 +132,15 @@ function CreateSpotForm() {
 <div className='lng'>Longtitude</div>
   <input
   type='number'
+  size='30'
   placeholder='Longtitude'
-
   value={lng}
   onChange={updateLng}
   />
 <div className='name'>Name</div>
   <input
   type='text'
+  size='30'
   placeholder='Name'
 
   value={name}
@@ -143,6 +149,7 @@ function CreateSpotForm() {
 <div className='description'>Description</div>
   <input
   type='text'
+  size='30'
   placeholder='Description'
 
   value={description}
@@ -151,6 +158,7 @@ function CreateSpotForm() {
 <div className='price'>Price</div>
   <input
   type='number'
+  size='30'
   placeholder='Price'
 
   value={price}
@@ -159,6 +167,7 @@ function CreateSpotForm() {
 <div className='previewImage'>Preview image</div>
     <input
     type='text'
+    size='30'
     placeholder='Image'
 
     value={previewImage}

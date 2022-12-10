@@ -51,10 +51,10 @@ export default function BasicMenu({user}) {
         className='profile_button'
       >
         <div className='menu_bars'>
-        <i class="fa-solid fa-bars"/>
+        <i className="fa-solid fa-bars"/>
         </div>
         <div className='avatar'>
-        <i class="fa-solid fa-circle-user"/>
+        <i className="fa-solid fa-circle-user"/>
         </div>
         </div>
       {/* </button> */}
