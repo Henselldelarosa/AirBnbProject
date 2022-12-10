@@ -53,9 +53,9 @@ if (showEditSpotForm) {
         {(user.id === spot.ownerId) && (
           <div className='spot_button'>
             {(!showEditSpotForm) && (
-              // <div className='edit_div'>
+              <div className='edit_div'>
               <button className='edit_form_button' onClick={() => setShowEditSpotForm(true)}>Update</button>
-
+              </div>
               )}
               <div className='delete_div'>
             <button className='delete_spot_button' onClick={deleteASpot}>Delete Spot</button>
@@ -65,7 +65,7 @@ if (showEditSpotForm) {
         <h1 className='spot_detail'>{spot.name}</h1>
 
         <div className='spot_info'>
-        <div className='user_spot_avg_Rating'><i class="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
+        <div className='user_spot_avg_Rating'><i className="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
         <div className='user_spot_reviews'>{spot.numReviews} reviews</div>
         <div className='user_spot_address_city'>{spot.address}, {spot.city}, {spot.state}, {spot.country}</div>
         </div>
@@ -98,7 +98,7 @@ if (showEditSpotForm) {
     <h1 className='spot_detail'>{spot.name}</h1>
 
     <div className='spot_info'>
-    <div className='user_spot_avg_Rating'><i class="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
+    <div className='user_spot_avg_Rating'><i className="fa-sharp fa-solid fa-star"/>{ratingCheck(spot.avgStarRating)}</div>
     <div className='user_spot_reviews'>{spot.numReviews} reviews</div>
     <div className='user_spot_address_city'>{spot.address}, {spot.city}, {spot.state}, {spot.country}</div>
     </div>

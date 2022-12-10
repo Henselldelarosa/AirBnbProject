@@ -127,3 +127,8 @@ height: 200px;
   margin-left: 50px;
   cursor: pointer;
 }
+
+.create_booking_form > ul{
+  color: var(--theme);
+
+}

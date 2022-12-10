@@ -1,59 +1,68 @@
-.create_spot_form{
+.edit_spot_form{
   height:950px;
-  padding-left: 200px;
-  padding-right: 200px;
-  align-items: center;
+  place-items: center;
   background-color: var(--theme);
+  display: grid;
 }
 
 .update_address{
 color: white;
 font-weight: bolder;
+margin-top: 20px;
 }
 
 .update_city{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_state{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_country{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_lat{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_lng{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_name{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_description{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_price{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_previewImage{
   color: white;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-top: 2px;
 }
 
 .update_spot_button{
@@ -80,19 +89,21 @@ font-weight: bolder;
 }
 
 .update_div{
-  margin-left: 30px;
+  margin-left: 15px;
   padding-top: 20px;
 }
 
 .cancel_div{
-  margin-left: 30px;
+  margin-left: 15px;
   padding-top: 20px;
+  padding-bottom: 5px;
 }
 
 .update_spot_image{
-  height:200px;
+  height: 200px;
+  width: 200px;
   align-items: center;
-  padding-left:20px;
+  border-radius: 1rem;
 }
 
 .update_spot_h1{
@@ -103,7 +114,9 @@ font-weight: bolder;
 
 .spot_for_update_info{
   padding-bottom: 20px;
-  border: 2px groove white ;
+  border: 2px groove white;
+  width: 250px;
   border-radius: 10px;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
 }

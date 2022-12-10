@@ -26,7 +26,7 @@ function Navigation({ isLoaded }){
 
           <div className='globe'>
 
-          <i title='See your bookings'class="fa-solid fa-globe"></i>
+          <i title='See your bookings'className="fa-solid fa-globe"></i>
 
         </div>
 

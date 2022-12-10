@@ -29,7 +29,7 @@
   object-fit: contain;
   height: 150px;
 }
-
+/*
  input[type=text],[type=password],[type=number]{
   display: block;
   background-color:white;
@@ -37,4 +37,4 @@
   font-weight: bolder;
   border:2px solid rgba(25,25,25);
   cursor:pointer;
- }
+ } */

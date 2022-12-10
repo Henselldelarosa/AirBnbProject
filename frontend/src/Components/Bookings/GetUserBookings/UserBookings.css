@@ -1,0 +1,11 @@
+.delete_booking_button{
+  color: white;
+  font-weight: bolder;
+  background-color: var(--theme);
+  margin-left: 60px;
+  cursor: pointer;
+}
+
+.booking_card{
+  height:650px
+}

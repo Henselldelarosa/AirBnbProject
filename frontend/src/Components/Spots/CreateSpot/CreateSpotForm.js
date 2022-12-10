@@ -79,12 +79,18 @@ function CreateSpotForm() {
 
   return(
     <div className='create_spot_body'>
-  <form className='create_spot_form' onSubmit={handleSubmit}>
-  <img className='login_logo'src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt=''/>
-    <h1>Create Spot</h1>
+
+    <form className='create_spot_form' onSubmit={handleSubmit}>
+
     <ul>
       {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
     </ul>
+
+    <div className='spot_to_create'>
+    <h1 className='create_spot_h1'>Create Spot</h1>
+    <img className='create_spot_image'src="https://www.citypng.com/public/uploads/small/31630073629n7z56al3asxk3azkyqehu2i6cnajcybom7ku66rccl1yopzxzns9nlttdp3rt3y3fqeyo9qgceiavu3gqnrg6z9oxynaxl0rvx8m.png" alt=''/>
+    </div>
+
     <div className='address'>Address</div>
     <input
     type='text'
@@ -93,6 +99,7 @@ function CreateSpotForm() {
     value={address}
     onChange={updateAddress}
     />
+
     <div className='city'>City</div>
     <input
     size='30'
@@ -101,6 +108,7 @@ function CreateSpotForm() {
 
     value={city}
     onChange={updateCity}
+
     />
 <div className='state'>State</div>
   <input
@@ -111,6 +119,7 @@ function CreateSpotForm() {
   value={state}
   onChange={updateState}
   />
+
 <div className='country'>Country</div>
   <input
   type='text'
@@ -123,7 +132,7 @@ function CreateSpotForm() {
 <div className='lat'>Latitude</div>
   <input
   type='number'
-  size='30'
+  style={{width:'251px'}}
   placeholder='Latitude'
 
   value={lat}
@@ -132,7 +141,7 @@ function CreateSpotForm() {
 <div className='lng'>Longtitude</div>
   <input
   type='number'
-  size='30'
+  style={{width:'251px'}}
   placeholder='Longtitude'
   value={lng}
   onChange={updateLng}
@@ -158,7 +167,7 @@ function CreateSpotForm() {
 <div className='price'>Price</div>
   <input
   type='number'
-  size='30'
+  style={{width:'251px'}}
   placeholder='Price'
 
   value={price}
@@ -174,8 +183,13 @@ function CreateSpotForm() {
     onChange={updatePreviewImage}
     />
 
+  <div className='create_div'>
   <button className='create_spot_button'type='submit'>Create new Spot</button>
+  </div>
+
+<div className='cancel_create_div'>
   <button className='cancel_button' type='button' onClick={handleCancelClick}>Cancel</button>
+</div>
   </form>
     </div>
   )

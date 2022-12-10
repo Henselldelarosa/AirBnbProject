@@ -1,101 +1,255 @@
-.create_spot_body{
-  display: grid;
+/* .create_spot_form{
+  height:950px;
   place-items: center;
-  height: 100vh;
-  background-color: #ff385c;
-  justify-content: space-around;
-  color: white;
+  background-color: var(--theme);
+  display: grid;
+}
+
+.create_spot_body{
+  padding-bottom: 20px;
+  border: 2px groove white;
+  width: 250px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
 }
 
 
-.create_spot_form{
-  display: flex;
-  flex-direction: column;
-  border: solid white;
-}
+
 
 .cancel_button{
+  color:white;
   font-weight: bolder;
-  background-color: #ff385c;
-  color: white;
-}
-
-.cancel_button:hover{
-  color: #ff385c;
-  background-color: white;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: 2px groove white;
   cursor: pointer;
 }
+
 
 .create_spot_button{
+  color:white;
   font-weight: bolder;
-  background-color: #ff385c;
-  color: whitesmoke;
-}
-
-.create_spot_button:hover{
-  color: #ff385c;
-  background-color: white;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: 2px groove white;
   cursor: pointer;
 }
 
+
 .address{
-font-weight: bolder;
-color: white;
+  color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .city{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .state{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .country{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .latitude{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .longtitude{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .name{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .description{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .price{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
 .previewImage{
-  font-weight: bolder;
   color: white;
+  font-weight: bolder;
+  margin-top: 20px;
 }
 
-.create_spot_form >input{
+/* .create_spot_form >input{
   background-color: white;
   cursor: pointer;
   color: #ff385c;
+} */
+
+/* .cancel_div{
+  margin-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
-.create_spot_form > input:hover{
-  background-color: #ff385c;
+.create_div{
+  margin-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
-/* .create_spot_form > input > [placeholder]:hover */
+.create_spot_form > input > [placeholder]:hover */
+
+
+/* .create_spot_body{
+  padding-bottom: 20px;
+  border: 2px groove white;
+  width: 250px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+} */
+
+.create_spot_form{
+  height:950px;
+  place-items: center;
+  background-color: var(--theme);
+  display: grid;
+}
+
+.address{
+color: white;
+font-weight: bolder;
+margin-top: 20px;
+}
+
+.city{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.state{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.country{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.lat{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.lng{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.name{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.description{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.price{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.previewImage{
+  color: white;
+  font-weight: bolder;
+  margin-top: 2px;
+}
+
+.create_spot_button{
+  color:white;
+  font-weight: bolder;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  border: 2px groove white;
+}
+
+.cancel_button{
+  color:white;
+  font-weight: bolder;
+  background-color: var(--theme);
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+  border: 2px groove white;
+  cursor: pointer;
+}
+
+.create_div{
+  margin-left: 15px;
+  padding-top: 20px;
+}
+
+.cancel_create_div{
+  margin-left: 15px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.create_spot_image{
+  height: 200px;
+  width: 200px;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+.create_spot_h1{
+  color: white;
+  align-items: center;
+  padding-top:20px;
+}
+
+.pot_to_create{
+  padding-bottom: 20px;
+  border: 2px groove white;
+  width: 250px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+}

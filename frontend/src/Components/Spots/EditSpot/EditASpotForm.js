@@ -73,8 +73,8 @@ const handleCancelClick = (e) => {
   hideForm();
 };
   return (
-    <div>
-<form className='create_spot_form' onSubmit={handleSubmit}>
+    <div className='update_spot_input_info'>
+<form className='edit_spot_form' onSubmit={handleSubmit}>
   <ul>
     {errorMessages.map((error,id)=> <li key={id}>{error}</li>)}
   </ul>
@@ -101,7 +101,7 @@ const handleCancelClick = (e) => {
   value={city}
   onChange={updateCity}
   />
-  
+
 <div className='update_state'>State</div>
 <input
 type='text'
