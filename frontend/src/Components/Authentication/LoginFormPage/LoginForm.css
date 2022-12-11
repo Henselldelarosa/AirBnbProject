@@ -13,19 +13,32 @@
   height: 100vh;
   background-color: #ff385c;
   color: white;
+
  }
 
  .login_buton{
   color:white;
   font-weight: bolder;
   background-color: #ff385c;
+  cursor: pointer;
+  border: 2px groove white;
+  
  }
 
- .login_buton:hover{
+ /* .demo_button{
+  color:white;
+  font-weight: bolder;
+  background-color: #ff385c;
+  cursor: pointer;
+  width:100px
+} */
+
+
+ /* .login_buton:hover{
   color:#ff385c;
   background-color: white;
   cursor: pointer;
- }
+ } */
 
 .login_form{
   display: flex;

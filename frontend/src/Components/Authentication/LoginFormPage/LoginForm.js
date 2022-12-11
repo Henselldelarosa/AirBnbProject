@@ -3,6 +3,7 @@ import * as sessionActions from '../../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css'
+import DemoUser from '../Demo/DemoUser';
 
 
 function LoginFormPage() {
@@ -58,6 +59,7 @@ function LoginFormPage() {
         />
       </label>
       <button className='login_buton'type="submit">Log In</button>
+      <DemoUser/>
     </form>
     </div>
   );

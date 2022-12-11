@@ -1,0 +1,7 @@
+.demo_button{
+  color:white;
+  font-weight: bolder;
+  background-color: #ff385c;
+  cursor: pointer;
+  border: 2px groove white;
+}
