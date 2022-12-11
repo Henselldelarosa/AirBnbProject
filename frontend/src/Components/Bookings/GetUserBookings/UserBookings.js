@@ -20,11 +20,11 @@ function UserBookings() {
 
 const deleteABooking = (e,id) =>{
   e.preventDefault()
-  // let today = new Date()
-  // let todaySecs = today.getTime
-  // if(userBookings[id])
   dispatch(bookingAction.deleteBooking(id))
 }
+
+const today = new Date().getTime()
+
 let content = null
 if(userBookings){
   content = (
@@ -33,7 +33,10 @@ if(userBookings){
       {userBookings && userBookings.map((booking) =>{
         return(
           <div key={booking.id}>
-            <button className='delete_booking_button'onClick={(e) => {deleteABooking(e, booking.id)}}> Delete this booking</button>
+            {(new Date(booking.startDate).getTime() >= today) && (
+              <button className='delete_booking_button'onClick={(e) => {deleteABooking(e, booking.id)}}> Delete this booking</button>
+            )}
+
             <UserBookingCard
             name={booking.Spot.name}
             startDate={booking.startDate}
