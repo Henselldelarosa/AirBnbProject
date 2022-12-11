@@ -21,12 +21,12 @@ function Navigation({ isLoaded }){
 
         <div className='air_bnb_your_home'>
 
-          Airbnb your home
+          {/* Airbnb your home */}
           </div>
 
           <div className='globe'>
 
-          <i title='See your bookings'className="fa-solid fa-globe"></i>
+          {/* <i title='See your bookings'className="fa-solid fa-globe"></i> */}
 
         </div>
 
@@ -44,10 +44,10 @@ function Navigation({ isLoaded }){
             </NavLink>
             <div className='profile_container'>
               <div className='air_bnb_your_home'>
-                Airbnb your home
+                {/* Airbnb your home */}
                 </div>
                 <div className='signout_globe'>
-                <i className="fa-solid fa-globe"></i>
+                {/* <i className="fa-solid fa-globe"></i> */}
               </div>
               <div className='profile'>
                 <BasicLoginMenu/>
