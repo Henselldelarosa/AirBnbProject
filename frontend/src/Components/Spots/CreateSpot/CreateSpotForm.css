@@ -132,16 +132,19 @@
 } */
 
 .create_spot_form{
-  height:950px;
+  height:1100px;
   place-items: center;
   background-color: var(--theme);
   display: grid;
 }
 
+.create_spot_form > ul{
+  color: white;
+}
 .address{
 color: white;
 font-weight: bolder;
-margin-top: 20px;
+margin-top: 2px;
 }
 
 .city{

@@ -55,12 +55,12 @@ const handleSubmit= async(e)=>{
 
 
 
-  // let createSpot;
+   let updateSpot;
 
   try{
-  await dispatch(spotsAction.updateSpot(payload))
+  updateSpot = await dispatch(spotsAction.updateSpot(payload))
     setErrorMessages([])
-    history.push(`/spots/${spot.id}`)
+    history.push(`/spots/${updateSpot.id}`)
   }catch(e){
     const response = await e.json()
     setErrorMessages(response.errors)
@@ -89,6 +89,7 @@ const handleCancelClick = (e) => {
   type='text'
   size='30'
   placeholder='Address'
+  required
   value={address}
   onChange={updateAddress}
   />
@@ -98,6 +99,7 @@ const handleCancelClick = (e) => {
   type='text'
   size='30'
   placeholder='City'
+  required
   value={city}
   onChange={updateCity}
   />
@@ -107,6 +109,7 @@ const handleCancelClick = (e) => {
 type='text'
 size='30'
 placeholder='State'
+required
 value={state}
 onChange={updateState}
 />
@@ -116,6 +119,7 @@ onChange={updateState}
 type='text'
 size='30'
 placeholder='Country'
+required
 value={country}
 onChange={updateCountry}
 />
@@ -126,6 +130,7 @@ type='number'
 style={{width:'251px'}}
 placeholder='Latitude'
 value={lat}
+required
 onChange={updateLat}
 />
 
@@ -134,6 +139,7 @@ onChange={updateLat}
 type='number'
 style={{width:'251px'}}
 placeholder='Longtitude'
+required
 value={lng}
 onChange={updateLng}
 />
@@ -143,6 +149,7 @@ onChange={updateLng}
 type='text'
 size='30'
 placeholder='Name'
+required
 value={name}
 onChange={updateName}
 />
@@ -151,6 +158,7 @@ onChange={updateName}
 <input
 type='text'
 placeholder='Description'
+required
 size='30'
 value={description}
 onChange={updateDescription}
@@ -161,6 +169,7 @@ onChange={updateDescription}
 type='number'
 style={{width:'251px'}}
 placeholder='Price'
+required
 value={price}
 onChange={updatePrice}
 />

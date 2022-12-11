@@ -1,10 +1,14 @@
 .edit_spot_form{
-  height:950px;
+  height: 1100px;
   place-items: center;
   background-color: var(--theme);
-  display: grid;
+  display: grid;;
 }
 
+.edit_spot_form > ul{
+  color: white;
+  font-weight: bolder
+}
 .update_address{
 color: white;
 font-weight: bolder;
